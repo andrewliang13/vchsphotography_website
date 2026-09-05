@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#00467F" />
+  <meta name="description" content="Allen Wu — Co-President at VCHS Photography." />
+  <title>Allen Wu | VCHS Photography</title>
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/portfolio.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="portfolio-top">
+    <a class="wordmark" href="../index.html#leadership"><span>VCHS</span><span>Photography</span></a>
+    <a class="back-link" href="../index.html#leadership">← Leadership</a>
+  </header>
+  <main class="portfolio-page" id="main">
+    <header class="portfolio-hero">
+      <p class="section-kicker">Co-President</p>
+      <h1>Allen Wu</h1>
+      <p class="portfolio-blurb">Leads community partnerships and Portraits with a Purpose, connecting club work beyond campus.</p>
+      <p class="portfolio-note">Portfolio images are temporary placeholders until student work is added.</p>
+    </header>
+    <section class="portfolio-gallery" aria-label="Allen Wu portfolio">
+      <div class="masonry">
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=84" alt="Temporary stock image for Allen Wu's portfolio" loading="lazy" width="1400" height="1750" />
+          <figcaption><strong>Landscape study</strong><span>Temporary stock</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=84" alt="Temporary stock image for Allen Wu's portfolio" loading="lazy" width="1400" height="1750" />
+          <figcaption><strong>Portrait study</strong><span>Temporary stock</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=84" alt="Temporary stock image for Allen Wu's portfolio" loading="lazy" width="1600" height="1067" />
+          <figcaption><strong>Event study</strong><span>Temporary stock</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=84" alt="Temporary stock image for Allen Wu's portfolio" loading="lazy" width="1600" height="1067" />
+          <figcaption><strong>Community study</strong><span>Temporary stock</span></figcaption>
+        </figure>
+      </div>
+    </section>
+    <footer class="portfolio-footer">
+      <a href="../index.html#leadership">Back to leadership</a>
+      <a href="../index.html">Club home</a>
+    </footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      gsap.from('.portfolio-hero > *', { opacity: 0, y: 18, duration: .7, stagger: .08, ease: 'power3.out' });
+      gsap.utils.toArray('.gallery-item').forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0, y: 24, duration: .75, delay: i * .04, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

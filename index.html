@@ -299,6 +299,7 @@
     .initiatives-section,
     .schedule-section,
     .socials-section,
+    .leadership-section,
     .about-section,
     .contact-section {
       position: relative;
@@ -669,6 +670,87 @@
       letter-spacing: .04em;
     }
 
+    /* ——— Leadership ——— */
+    .leadership-section {
+      padding: 8rem var(--pad);
+      border-top: 1px solid var(--line);
+    }
+
+    .leadership-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+
+    .leadership-intro .section-heading { margin-bottom: 0; }
+
+    .leadership-intro p {
+      max-width: 26rem;
+      margin: 0;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .leadership-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .leader-link {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+      gap: 1rem 1.5rem;
+      align-items: baseline;
+      padding: 1.35rem 0;
+      border-bottom: 1px solid var(--line);
+      transition: color .25s ease, transform .25s ease, padding-left .25s ease;
+    }
+
+    .leader-link:hover,
+    .leader-link:focus-visible {
+      color: var(--accent);
+      padding-left: .45rem;
+    }
+
+    .leader-name {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+    }
+
+    .leader-role {
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .leader-link:hover .leader-role,
+    .leader-link:focus-visible .leader-role { color: var(--accent); }
+
+    .leader-cta {
+      color: var(--gray);
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color .25s ease, transform .25s ease;
+    }
+
+    .leader-link:hover .leader-cta,
+    .leader-link:focus-visible .leader-cta {
+      color: var(--accent);
+      transform: translateX(.2rem);
+    }
+
     .about-section {
       min-height: 92dvh;
       display: grid;
@@ -751,7 +833,9 @@
 
     @media (max-width: 900px) {
       .initiatives-intro,
-      .schedule-header { grid-template-columns: 1fr; }
+      .schedule-header,
+      .leadership-intro,
+      .socials-layout { grid-template-columns: 1fr; }
       .initiative-grid { grid-template-columns: 1fr; }
       .initiative:nth-child(odd),
       .initiative:nth-child(even) {
@@ -759,6 +843,12 @@
         padding-right: 0;
         border-left: 0;
       }
+      .leader-link {
+        grid-template-columns: 1fr auto;
+        gap: .35rem 1rem;
+      }
+      .leader-role { grid-column: 1; }
+      .leader-cta { grid-row: 1 / span 2; align-self: center; }
     }
 
     @media (max-width: 767px) {
@@ -792,7 +882,8 @@
       .gallery-section,
       .initiatives-section,
       .schedule-section,
-      .socials-section { padding: 6rem 1rem; }
+      .socials-section,
+      .leadership-section { padding: 6rem 1rem; }
       .socials-layout { grid-template-columns: 1fr; }
       .social-links { margin-top: 2rem; }
       .section-heading { margin-bottom: 3rem; }
@@ -851,6 +942,7 @@
       </ul>
       <p class="nav-label">Club</p>
       <ul class="nav-list">
+        <li><a href="#leadership" data-nav="leadership">Leadership</a></li>
         <li><a href="#initiatives" data-nav="initiatives">Initiatives</a></li>
         <li><a href="#archive" data-nav="archive">Gallery</a></li>
         <li><a href="#schedule" data-nav="schedule">Schedule</a></li>
@@ -885,6 +977,7 @@
     <a href="#portraits">Portraits</a>
     <a href="#campus">Campus</a>
     <a href="#motion">Motion</a>
+    <a href="#leadership">Leadership</a>
     <a href="#initiatives">Initiatives</a>
     <a href="#archive">Gallery</a>
     <a href="#schedule">Schedule</a>
@@ -936,6 +1029,74 @@
         <h2>After Hours</h2>
         <p>Low light, live events, and the energy that appears when the school day ends.</p>
       </div>
+    </section>
+
+    <section class="leadership-section" id="leadership" data-surface>
+      <div class="leadership-intro">
+        <div>
+          <p class="section-kicker reveal">Leadership</p>
+          <h2 class="section-heading reveal">The people behind the lens.</h2>
+        </div>
+        <p class="reveal">Click a name to open their portfolio. Student work will replace temporary stock as the archive grows.</p>
+      </div>
+      <ul class="leadership-list">
+        <li>
+          <a class="leader-link reveal" href="team/allen-wu.html">
+            <h3 class="leader-name">Allen Wu</h3>
+            <span class="leader-role">Co-President</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/ethan-chen.html">
+            <h3 class="leader-name">Ethan Chen</h3>
+            <span class="leader-role">Co-President</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/jocelyn-kwok.html">
+            <h3 class="leader-name">Jocelyn Kwok</h3>
+            <span class="leader-role">Co-President</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/amanda-garcia.html">
+            <h3 class="leader-name">Amanda Garcia</h3>
+            <span class="leader-role">Vice President</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/daniel-an.html">
+            <h3 class="leader-name">Daniel An</h3>
+            <span class="leader-role">Operations Officer</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/john-wu.html">
+            <h3 class="leader-name">John Wu</h3>
+            <span class="leader-role">Technical Officer</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/andrew-liang.html">
+            <h3 class="leader-name">Andrew Liang</h3>
+            <span class="leader-role">Sophomore Apprentice</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+        <li>
+          <a class="leader-link reveal" href="team/austin-guydish.html">
+            <h3 class="leader-name">Austin Guydish</h3>
+            <span class="leader-role">Freshman Apprentice</span>
+            <span class="leader-cta">Portfolio →</span>
+          </a>
+        </li>
+      </ul>
     </section>
 
     <section class="initiatives-section" id="initiatives" data-surface>

@@ -18,8 +18,10 @@ jobs:
 
       - name: Prepare static assets
         run: |
-          mkdir -p dist
+          mkdir -p dist/team dist/assets
           cp index.html _headers dist/
+          cp assets/portfolio.css dist/assets/
+          cp team/*.html dist/team/
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
