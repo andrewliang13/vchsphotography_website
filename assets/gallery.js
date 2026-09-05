@@ -136,6 +136,10 @@
   let index = -1;
   let lastFocus = null;
 
+  function fullSrc(src) {
+    return String(src).replace('/web/', '/full/');
+  }
+
   function openAt(i) {
     const items = visibleItems();
     if (!items.length) return;
@@ -148,9 +152,22 @@
     const root = ensureLightbox();
     const large = root.querySelector('.photo-lightbox__img');
     const cap = root.querySelector('.photo-lightbox__caption');
+    const thumb = img.currentSrc || img.src;
+    const full = fullSrc(thumb);
+    const loadToken = String(index);
 
-    large.src = img.currentSrc || img.src;
+    large.dataset.loadToken = loadToken;
     large.alt = img.alt || '';
+    // Show the grid image immediately, then swap to the high-res file.
+    large.src = thumb;
+    if (full !== thumb) {
+      const hi = new Image();
+      hi.onload = () => {
+        if (large.dataset.loadToken === loadToken) large.src = full;
+      };
+      hi.onerror = () => {};
+      hi.src = full;
+    }
     cap.textContent = caption ? caption.textContent.replace(/\s+/g, ' ').trim() : '';
 
     const multi = items.length > 1;
