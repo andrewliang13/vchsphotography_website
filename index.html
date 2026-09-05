@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f2f2ee" />
+  <meta name="theme-color" content="#00467F" />
   <meta name="description" content="VCHS Photography is Valley Christian High School's student photography collective in San Jose, California." />
   <title>VCHS Photography | Student Collective</title>
   <link rel="preconnect" href="https://images.unsplash.com" />
@@ -14,11 +14,14 @@
   <style>
     :root {
       color-scheme: light;
-      --paper: #f2f2ee;
-      --ink: #151515;
-      --muted: #6f706c;
-      --line: rgba(21, 21, 21, 0.18);
-      --accent: #457c78;
+      --paper: #f4f4f2;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --gray: #8a8a8a;
+      --line: rgba(10, 10, 10, 0.16);
+      --accent: #00467F;
+      --accent-soft: rgba(0, 70, 127, 0.12);
+      --white: #ffffff;
       --sidebar: 15rem;
       --pad: clamp(1.25rem, 3vw, 3.25rem);
     }
@@ -45,7 +48,7 @@
     a { color: inherit; text-decoration: none; }
     button { color: inherit; font: inherit; }
     img { display: block; max-width: 100%; }
-    ::selection { color: var(--paper); background: var(--accent); }
+    ::selection { color: var(--white); background: var(--accent); }
 
     a:focus-visible,
     button:focus-visible {
@@ -76,7 +79,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 2.1rem 1.65rem 1.55rem;
-      background: rgba(242, 242, 238, .96);
+      background: rgba(244, 244, 242, .96);
       border-right: 1px solid var(--line);
     }
 
@@ -93,7 +96,7 @@
 
     .nav-label {
       margin: 2.8rem 0 .85rem;
-      color: #979893;
+      color: var(--gray);
       font-family: 'DM Mono', monospace;
       font-size: .64rem;
       letter-spacing: .08em;
@@ -112,7 +115,7 @@
     .nav-list a {
       display: inline-block;
       padding: .12rem 0;
-      color: #5c5d59;
+      color: #5c5c5c;
       transition: color .25s ease, transform .25s ease;
     }
 
@@ -122,13 +125,51 @@
     .sidebar-foot {
       display: grid;
       gap: .8rem;
-      color: #73746f;
+      color: var(--muted);
       font-family: 'DM Mono', monospace;
       font-size: .62rem;
       line-height: 1.55;
     }
 
     .sidebar-foot a { text-decoration: underline; text-underline-offset: .18rem; }
+
+    .sidebar-social {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      margin-top: .15rem;
+    }
+
+    .sidebar-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.65rem;
+      height: 1.65rem;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
+    }
+
+    .sidebar-social a:hover {
+      color: var(--white);
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .sidebar-social a:active { transform: translateY(1px); }
+
+    .sidebar-social svg {
+      width: .85rem;
+      height: .85rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
 
     .mobile-header { display: none; }
 
@@ -138,7 +179,7 @@
       inset: 4.2rem .75rem auto;
       z-index: 50;
       padding: 1rem;
-      background: rgba(242, 242, 238, .98);
+      background: rgba(244, 244, 242, .98);
       border: 1px solid var(--line);
     }
 
@@ -151,7 +192,7 @@
       inset: 0 0 0 var(--sidebar);
       z-index: 0;
       overflow: hidden;
-      background: #1c1c1b;
+      background: #111;
       transition: opacity .65s ease;
     }
 
@@ -163,7 +204,7 @@
       inset: 0;
       z-index: 2;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(10, 10, 10, .06) 28%, rgba(10, 10, 10, .7) 100%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, .08) 28%, rgba(0, 0, 0, .72) 100%);
     }
 
     .background-photo {
@@ -184,7 +225,7 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(110deg, #20201f 20%, #2b2b29 35%, #20201f 50%);
+      background: linear-gradient(110deg, #1a1a1a 20%, #2a2a2a 35%, #1a1a1a 50%);
       background-size: 220% 100%;
       animation: shimmer 1.3s linear infinite;
     }
@@ -202,7 +243,7 @@
       display: flex;
       align-items: flex-end;
       padding: var(--pad);
-      color: #f4f4f0;
+      color: #f4f4f2;
     }
 
     .hero-copy {
@@ -223,7 +264,7 @@
     .hero-copy p {
       max-width: 29rem;
       margin: 1.45rem 0 0;
-      color: rgba(244, 244, 240, .82);
+      color: rgba(244, 244, 242, .82);
       font-size: .94rem;
       line-height: 1.6;
     }
@@ -235,7 +276,7 @@
       gap: 2rem;
       width: 100%;
       padding-top: 1.25rem;
-      border-top: 1px solid rgba(244, 244, 240, .45);
+      border-top: 1px solid rgba(244, 244, 242, .45);
     }
 
     .chapter-caption h2 {
@@ -249,12 +290,15 @@
     .chapter-caption p {
       max-width: 22rem;
       margin: 0;
-      color: rgba(244, 244, 240, .78);
+      color: rgba(244, 244, 242, .78);
       font-size: .82rem;
       line-height: 1.65;
     }
 
     .gallery-section,
+    .initiatives-section,
+    .schedule-section,
+    .socials-section,
     .about-section,
     .contact-section {
       position: relative;
@@ -270,6 +314,15 @@
       font-weight: 500;
       line-height: .92;
       letter-spacing: -.06em;
+    }
+
+    .section-kicker {
+      margin: 0 0 1rem;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     .masonry {
@@ -307,6 +360,315 @@
 
     .gallery-item figcaption strong { color: var(--ink); font-weight: 400; }
 
+    /* ——— Initiatives ——— */
+    .initiatives-section {
+      padding: 8rem var(--pad);
+      border-top: 1px solid var(--line);
+    }
+
+    .initiatives-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: end;
+      margin-bottom: 4.5rem;
+    }
+
+    .initiatives-intro p {
+      max-width: 28rem;
+      margin: 0;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .initiative-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .initiative {
+      padding: 2.4rem 0 2.6rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .initiative:nth-child(odd) { padding-right: clamp(1.5rem, 4vw, 3.5rem); }
+    .initiative:nth-child(even) {
+      padding-left: clamp(1.5rem, 4vw, 3.5rem);
+      border-left: 1px solid var(--line);
+    }
+
+    .initiative-index {
+      display: block;
+      margin-bottom: .9rem;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-size: .64rem;
+      letter-spacing: .1em;
+    }
+
+    .initiative h3 {
+      margin: 0 0 .85rem;
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+    }
+
+    .initiative p {
+      margin: 0;
+      max-width: 32rem;
+      color: #555;
+      font-size: .92rem;
+      line-height: 1.65;
+    }
+
+    .initiative-meta {
+      display: block;
+      margin-top: 1.1rem;
+      color: var(--gray);
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .04em;
+    }
+
+    /* ——— Schedule / Timeline ——— */
+    .schedule-section {
+      padding: 8rem var(--pad) 10rem;
+      border-top: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, var(--paper) 0%, #ecece8 42%, var(--paper) 100%);
+    }
+
+    .schedule-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .schedule-header .section-heading { margin-bottom: 0; }
+
+    .schedule-header p {
+      max-width: 26rem;
+      margin: 0;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 58rem;
+      margin: 0 auto;
+      padding: 1rem 0 2rem;
+    }
+
+    .timeline-rail {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      transform: translateX(-50%);
+      background: rgba(10, 10, 10, 0.12);
+      overflow: hidden;
+    }
+
+    .timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: var(--accent);
+      transform-origin: top center;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 2.4rem 0;
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+
+    .timeline-item.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card {
+      grid-column: 1;
+      justify-self: end;
+      text-align: right;
+      padding-right: 3.25rem;
+    }
+
+    .timeline-item:nth-child(even) .timeline-card {
+      grid-column: 2;
+      justify-self: start;
+      text-align: left;
+      padding-left: 3.25rem;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-date-block {
+      grid-column: 2;
+      justify-self: start;
+      padding-left: 3.25rem;
+    }
+
+    .timeline-item:nth-child(even) .timeline-date-block {
+      grid-column: 1;
+      justify-self: end;
+      text-align: right;
+      padding-right: 3.25rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 3.1rem;
+      left: 50%;
+      z-index: 2;
+      width: .7rem;
+      height: .7rem;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--accent);
+      transform: translateX(-50%) scale(.7);
+      transition: transform .45s cubic-bezier(.16, 1, .3, 1), background-color .35s ease, box-shadow .35s ease;
+    }
+
+    .timeline-item.is-visible .timeline-dot,
+    .timeline-item.is-active .timeline-dot {
+      transform: translateX(-50%) scale(1);
+      background: var(--accent);
+      box-shadow: 0 0 0 6px var(--accent-soft);
+    }
+
+    .timeline-date-block {
+      align-self: start;
+      padding-top: .35rem;
+    }
+
+    .timeline-date {
+      display: block;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .timeline-year {
+      display: block;
+      margin-top: .35rem;
+      color: var(--gray);
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .08em;
+    }
+
+    .timeline-card {
+      max-width: 22rem;
+    }
+
+    .timeline-card h3 {
+      margin: 0 0 .7rem;
+      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+    }
+
+    .timeline-card p {
+      margin: 0;
+      color: #555;
+      font-size: .9rem;
+      line-height: 1.65;
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .28rem 0;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-top: 1px solid var(--line);
+    }
+
+    .socials-section {
+      padding: 7rem var(--pad);
+      border-top: 1px solid var(--line);
+    }
+
+    .socials-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: end;
+    }
+
+    .socials-layout .section-heading { margin-bottom: 0; }
+
+    .socials-layout > p {
+      max-width: 26rem;
+      margin: 0;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 3rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      min-height: 3rem;
+      padding: .7rem 1rem .7rem .85rem;
+      border: 1px solid var(--ink);
+      font-size: .8rem;
+      transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
+    }
+
+    .social-link:hover {
+      color: var(--white);
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .social-link:active { transform: translateY(1px); }
+
+    .social-link svg {
+      width: 1.05rem;
+      height: 1.05rem;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .social-link span {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .04em;
+    }
+
     .about-section {
       min-height: 92dvh;
       display: grid;
@@ -327,7 +689,7 @@
     }
 
     .about-copy { max-width: 31rem; }
-    .about-copy p { margin: 0 0 1.3rem; color: #555651; line-height: 1.75; }
+    .about-copy p { margin: 0 0 1.3rem; color: #555; line-height: 1.75; }
 
     .contact-section {
       min-height: 78dvh;
@@ -335,7 +697,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 7rem var(--pad) 2rem;
-      background: #dfe2dd;
+      background: #e4e4e0;
       border-top: 1px solid var(--line);
     }
 
@@ -362,10 +724,16 @@
       padding: .75rem 1rem;
       border: 1px solid var(--ink);
       font-size: .8rem;
-      transition: color .25s ease, background-color .25s ease, transform .25s ease;
+      transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
     }
 
-    .contact-actions a:hover { color: var(--paper); background: var(--ink); transform: translateY(-2px); }
+    .contact-actions a:hover {
+      color: var(--white);
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
     .contact-actions a:active { transform: translateY(1px); }
 
     .site-footer {
@@ -373,13 +741,25 @@
       justify-content: space-between;
       gap: 2rem;
       padding-top: 1.4rem;
-      border-top: 1px solid rgba(21, 21, 21, .3);
-      color: #575853;
+      border-top: 1px solid rgba(10, 10, 10, .3);
+      color: #575757;
       font-family: 'DM Mono', monospace;
       font-size: .62rem;
     }
 
     .reveal { opacity: 0; transform: translateY(1.75rem); }
+
+    @media (max-width: 900px) {
+      .initiatives-intro,
+      .schedule-header { grid-template-columns: 1fr; }
+      .initiative-grid { grid-template-columns: 1fr; }
+      .initiative:nth-child(odd),
+      .initiative:nth-child(even) {
+        padding-left: 0;
+        padding-right: 0;
+        border-left: 0;
+      }
+    }
 
     @media (max-width: 767px) {
       :root { --pad: 1rem; }
@@ -394,8 +774,8 @@
         justify-content: space-between;
         min-height: 3.25rem;
         padding: .7rem .9rem;
-        background: rgba(242, 242, 238, .94);
-        border: 1px solid rgba(21, 21, 21, .18);
+        background: rgba(244, 244, 242, .94);
+        border: 1px solid rgba(10, 10, 10, .18);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
       }
@@ -409,7 +789,12 @@
       .hero-copy p { max-width: 19rem; font-size: .82rem; }
       .chapter-caption { grid-template-columns: 1fr; gap: .9rem; }
       .chapter-caption p { max-width: 18rem; }
-      .gallery-section { padding: 6rem 1rem; }
+      .gallery-section,
+      .initiatives-section,
+      .schedule-section,
+      .socials-section { padding: 6rem 1rem; }
+      .socials-layout { grid-template-columns: 1fr; }
+      .social-links { margin-top: 2rem; }
       .section-heading { margin-bottom: 3rem; }
       .masonry { columns: 1; }
       .gallery-item:nth-child(2), .gallery-item:nth-child(5) { padding-top: 0; }
@@ -417,12 +802,36 @@
       .contact-section { min-height: 80dvh; padding: 6rem 1rem 1.5rem; }
       .contact-section h2 { font-size: clamp(3.4rem, 16vw, 5.5rem); }
       .site-footer { flex-direction: column; gap: .4rem; }
+
+      .timeline { padding-left: 1.4rem; }
+      .timeline-rail { left: .2rem; transform: none; }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        padding: 1.6rem 0 1.6rem 1.4rem;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card,
+      .timeline-item:nth-child(odd) .timeline-date-block,
+      .timeline-item:nth-child(even) .timeline-date-block {
+        grid-column: 1;
+        justify-self: start;
+        text-align: left;
+        padding-left: 0;
+        padding-right: 0;
+        max-width: none;
+      }
+
+      .timeline-date-block { order: -1; margin-bottom: .55rem; }
+      .timeline-dot { left: .2rem; top: 1.85rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
+      .reveal,
+      .timeline-item { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -440,15 +849,27 @@
         <li><a href="#motion" data-nav="motion">Motion</a></li>
         <li><a href="#after-hours" data-nav="after-hours">After Hours</a></li>
       </ul>
-      <p class="nav-label">Information</p>
+      <p class="nav-label">Club</p>
       <ul class="nav-list">
-        <li><a href="#archive" data-nav="archive">Archive</a></li>
+        <li><a href="#initiatives" data-nav="initiatives">Initiatives</a></li>
+        <li><a href="#archive" data-nav="archive">Gallery</a></li>
+        <li><a href="#schedule" data-nav="schedule">Schedule</a></li>
+        <li><a href="#socials" data-nav="socials">Socials</a></li>
         <li><a href="#about" data-nav="about">About</a></li>
         <li><a href="#contact" data-nav="contact">Contact</a></li>
       </ul>
     </div>
     <div class="sidebar-foot">
       <span>Student-led photography at Valley Christian High School.</span>
+      <div class="sidebar-social">
+        <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer" aria-label="VCHS Photography on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.2" cy="6.8" r=".7" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+      </div>
       <a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">VCS contact</a>
       <span>Temporary stock imagery</span>
     </div>
@@ -464,7 +885,10 @@
     <a href="#portraits">Portraits</a>
     <a href="#campus">Campus</a>
     <a href="#motion">Motion</a>
-    <a href="#archive">Archive</a>
+    <a href="#initiatives">Initiatives</a>
+    <a href="#archive">Gallery</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#socials">Socials</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -514,7 +938,42 @@
       </div>
     </section>
 
+    <section class="initiatives-section" id="initiatives" data-surface>
+      <p class="section-kicker reveal">Our initiatives</p>
+      <div class="initiatives-intro">
+        <h2 class="section-heading reveal">Work that reaches past campus.</h2>
+        <p class="reveal">Learning the craft, serving the community, and building a home for student photography—led by club members across curriculum, outreach, fundraisers, and the web.</p>
+      </div>
+      <div class="initiative-grid">
+        <article class="initiative reveal">
+          <span class="initiative-index">01</span>
+          <h3>Portraits with a Purpose</h3>
+          <p>Partnering with Bill Wilson Center to create portraits that support people in our community. We are planning 1–2 visits this fall.</p>
+          <span class="initiative-meta">Community partnership</span>
+        </article>
+        <article class="initiative reveal">
+          <span class="initiative-index">02</span>
+          <h3>Curriculum</h3>
+          <p>Hands-on meetings covering camera settings, portrait direction, and how to shoot with intention—from basics to professional habits.</p>
+          <span class="initiative-meta">Allen · Ethan · John · Amanda</span>
+        </article>
+        <article class="initiative reveal">
+          <span class="initiative-index">03</span>
+          <h3>Fundraisers</h3>
+          <p>Events and campaigns that keep the club equipped—film, prints, gear, and the materials that make projects possible.</p>
+          <span class="initiative-meta">Daniel · Jocelyn</span>
+        </article>
+        <article class="initiative reveal">
+          <span class="initiative-index">04</span>
+          <h3>Website</h3>
+          <p>This site is the club’s public archive and schedule—gallery, initiatives, and what’s coming next.</p>
+          <span class="initiative-meta">Andrew · Ethan</span>
+        </article>
+      </div>
+    </section>
+
     <section class="gallery-section" id="archive" data-surface>
+      <p class="section-kicker reveal">Photo gallery</p>
       <h2 class="section-heading reveal">A growing student archive.</h2>
       <div class="masonry">
         <figure class="gallery-item reveal">
@@ -544,11 +1003,113 @@
       </div>
     </section>
 
+    <section class="schedule-section" id="schedule" data-surface>
+      <div class="schedule-header">
+        <div>
+          <p class="section-kicker reveal">Fall 2026</p>
+          <h2 class="section-heading reveal">Club schedule.</h2>
+        </div>
+        <p class="reveal">Meetings, fair days, and community shoots—scroll through the season as it unfolds.</p>
+      </div>
+
+      <div class="timeline" id="timeline" aria-label="Photography club schedule timeline">
+        <div class="timeline-rail" aria-hidden="true">
+          <div class="timeline-progress" id="timeline-progress"></div>
+        </div>
+
+        <article class="timeline-item" data-timeline-item>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-date-block">
+            <span class="timeline-date">Aug 17</span>
+            <span class="timeline-year">2026</span>
+          </div>
+          <div class="timeline-card">
+            <h3>Club Fair</h3>
+            <p>Photo booth on campus—Instant film, frames, and a first look at the club for new members.</p>
+            <span class="timeline-tag">Kickoff</span>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-timeline-item>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-date-block">
+            <span class="timeline-date">Aug 31</span>
+            <span class="timeline-year">2026</span>
+          </div>
+          <div class="timeline-card">
+            <h3>Camera settings basics</h3>
+            <p>Club meeting focused on exposure, aperture, shutter, and ISO—the foundations of intentional shooting.</p>
+            <span class="timeline-tag">Curriculum</span>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-timeline-item>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-date-block">
+            <span class="timeline-date">Sep 4</span>
+            <span class="timeline-year">2026</span>
+          </div>
+          <div class="timeline-card">
+            <h3>Bill Wilson Center</h3>
+            <p>Planning meeting for Portraits with a Purpose—setting up 1–2 visits over the next four weeks.</p>
+            <span class="timeline-tag">Outreach</span>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-timeline-item>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-date-block">
+            <span class="timeline-date">Sep 14</span>
+            <span class="timeline-year">2026</span>
+          </div>
+          <div class="timeline-card">
+            <h3>Portraits &amp; craft</h3>
+            <p>How to shoot portraits with purpose, give clear direction, and explore types of photography and gear.</p>
+            <span class="timeline-tag">Curriculum</span>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-timeline-item>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-date-block">
+            <span class="timeline-date">Fall</span>
+            <span class="timeline-year">Ongoing</span>
+          </div>
+          <div class="timeline-card">
+            <h3>Community shoots</h3>
+            <p>Visits to Bill Wilson Center and fundraiser support—putting what we learn into work that matters.</p>
+            <span class="timeline-tag">Purpose</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="socials-section" id="socials" data-surface>
+      <div class="socials-layout">
+        <div>
+          <p class="section-kicker reveal">Socials</p>
+          <h2 class="section-heading reveal">Follow the work.</h2>
+        </div>
+        <p class="reveal">New shoots, club moments, and campus stories land on Instagram first.</p>
+      </div>
+      <div class="social-links reveal">
+        <a class="social-link" href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.2" cy="6.8" r=".7" fill="currentColor" stroke="none" />
+          </svg>
+          <span>@vchs_photography</span>
+        </a>
+      </div>
+    </section>
+
     <section class="about-section" id="about" data-surface>
       <h2 class="reveal">A place to practice seeing.</h2>
       <div class="about-copy reveal">
         <p>VCHS Photography brings students together to learn technique, share critique, and document school life with care.</p>
         <p>Phones, borrowed cameras, and personal gear are all welcome. No previous experience is required.</p>
+        <p>This year we are building curriculum, community partnerships, fundraisers, and this website—so student work has somewhere to live.</p>
       </div>
     </section>
 
@@ -556,6 +1117,7 @@
       <div class="reveal">
         <h2>Bring your point of view.</h2>
         <div class="contact-actions">
+          <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">Instagram</a>
           <a href="tel:+14085132400">High School: (408) 513-2400</a>
           <a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">Official contact page</a>
         </div>
@@ -578,6 +1140,9 @@
     const photoChapters = [...document.querySelectorAll('.photo-chapter')];
     const surfaceSections = [...document.querySelectorAll('[data-surface]')];
     const navLinks = [...document.querySelectorAll('[data-nav]')];
+    const timeline = document.querySelector('#timeline');
+    const timelineProgress = document.querySelector('#timeline-progress');
+    const timelineItems = [...document.querySelectorAll('[data-timeline-item]')];
     let currentPhoto = 0;
 
     function showPhoto(index) {
@@ -629,8 +1194,34 @@
           scrollTrigger: { trigger: element, start: 'top 88%', once: true }
         });
       });
+
+      ScrollTrigger.create({
+        trigger: timeline,
+        start: 'top 70%',
+        end: 'bottom 55%',
+        scrub: true,
+        onUpdate: self => {
+          timelineProgress.style.height = `${self.progress * 100}%`;
+        }
+      });
+
+      timelineItems.forEach(item => {
+        ScrollTrigger.create({
+          trigger: item,
+          start: 'top 78%',
+          end: 'bottom 45%',
+          onEnter: () => {
+            item.classList.add('is-visible', 'is-active');
+          },
+          onEnterBack: () => item.classList.add('is-active'),
+          onLeave: () => item.classList.remove('is-active'),
+          onLeaveBack: () => item.classList.remove('is-active')
+        });
+      });
     } else {
       gsap.set('.reveal', { opacity: 1, y: 0 });
+      timelineItems.forEach(item => item.classList.add('is-visible', 'is-active'));
+      timelineProgress.style.height = '100%';
     }
 
     const menuToggle = document.querySelector('#menu-toggle');
