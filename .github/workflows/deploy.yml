@@ -18,9 +18,10 @@ jobs:
 
       - name: Prepare static assets
         run: |
-          mkdir -p dist/team dist/assets
+          mkdir -p dist/team dist/assets/andrew/web
           cp index.html _headers dist/
           cp assets/portfolio.css dist/assets/
+          cp -R assets/andrew/web dist/assets/andrew/
           cp team/*.html dist/team/
 
       - name: Deploy to Cloudflare Pages
