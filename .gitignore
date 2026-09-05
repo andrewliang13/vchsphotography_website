@@ -3,3 +3,8 @@
 node_modules/
 assets/andrew/raw/
 assets/andrew/thumbs/
+assets/andrew/raw-zip/
+assets/andrew/extracted/
+assets/andrew/nested/
+assets/andrew/optimize_photos.py
+assets/andrew/manifest.json
