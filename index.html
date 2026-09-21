@@ -337,11 +337,15 @@
     }
 
     .gallery-item:nth-child(2),
-    .gallery-item:nth-child(5) { padding-top: 6rem; }
+    .gallery-item:nth-child(5) { padding-top: 2.5rem; }
 
     .gallery-item img {
-      width: 100%;
+      display: block;
+      width: auto;
+      max-width: 100%;
       height: auto;
+      max-height: min(68dvh, 520px);
+      margin-inline: auto;
       background: #ddd;
       transition: filter .35s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
     }
@@ -360,6 +364,10 @@
     }
 
     .gallery-item figcaption strong { color: var(--ink); font-weight: 400; }
+
+    @media (min-width: 1200px) {
+      .gallery-section .masonry { columns: 3; }
+    }
 
     /* ——— Initiatives ——— */
     .initiatives-section {
