@@ -280,10 +280,10 @@ body.lightbox-open {
 }
 
 .photo-lightbox {
-  --lightbox-pad-top: 3.25rem;
-  --lightbox-pad-x: 3.75rem;
-  --lightbox-pad-bottom: 1.5rem;
-  --lightbox-caption: 2.25rem;
+  --lightbox-pad-top: 3.5rem;
+  --lightbox-pad-x: 4rem;
+  --lightbox-pad-bottom: 2rem;
+  --lightbox-caption: 2.5rem;
   position: fixed;
   inset: 0;
   z-index: 80;
@@ -320,10 +320,14 @@ body.lightbox-open {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .7rem;
-  width: 100%;
-  max-width: min(96vw, 2400px);
+  gap: .75rem;
+  box-sizing: border-box;
+  width: min(100%, 86vw);
+  height: calc(100dvh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom));
+  max-width: 1200px;
   max-height: calc(100dvh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom));
+  min-width: 0;
+  min-height: 0;
   margin: 0;
   transform: scale(.97);
   transition: transform .22s cubic-bezier(.23, 1, .32, 1);
@@ -335,12 +339,11 @@ body.lightbox-open {
 
 .photo-lightbox__img {
   display: block;
+  flex: 0 1 auto;
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: calc(
-    100dvh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom) - var(--lightbox-caption)
-  );
+  max-height: calc(100% - var(--lightbox-caption));
   object-fit: contain;
   object-position: center;
   background: transparent;
@@ -440,10 +443,14 @@ body.lightbox-open {
   .masonry.is-justified .gallery-item { height: var(--row-h, 140px); }
 
   .photo-lightbox {
-    --lightbox-pad-top: 3rem;
-    --lightbox-pad-x: .85rem;
-    --lightbox-pad-bottom: 1.25rem;
-    --lightbox-caption: 2.5rem;
+    --lightbox-pad-top: 3.25rem;
+    --lightbox-pad-x: 1rem;
+    --lightbox-pad-bottom: 1.5rem;
+    --lightbox-caption: 2.75rem;
+  }
+
+  .photo-lightbox__figure {
+    width: min(100%, 94vw);
   }
 
   .photo-lightbox__nav {
