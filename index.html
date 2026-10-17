@@ -3,1459 +3,817 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#00467F" />
+  <meta name="theme-color" content="#02182c" />
   <meta name="description" content="VCHS Photography is Valley Christian High School's student photography collective in San Jose, California." />
   <title>VCHS Photography | Student Collective</title>
-  <link rel="preconnect" href="https://images.unsplash.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=2400&q=88" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      color-scheme: light;
-      --paper: #f4f4f2;
-      --ink: #0a0a0a;
-      --muted: #6b6b6b;
-      --gray: #8a8a8a;
-      --line: rgba(10, 10, 10, 0.16);
-      --accent: #00467F;
-      --accent-soft: rgba(0, 70, 127, 0.12);
-      --white: #ffffff;
-      --sidebar: 15rem;
-      --pad: clamp(1.25rem, 3vw, 3.25rem);
+      --paper: #f6f5f2;
+      --ink: #121212;
+      --muted: #5c5c5c;
+      --line: rgba(18, 18, 18, .12);
+      --navy: #00467F;
+      --sky: #8CD2F4;
+      --white: #fff;
+      --deep: #02182c;
+      --ease: cubic-bezier(.32, .72, 0, 1);
+      --pad: clamp(1.25rem, 3vw, 2.5rem);
+      --measure: 72rem;
     }
 
     * { box-sizing: border-box; }
-
     html {
-      background: var(--paper);
       scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: #aaa var(--paper);
+      scroll-snap-type: y mandatory;
+      background: var(--paper);
     }
-
     body {
       margin: 0;
-      overflow-x: hidden;
       color: var(--ink);
       background: var(--paper);
-      font-family: 'Manrope', sans-serif;
+      font-family: Manrope, sans-serif;
+      font-weight: 500;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-
-    a { color: inherit; text-decoration: none; }
-    button { color: inherit; font: inherit; }
     img { display: block; max-width: 100%; }
-    ::selection { color: var(--white); background: var(--accent); }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    ::selection { color: var(--white); background: var(--navy); }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
 
     .skip-link {
       position: fixed;
+      z-index: 40;
       top: .75rem;
       left: 1rem;
-      z-index: 100;
       transform: translateY(-5rem);
       padding: .7rem 1rem;
       background: var(--paper);
-      border: 1px solid var(--ink);
-      transition: transform .2s ease;
+      color: var(--ink);
     }
+    .skip-link:focus { transform: none; }
 
-    .skip-link:focus { transform: translateY(0); }
-
-    .sidebar {
+    .bar {
       position: fixed;
-      inset: 0 auto 0 0;
       z-index: 30;
-      width: var(--sidebar);
+      top: 0;
+      left: 0;
+      right: 0;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2.1rem 1.65rem 1.55rem;
-      background: rgba(244, 244, 242, .96);
-      border-right: 1px solid var(--line);
+      align-items: center;
+      gap: 1.5rem;
+      min-height: 4.5rem;
+      padding: .85rem var(--pad);
+      color: var(--white);
+      transition: background .5s var(--ease), color .5s var(--ease), box-shadow .5s var(--ease);
     }
-
-    .wordmark {
-      display: inline-block;
-      font-size: .92rem;
+    .bar.is-solid {
+      color: var(--ink);
+      background: rgba(246, 245, 242, .94);
+      box-shadow: inset 0 -1px 0 var(--line);
+    }
+    .mark {
+      font-size: .95rem;
       font-weight: 700;
-      line-height: 1.02;
-      letter-spacing: .09em;
-      text-transform: uppercase;
+      letter-spacing: -.02em;
+      white-space: nowrap;
     }
-
-    .wordmark span { display: block; }
-
-    .nav-label {
-      margin: 2.8rem 0 .85rem;
-      color: var(--gray);
-      font-family: 'DM Mono', monospace;
-      font-size: .64rem;
+    .mark small {
+      display: block;
+      margin-top: .12rem;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      opacity: .72;
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      margin-left: auto;
+      font-size: .78rem;
+      font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-
-    .nav-list {
-      display: grid;
-      gap: .38rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-size: .86rem;
-    }
-
-    .nav-list a {
-      display: inline-block;
-      padding: .12rem 0;
-      color: #5c5c5c;
-      transition: color .25s ease, transform .25s ease;
-    }
-
-    .nav-list a:hover,
-    .nav-list a.active { color: var(--ink); transform: translateX(.28rem); }
-
-    .sidebar-foot {
-      display: grid;
-      gap: .8rem;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: .62rem;
-      line-height: 1.55;
-    }
-
-    .sidebar-foot a { text-decoration: underline; text-underline-offset: .18rem; }
-
-    .sidebar-social {
-      display: flex;
-      align-items: center;
-      gap: .55rem;
-      margin-top: .15rem;
-    }
-
-    .sidebar-social a {
+    .menu a { opacity: .82; }
+    .menu a:hover, .menu a.active { opacity: 1; }
+    .pill {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 1.65rem;
-      height: 1.65rem;
-      border: 1px solid var(--line);
-      color: var(--ink);
-      text-decoration: none;
-      transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
-    }
-
-    .sidebar-social a:hover {
-      color: var(--white);
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .sidebar-social a:active { transform: translateY(1px); }
-
-    .sidebar-social svg {
-      width: .85rem;
-      height: .85rem;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .mobile-header { display: none; }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 4.2rem .75rem auto;
-      z-index: 50;
-      padding: 1rem;
-      background: rgba(244, 244, 242, .98);
-      border: 1px solid var(--line);
-    }
-
-    .mobile-menu.open { display: grid; }
-    .mobile-menu a { padding: .85rem .4rem; border-bottom: 1px solid var(--line); }
-    .mobile-menu a:last-child { border-bottom: 0; }
-
-    .background-stage {
-      position: fixed;
-      inset: 0 0 0 var(--sidebar);
-      z-index: 0;
-      overflow: hidden;
-      background: #111;
-      transition: opacity .65s ease;
-    }
-
-    .background-stage.is-hidden { opacity: 0; }
-
-    .background-stage::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(0, 0, 0, .08) 28%, rgba(0, 0, 0, .72) 100%);
-    }
-
-    .background-photo {
-      position: absolute;
-      inset: -2%;
-      width: 104%;
-      height: 104%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.035);
-      transition: opacity .85s ease, transform 1.25s cubic-bezier(.16, 1, .3, 1);
-      will-change: opacity, transform;
-    }
-
-    .background-photo.active { opacity: 1; transform: scale(1); }
-
-    .image-loading {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(110deg, #1a1a1a 20%, #2a2a2a 35%, #1a1a1a 50%);
-      background-size: 220% 100%;
-      animation: shimmer 1.3s linear infinite;
-    }
-
-    @keyframes shimmer { to { background-position-x: -220%; } }
-
-    .page {
-      position: relative;
-      z-index: 5;
-      margin-left: var(--sidebar);
-    }
-
-    .photo-chapter {
-      min-height: 100dvh;
-      display: flex;
-      align-items: flex-end;
-      padding: var(--pad);
-      color: #f4f4f2;
-    }
-
-    .hero-copy {
-      width: min(100%, 66rem);
-      padding-bottom: 1rem;
-    }
-
-    .hero-copy h1 {
-      max-width: 10ch;
-      margin: 0;
-      font-size: clamp(3.4rem, 8.4vw, 8.5rem);
+      min-height: 2.6rem;
+      padding: .55rem 1rem;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 999px;
+      font-size: .78rem;
       font-weight: 600;
-      line-height: .86;
-      letter-spacing: -.07em;
-      text-wrap: balance;
+      letter-spacing: .04em;
+      transition: background .45s var(--ease), color .45s var(--ease), border-color .45s var(--ease), transform .45s var(--ease);
     }
+    .bar.is-solid .pill { border-color: var(--navy); color: var(--navy); }
+    .pill:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
+    .bar.is-solid .pill:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .pill:active { transform: scale(.98); }
+    .menu-toggle { display: none; letter-spacing: .08em; text-transform: uppercase; font-size: .75rem; font-weight: 700; }
 
-    .hero-copy p {
-      max-width: 29rem;
-      margin: 1.45rem 0 0;
-      color: rgba(244, 244, 242, .82);
-      font-size: .94rem;
-      line-height: 1.6;
-    }
-
-    .chapter-caption {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      gap: 2rem;
-      width: 100%;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(244, 244, 242, .45);
-    }
-
-    .chapter-caption h2 {
-      margin: 0;
-      font-size: clamp(2.4rem, 5.5vw, 5.6rem);
-      font-weight: 500;
-      line-height: .9;
-      letter-spacing: -.06em;
-    }
-
-    .chapter-caption p {
-      max-width: 22rem;
-      margin: 0;
-      color: rgba(244, 244, 242, .78);
-      font-size: .82rem;
-      line-height: 1.65;
-    }
-
-    .gallery-section,
-    .initiatives-section,
-    .schedule-section,
-    .socials-section,
-    .leadership-section,
-    .about-section,
-    .contact-section {
+    .hero {
       position: relative;
-      background: var(--paper);
+      height: 100dvh;
+      min-height: 100dvh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      color: var(--white);
+      background: var(--deep);
+      overflow: hidden;
     }
-
-    .gallery-section { padding: 8rem var(--pad) 10rem; }
-
-    .section-heading {
-      max-width: 14ch;
-      margin: 0 0 5rem;
-      font-size: clamp(2.8rem, 5.7vw, 6.2rem);
-      font-weight: 500;
-      line-height: .92;
-      letter-spacing: -.06em;
+    .slides { position: absolute; inset: 0; }
+    .slides img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+      opacity: 0;
+      transform: scale(1.06);
+      transition: opacity 1.15s var(--ease), transform 6.5s var(--ease);
     }
-
-    .section-kicker {
-      margin: 0 0 1rem;
-      color: var(--accent);
-      font-family: 'DM Mono', monospace;
-      font-size: .68rem;
-      letter-spacing: .12em;
+    .slides img.is-on { opacity: 1; transform: scale(1); }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 24, 44, .46) 0%, rgba(2, 24, 44, .5) 42%, rgba(2, 24, 44, .32) 70%, rgba(2, 24, 44, .55));
+    }
+    .hero-copy {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 48%;
+      width: min(92vw, 70rem);
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .eyebrow {
+      margin: 0 0 .85rem;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .28em;
       text-transform: uppercase;
     }
-
-    .masonry {
-      columns: 2;
-      column-gap: var(--pad);
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7.2vw, 5.8rem);
+      font-weight: 600;
+      line-height: .92;
+      letter-spacing: -.038em;
+      text-shadow: 0 10px 28px rgba(0, 0, 0, .28);
+    }
+    .hero-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.4rem;
+      margin-top: 1.4rem;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .hero-links a { opacity: .88; }
+    .hero-links a:hover { opacity: 1; }
+    .hero-foot {
+      position: absolute;
+      z-index: 2;
+      left: var(--pad);
+      right: var(--pad);
+      bottom: 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .dots { display: flex; gap: .45rem; }
+    .dots button {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      position: relative;
+    }
+    .dots button::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: .42rem;
+      height: .42rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .45);
+      transform: translate(-50%, -50%);
+      transition: transform .45s var(--ease), background .45s var(--ease);
+    }
+    .dots button[aria-current="true"]::after { background: var(--white); transform: translate(-50%, -50%) scale(1.35); }
+    .scroll-hint {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      opacity: .82;
     }
 
-    .gallery-item {
-      break-inside: avoid;
-      margin: 0 0 var(--pad);
+    .wrap { width: min(var(--measure), calc(100% - var(--pad) * 2)); margin: 0 auto; }
+    main > section {
+      display: flex;
+      align-items: center;
+      height: 100dvh;
+      min-height: 100dvh;
+      padding: 4.7rem 0 1.15rem;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+    }
+    main > section .wrap { width: min(var(--measure), calc(100% - var(--pad) * 2)); }
+    .kicker {
+      margin: 0 0 .7rem;
+      color: var(--navy);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3.1vw, 2.45rem);
+      font-weight: 700;
+      letter-spacing: -.035em;
+      line-height: 1.02;
+    }
+    .lede { max-width: 34rem; margin: .45rem 0 0; color: var(--muted); font-size: .92rem; line-height: 1.45; }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: 1.25rem 2.5rem;
+      align-items: end;
+      margin-bottom: 1rem;
     }
 
-    .gallery-item:nth-child(2),
-    .gallery-item:nth-child(5) { padding-top: 2.5rem; }
-
-    .gallery-item img {
-      display: block;
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      max-height: min(68dvh, 520px);
-      margin-inline: auto;
+    .work { display: grid; gap: 4.75rem; }
+    .piece { display: grid; gap: .9rem; }
+    .piece figure {
+      margin: 0;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
       background: #ddd;
-      transition: filter .35s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
     }
-
-    .gallery-item:hover img { filter: saturate(.85) contrast(1.04); transform: scale(.994); }
-
-    .gallery-item figcaption {
+    .piece img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s var(--ease);
+    }
+    .piece a:hover img { transform: scale(1.03); }
+    .caption {
       display: flex;
       justify-content: space-between;
       gap: 1rem;
-      padding-top: .7rem;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: .64rem;
-      line-height: 1.45;
-    }
-
-    .gallery-item figcaption strong { color: var(--ink); font-weight: 400; }
-
-    @media (min-width: 1200px) {
-      .gallery-section .masonry { columns: 3; }
-    }
-
-    /* ——— Initiatives ——— */
-    .initiatives-section {
-      padding: 8rem var(--pad);
-      border-top: 1px solid var(--line);
-    }
-
-    .initiatives-intro {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: clamp(2rem, 6vw, 6rem);
-      align-items: end;
-      margin-bottom: 4.5rem;
-    }
-
-    .initiatives-intro p {
-      max-width: 28rem;
-      margin: 0;
-      color: #555;
-      line-height: 1.7;
-    }
-
-    .initiative-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .initiative {
-      padding: 2.4rem 0 2.6rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .initiative:nth-child(odd) { padding-right: clamp(1.5rem, 4vw, 3.5rem); }
-    .initiative:nth-child(even) {
-      padding-left: clamp(1.5rem, 4vw, 3.5rem);
-      border-left: 1px solid var(--line);
-    }
-
-    .initiative-index {
-      display: block;
-      margin-bottom: .9rem;
-      color: var(--accent);
-      font-family: 'DM Mono', monospace;
-      font-size: .64rem;
-      letter-spacing: .1em;
-    }
-
-    .initiative h3 {
-      margin: 0 0 .85rem;
-      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      font-size: .78rem;
       font-weight: 600;
-      letter-spacing: -.03em;
-      line-height: 1.15;
-    }
-
-    .initiative p {
-      margin: 0;
-      max-width: 32rem;
-      color: #555;
-      font-size: .92rem;
-      line-height: 1.65;
-    }
-
-    .initiative-meta {
-      display: block;
-      margin-top: 1.1rem;
-      color: var(--gray);
-      font-family: 'DM Mono', monospace;
-      font-size: .62rem;
-      letter-spacing: .04em;
-    }
-
-    /* ——— Schedule / Timeline ——— */
-    .schedule-section {
-      padding: 8rem var(--pad) 10rem;
-      border-top: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, var(--paper) 0%, #ecece8 42%, var(--paper) 100%);
-    }
-
-    .schedule-header {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
-      gap: clamp(2rem, 5vw, 5rem);
-      align-items: end;
-      margin-bottom: 5rem;
-    }
-
-    .schedule-header .section-heading { margin-bottom: 0; }
-
-    .schedule-header p {
-      max-width: 26rem;
-      margin: 0;
-      color: #555;
-      line-height: 1.7;
-    }
-
-    .timeline {
-      position: relative;
-      max-width: 58rem;
-      margin: 0 auto;
-      padding: 1rem 0 2rem;
-    }
-
-    .timeline-rail {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      transform: translateX(-50%);
-      background: rgba(10, 10, 10, 0.12);
-      overflow: hidden;
-    }
-
-    .timeline-progress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 0%;
-      background: var(--accent);
-      transform-origin: top center;
-    }
-
-    .timeline-item {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      padding: 2.4rem 0;
-      opacity: 0;
-      transform: translateY(2rem);
-    }
-
-    .timeline-item.is-visible {
-      opacity: 1;
-      transform: none;
-      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
-    }
-
-    .timeline-item:nth-child(odd) .timeline-card {
-      grid-column: 1;
-      justify-self: end;
-      text-align: right;
-      padding-right: 3.25rem;
-    }
-
-    .timeline-item:nth-child(even) .timeline-card {
-      grid-column: 2;
-      justify-self: start;
-      text-align: left;
-      padding-left: 3.25rem;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-date-block {
-      grid-column: 2;
-      justify-self: start;
-      padding-left: 3.25rem;
-    }
-
-    .timeline-item:nth-child(even) .timeline-date-block {
-      grid-column: 1;
-      justify-self: end;
-      text-align: right;
-      padding-right: 3.25rem;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      top: 3.1rem;
-      left: 50%;
-      z-index: 2;
-      width: .7rem;
-      height: .7rem;
-      border-radius: 50%;
-      background: var(--paper);
-      border: 2px solid var(--accent);
-      transform: translateX(-50%) scale(.7);
-      transition: transform .45s cubic-bezier(.16, 1, .3, 1), background-color .35s ease, box-shadow .35s ease;
-    }
-
-    .timeline-item.is-visible .timeline-dot,
-    .timeline-item.is-active .timeline-dot {
-      transform: translateX(-50%) scale(1);
-      background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-soft);
-    }
-
-    .timeline-date-block {
-      align-self: start;
-      padding-top: .35rem;
-    }
-
-    .timeline-date {
-      display: block;
-      color: var(--accent);
-      font-family: 'DM Mono', monospace;
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .timeline-year {
-      display: block;
-      margin-top: .35rem;
-      color: var(--gray);
-      font-family: 'DM Mono', monospace;
-      font-size: .62rem;
-      letter-spacing: .08em;
-    }
-
-    .timeline-card {
-      max-width: 22rem;
-    }
-
-    .timeline-card h3 {
-      margin: 0 0 .7rem;
-      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
-      font-weight: 600;
-      letter-spacing: -.03em;
-      line-height: 1.15;
-    }
-
-    .timeline-card p {
-      margin: 0;
-      color: #555;
-      font-size: .9rem;
-      line-height: 1.65;
-    }
-
-    .timeline-tag {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: .28rem 0;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: .6rem;
       letter-spacing: .08em;
       text-transform: uppercase;
-      border-top: 1px solid var(--line);
     }
+    .caption span { color: var(--muted); font-weight: 500; }
 
-    .socials-section {
-      padding: 7rem var(--pad);
-      border-top: 1px solid var(--line);
-    }
-
-    .socials-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: clamp(2rem, 6vw, 6rem);
-      align-items: end;
-    }
-
-    .socials-layout .section-heading { margin-bottom: 0; }
-
-    .socials-layout > p {
-      max-width: 26rem;
-      margin: 0;
-      color: #555;
-      line-height: 1.7;
-    }
-
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .75rem;
-      margin-top: 3rem;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: .75rem;
-      min-height: 3rem;
-      padding: .7rem 1rem .7rem .85rem;
-      border: 1px solid var(--ink);
-      font-size: .8rem;
-      transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
-    }
-
-    .social-link:hover {
-      color: var(--white);
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .social-link:active { transform: translateY(1px); }
-
-    .social-link svg {
-      width: 1.05rem;
-      height: 1.05rem;
-      flex-shrink: 0;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .social-link span {
-      font-family: 'DM Mono', monospace;
-      font-size: .68rem;
-      letter-spacing: .04em;
-    }
-
-    /* ——— Leadership ——— */
-    .leadership-section {
-      box-sizing: border-box;
-      display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
-      gap: 1.15rem;
-      min-height: 100dvh;
-      padding: 2rem var(--pad) 1.75rem;
-      border-top: 1px solid var(--line);
-    }
-
-    @media (min-width: 768px) {
-      .leadership-section {
-        height: 100dvh;
-        max-height: 100dvh;
-        overflow: hidden;
-      }
-    }
-
-    .leadership-intro {
-      max-width: 36rem;
-    }
-
-    .leadership-intro .section-kicker {
-      margin-bottom: .55rem;
-    }
-
-    .leadership-intro .section-heading {
-      max-width: 14ch;
-      margin: 0 0 .45rem;
-      font-size: clamp(1.9rem, 3.5vw, 3.15rem);
-    }
-
-    .leadership-intro p {
-      max-width: 30rem;
-      margin: 0;
-      color: #555;
-      font-size: .9rem;
-      line-height: 1.5;
-    }
-
-    .leadership-list {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      min-height: 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .leadership-list > li {
-      flex: 1 1 0;
-      display: flex;
-      min-height: 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .leader-link {
+    .roster { margin: .7rem 0 0; padding: 0; list-style: none; }
+    .roster a {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: .45rem 2rem;
+      gap: .4rem 1.5rem;
       align-items: center;
-      flex: 1;
-      width: 100%;
-      min-height: 2.65rem;
-      padding: 0;
-      transition: color .25s ease, transform .25s ease, padding-left .25s ease;
+      min-height: 2.55rem;
+      padding: .35rem 0;
+      border-top: 1px solid var(--line);
+      transition: color .4s var(--ease), padding-left .4s var(--ease);
     }
-
-    .leader-link:hover,
-    .leader-link:focus-visible {
-      color: var(--accent);
-      padding-left: .35rem;
-    }
-
-    .leader-name {
-      margin: 0;
-      font-size: clamp(1rem, 1.45vw, 1.22rem);
+    .roster li:last-child a { border-bottom: 1px solid var(--line); }
+    .roster a:hover { color: var(--navy); padding-left: .35rem; }
+    .roster strong { font-size: clamp(1.05rem, 1.6vw, 1.28rem); font-weight: 600; letter-spacing: -.02em; }
+    .roster em, .roster b {
+      color: var(--muted);
+      font-style: normal;
       font-weight: 600;
-      letter-spacing: -.03em;
-      line-height: 1.15;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .roster a:hover em, .roster a:hover b { color: var(--navy); }
+
+    .rules { border-top: 1px solid var(--line); }
+    .rule {
+      display: grid;
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: .35rem 1.25rem;
+      padding: .62rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .rule span { color: var(--navy); font-size: .72rem; font-weight: 700; letter-spacing: .12em; }
+    .rule h3 { margin: 0 0 .15rem; font-size: 1.05rem; letter-spacing: -.02em; }
+    .rule p { margin: 0; max-width: 46rem; color: var(--muted); font-size: .86rem; line-height: 1.35; }
+    .rule small { display: block; margin-top: .2rem; color: var(--muted); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 1.25rem;
+    }
+    .grid figure { margin: 0; }
+    .grid a {
+      display: block;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #ddd;
+    }
+    .grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s var(--ease);
+    }
+    .grid a:hover img { transform: scale(1.03); }
+    .grid figcaption {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: .65rem;
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .grid figcaption strong { color: var(--ink); font-weight: 600; }
+
+    .timeline { position: relative; max-width: 52rem; margin: 0 auto; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 7rem minmax(0, 1fr);
+      gap: .75rem 1.25rem;
+      padding: .62rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .timeline-item:last-child { border-bottom: 1px solid var(--line); }
+    .when { color: var(--navy); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .when small { display: block; margin-top: .25rem; color: var(--muted); font-size: .68rem; }
+    .timeline-item h3 { margin: 0 0 .15rem; font-size: 1.05rem; letter-spacing: -.02em; }
+    .timeline-item p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.35; }
+    .tag {
+      display: inline-block;
+      margin-top: .25rem;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
     }
 
-    .leader-role {
-      color: #5c5c5c;
-      font-family: 'DM Mono', monospace;
-      font-size: .7rem;
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(16rem, .8fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: start;
+    }
+    .about p { margin: 0 0 1rem; color: var(--muted); line-height: 1.7; }
+
+    .contact { background: #eceae4; }
+    .contact h2 { max-width: 12ch; }
+    .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      padding: .65rem 1rem;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: 600;
+      transition: background .45s var(--ease), color .45s var(--ease), transform .45s var(--ease);
+    }
+    .actions a:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .actions a:active { transform: scale(.98); }
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.6rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .75rem;
       letter-spacing: .06em;
       text-transform: uppercase;
     }
 
-    .leader-link:hover .leader-role,
-    .leader-link:focus-visible .leader-role { color: var(--accent); }
-
-    .leader-cta {
-      color: #5c5c5c;
-      font-family: 'DM Mono', monospace;
-      font-size: .66rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      transition: color .25s ease, transform .25s ease;
+    .rise { animation: rise .9s cubic-bezier(.16, 1, .3, 1) both; }
+    .d1 { animation-delay: .08s; }
+    .d2 { animation-delay: .16s; }
+    @keyframes rise {
+      from { opacity: 0; translate: 0 3.2rem; scale: .9; }
+      to { opacity: 1; translate: 0 0; scale: 1; }
     }
-
-    .leader-link:hover .leader-cta,
-    .leader-link:focus-visible .leader-cta {
-      color: var(--accent);
-      transform: translateX(.2rem);
+    html.motion main > section :is(.kicker, h2, .lede, .roster li, .rule, .timeline-item, .about p, .actions, .site-footer) {
+      opacity: 0;
+      translate: 0 2.8rem;
+      scale: .94;
+      transition: opacity 650ms ease, translate 850ms cubic-bezier(.16, 1, .3, 1), scale 850ms cubic-bezier(.16, 1, .3, 1);
     }
-
-    .about-section {
-      min-height: 92dvh;
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(18rem, .65fr);
-      gap: clamp(3rem, 9vw, 10rem);
-      align-items: center;
-      padding: 8rem var(--pad);
-      border-top: 1px solid var(--line);
+    html.motion main > section.is-current :is(.kicker, h2, .lede, .roster li, .rule, .timeline-item, .about p, .actions, .site-footer) {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
     }
-
-    .about-section h2 {
-      max-width: 13ch;
-      margin: 0;
-      font-size: clamp(2.7rem, 5.3vw, 5.8rem);
-      font-weight: 500;
-      line-height: .94;
-      letter-spacing: -.06em;
-    }
-
-    .about-copy { max-width: 31rem; }
-    .about-copy p { margin: 0 0 1.3rem; color: #555; line-height: 1.75; }
-
-    .contact-section {
-      min-height: 78dvh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 7rem var(--pad) 2rem;
-      background: #e4e4e0;
-      border-top: 1px solid var(--line);
-    }
-
-    .contact-section h2 {
-      max-width: 11ch;
-      margin: 0;
-      font-size: clamp(3.4rem, 8vw, 8.2rem);
-      font-weight: 500;
-      line-height: .85;
-      letter-spacing: -.072em;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .75rem;
-      margin-top: 2.3rem;
-    }
-
-    .contact-actions a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 3rem;
-      padding: .75rem 1rem;
-      border: 1px solid var(--ink);
-      font-size: .8rem;
-      transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
-    }
-
-    .contact-actions a:hover {
-      color: var(--white);
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .contact-actions a:active { transform: translateY(1px); }
-
-    .site-footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 2rem;
-      padding-top: 1.4rem;
-      border-top: 1px solid rgba(10, 10, 10, .3);
-      color: #575757;
-      font-family: 'DM Mono', monospace;
-      font-size: .62rem;
-    }
-
-    .reveal { opacity: 0; transform: translateY(1.75rem); }
+    html.motion main > section.is-current h2 { transition-delay: 70ms; }
+    html.motion main > section.is-current .lede { transition-delay: 130ms; }
+    html.motion main > section.is-current .roster li:nth-child(1) { transition-delay: 90ms; }
+    html.motion main > section.is-current .roster li:nth-child(2) { transition-delay: 130ms; }
+    html.motion main > section.is-current .roster li:nth-child(3) { transition-delay: 170ms; }
+    html.motion main > section.is-current .roster li:nth-child(4) { transition-delay: 210ms; }
+    html.motion main > section.is-current .roster li:nth-child(5) { transition-delay: 250ms; }
+    html.motion main > section.is-current .roster li:nth-child(6) { transition-delay: 290ms; }
+    html.motion main > section.is-current .roster li:nth-child(7) { transition-delay: 330ms; }
+    html.motion main > section.is-current .roster li:nth-child(8) { transition-delay: 370ms; }
+    html.motion main > section.is-current .roster li:nth-child(9) { transition-delay: 410ms; }
+    html.motion main > section.is-current .roster li:nth-child(10) { transition-delay: 450ms; }
+    html.motion main > section.is-current .rule:nth-child(1) { transition-delay: 80ms; }
+    html.motion main > section.is-current .rule:nth-child(2) { transition-delay: 140ms; }
+    html.motion main > section.is-current .rule:nth-child(3) { transition-delay: 200ms; }
+    html.motion main > section.is-current .rule:nth-child(4) { transition-delay: 260ms; }
+    html.motion main > section.is-current .rule:nth-child(5) { transition-delay: 320ms; }
+    html.motion main > section.is-current .timeline-item:nth-child(1) { transition-delay: 80ms; }
+    html.motion main > section.is-current .timeline-item:nth-child(2) { transition-delay: 140ms; }
+    html.motion main > section.is-current .timeline-item:nth-child(3) { transition-delay: 200ms; }
+    html.motion main > section.is-current .timeline-item:nth-child(4) { transition-delay: 260ms; }
+    html.motion main > section.is-current .timeline-item:nth-child(5) { transition-delay: 320ms; }
+    html.motion main > section.is-current .actions { transition-delay: 180ms; }
+    html.motion main > section.is-current .about p:nth-child(1) { transition-delay: 80ms; }
+    html.motion main > section.is-current .about p:nth-child(2) { transition-delay: 150ms; }
+    html.motion main > section.is-current .about p:nth-child(3) { transition-delay: 220ms; }
 
     @media (max-width: 900px) {
-      .initiatives-intro,
-      .schedule-header,
-      .socials-layout { grid-template-columns: 1fr; }
-      .initiative-grid { grid-template-columns: 1fr; }
-      .initiative:nth-child(odd),
-      .initiative:nth-child(even) {
-        padding-left: 0;
-        padding-right: 0;
-        border-left: 0;
+      .menu { display: none; }
+      .menu-toggle { display: inline-flex; margin-left: auto; min-height: 2.75rem; align-items: center; }
+      .menu.open {
+        display: grid;
+        position: absolute;
+        top: 100%;
+        left: .75rem;
+        right: .75rem;
+        margin: 0;
+        padding: .4rem 1rem 1rem;
+        background: var(--paper);
+        color: var(--ink);
+        box-shadow: 0 18px 40px rgba(2, 24, 44, .12);
       }
-      .leader-link {
-        grid-template-columns: 1fr auto;
-        gap: .35rem 1rem;
-      }
-      .leader-role { grid-column: 1; }
-      .leader-cta { grid-row: 1 / span 2; align-self: center; }
-    }
-
-    @media (max-width: 767px) {
-      :root { --pad: 1rem; }
-      .sidebar { display: none; }
-
-      .mobile-header {
-        position: fixed;
-        inset: .7rem .7rem auto;
-        z-index: 40;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 3.25rem;
-        padding: .7rem .9rem;
-        background: rgba(244, 244, 242, .94);
-        border: 1px solid rgba(10, 10, 10, .18);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
-
-      .mobile-header .wordmark { font-size: .7rem; }
-      .menu-toggle { border: 0; background: transparent; font-family: 'DM Mono', monospace; font-size: .7rem; text-transform: uppercase; }
-      .background-stage { inset: 0; }
-      .page { margin-left: 0; }
-      .photo-chapter { padding: 5.5rem 1rem 1.2rem; }
-      .hero-copy h1 { font-size: clamp(3.35rem, 17vw, 5.4rem); }
-      .hero-copy p { max-width: 19rem; font-size: .82rem; }
-      .chapter-caption { grid-template-columns: 1fr; gap: .9rem; }
-      .chapter-caption p { max-width: 18rem; }
-      .gallery-section,
-      .initiatives-section,
-      .schedule-section,
-      .socials-section,
-      .leadership-section {
-        display: block;
-        height: auto;
-        max-height: none;
-        min-height: auto;
-        overflow: visible;
-        padding: 5rem 1rem 4.5rem;
-      }
-
-      .leadership-list > li {
-        flex: none;
-      }
-
-      .leader-link {
-        min-height: 3.1rem;
-        padding: .85rem 0;
-      }
-      .socials-layout { grid-template-columns: 1fr; }
-      .social-links { margin-top: 2rem; }
-      .section-heading { margin-bottom: 3rem; }
-      .masonry { columns: 1; }
-      .gallery-item:nth-child(2), .gallery-item:nth-child(5) { padding-top: 0; }
-      .about-section { grid-template-columns: 1fr; gap: 3rem; min-height: auto; padding: 6rem 1rem; }
-      .contact-section { min-height: 80dvh; padding: 6rem 1rem 1.5rem; }
-      .contact-section h2 { font-size: clamp(3.4rem, 16vw, 5.5rem); }
-      .site-footer { flex-direction: column; gap: .4rem; }
-
-      .timeline { padding-left: 1.4rem; }
-      .timeline-rail { left: .2rem; transform: none; }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-        padding: 1.6rem 0 1.6rem 1.4rem;
-      }
-
-      .timeline-item:nth-child(odd) .timeline-card,
-      .timeline-item:nth-child(even) .timeline-card,
-      .timeline-item:nth-child(odd) .timeline-date-block,
-      .timeline-item:nth-child(even) .timeline-date-block {
-        grid-column: 1;
-        justify-self: start;
-        text-align: left;
-        padding-left: 0;
-        padding-right: 0;
-        max-width: none;
-      }
-
-      .timeline-date-block { order: -1; margin-bottom: .55rem; }
-      .timeline-dot { left: .2rem; top: 1.85rem; }
+      .menu.open a { padding: .85rem 0; border-bottom: 1px solid var(--line); opacity: 1; }
+      .split, .about, .timeline-item { grid-template-columns: 1fr; }
+      .roster b { justify-self: start; }
+      main > section { padding: 4.4rem 0 .8rem; }
+      .hero-links { gap: .85rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .reveal,
-      .timeline-item { opacity: 1; transform: none; }
+      .rise, .slides img { animation: none; }
+      .slides img { transform: none; }
+      main > section :is(.kicker, h2, .lede, .roster li, .rule, .timeline-item, .about p, .actions, .site-footer) {
+        opacity: 1;
+        translate: none;
+        scale: none;
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <aside class="sidebar" aria-label="Portfolio navigation">
-    <div>
-      <a class="wordmark" href="#home" aria-label="VCHS Photography home"><span>VCHS</span><span>Photography</span></a>
-      <p class="nav-label">Portfolio</p>
-      <ul class="nav-list">
-        <li><a class="active" href="#home" data-nav="home">Overview</a></li>
-        <li><a href="#portraits" data-nav="portraits">Portraits</a></li>
-        <li><a href="#campus" data-nav="campus">Campus</a></li>
-        <li><a href="#motion" data-nav="motion">Motion</a></li>
-        <li><a href="#after-hours" data-nav="after-hours">After Hours</a></li>
-      </ul>
-      <p class="nav-label">Club</p>
-      <ul class="nav-list">
-        <li><a href="#leadership" data-nav="leadership">Leadership</a></li>
-        <li><a href="#initiatives" data-nav="initiatives">Initiatives</a></li>
-        <li><a href="#archive" data-nav="archive">Gallery</a></li>
-        <li><a href="#schedule" data-nav="schedule">Schedule</a></li>
-        <li><a href="#socials" data-nav="socials">Socials</a></li>
-        <li><a href="#about" data-nav="about">About</a></li>
-        <li><a href="#contact" data-nav="contact">Contact</a></li>
-      </ul>
-    </div>
-    <div class="sidebar-foot">
-      <span>Student-led photography at Valley Christian High School.</span>
-      <div class="sidebar-social">
-        <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer" aria-label="VCHS Photography on Instagram">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.2" cy="6.8" r=".7" fill="currentColor" stroke="none" />
-          </svg>
-        </a>
-      </div>
-      <a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">VCS contact</a>
-      <span>Temporary stock imagery</span>
-    </div>
-  </aside>
-
-  <header class="mobile-header">
-    <a class="wordmark" href="#home"><span>VCHS</span><span>Photography</span></a>
-    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+  <header class="bar" id="bar">
+    <a class="mark" href="#home">VCHS Photography<small>Student collective</small></a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav class="menu" id="menu" aria-label="Site">
+      <a href="#leadership">People</a>
+      <a href="#events">Events</a>
+      <a href="#initiatives">Initiatives</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="pill" href="#contact">Contact</a>
   </header>
 
-  <nav class="mobile-menu" id="mobile-menu" aria-hidden="true" aria-label="Mobile navigation">
-    <a href="#home">Overview</a>
-    <a href="#portraits">Portraits</a>
-    <a href="#campus">Campus</a>
-    <a href="#motion">Motion</a>
-    <a href="#leadership">Leadership</a>
-    <a href="#initiatives">Initiatives</a>
-    <a href="#archive">Gallery</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#socials">Socials</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <section class="hero" id="home">
+    <div class="slides" id="slides" aria-hidden="true">
+      <img class="is-on" src="assets/club/john-indoor/full/196-1m3614-L-DSC09531.JPG" alt="" />
+      <img src="assets/club/vb-var/full/377-1bxVKQ8A-DSC04109.jpg" alt="" />
+      <img src="assets/club/ethan-hoco/full/001-1Hus01uB-1E2111B9-DCF3-4C89-ADC3-EEB53FF8824E.jpeg" alt="" />
+      <img src="assets/club/john-hoco/full/004-1HAZ0xuq-DSC02133.jpg" alt="" />
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow rise">Valley Christian High School</p>
+      <h1 class="rise d1">Photography</h1>
+      <nav class="hero-links rise d2" aria-label="On this page">
+        <a href="#leadership">People</a>
+        <a href="#events">Events</a>
+        <a href="gallery.html">Gallery</a>
+      </nav>
+    </div>
+    <div class="hero-foot">
+      <div class="dots" id="dots" role="group" aria-label="Hero photographs"></div>
+      <a class="scroll-hint" href="#leadership">Scroll down</a>
+    </div>
+  </section>
 
-  <div class="background-stage" id="background-stage" aria-hidden="true">
-    <div class="image-loading"></div>
-    <img class="background-photo active" data-image="0" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=2400&q=88" alt="" fetchpriority="high" />
-    <img class="background-photo" data-image="1" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=2400&q=86" alt="" loading="lazy" />
-    <img class="background-photo" data-image="2" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2400&q=86" alt="" loading="lazy" />
-    <img class="background-photo" data-image="3" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=2400&q=86" alt="" loading="lazy" />
-    <img class="background-photo" data-image="4" src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=2400&q=86" alt="" loading="lazy" />
-  </div>
-
-  <main class="page" id="main">
-    <section class="photo-chapter" id="home" data-bg="0">
-      <div class="hero-copy reveal">
-        <h1>See what stays.</h1>
-        <p>VCHS Photography is a student collective documenting people, place, and everyday life.</p>
-      </div>
-    </section>
-
-    <section class="photo-chapter" id="portraits" data-bg="1">
-      <div class="chapter-caption reveal">
-        <h2>Portraits</h2>
-        <p>Faces, gesture, and presence. Temporary stock photography will be replaced by student work.</p>
-      </div>
-    </section>
-
-    <section class="photo-chapter" id="campus" data-bg="2">
-      <div class="chapter-caption reveal">
-        <h2>Campus</h2>
-        <p>The people and passing moments that make Valley Christian feel like a community.</p>
-      </div>
-    </section>
-
-    <section class="photo-chapter" id="motion" data-bg="3">
-      <div class="chapter-caption reveal">
-        <h2>Motion</h2>
-        <p>Sport, performance, and the split-second choices that make movement readable.</p>
-      </div>
-    </section>
-
-    <section class="photo-chapter" id="after-hours" data-bg="4">
-      <div class="chapter-caption reveal">
-        <h2>After Hours</h2>
-        <p>Low light, live events, and the energy that appears when the school day ends.</p>
-      </div>
-    </section>
-
-    <section class="leadership-section" id="leadership" data-surface>
-      <div class="leadership-intro">
-        <p class="section-kicker">Leadership</p>
-        <h2 class="section-heading">The people behind the lens.</h2>
-        <p>Click a name to open their portfolio.</p>
-      </div>
-      <ul class="leadership-list">
-        <li>
-          <a class="leader-link" href="team/allen-wu.html">
-            <h3 class="leader-name">Allen Wu</h3>
-            <span class="leader-role">Co-President</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/ethan-chen.html">
-            <h3 class="leader-name">Ethan Chen</h3>
-            <span class="leader-role">Co-President</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/jocelyn-kwok.html">
-            <h3 class="leader-name">Jocelyn Kwok</h3>
-            <span class="leader-role">Co-President</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/amanda-garcia.html">
-            <h3 class="leader-name">Amanda Garcia</h3>
-            <span class="leader-role">Vice President</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/daniel-an.html">
-            <h3 class="leader-name">Daniel An</h3>
-            <span class="leader-role">Operations Officer</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/john-wu.html">
-            <h3 class="leader-name">John Wu</h3>
-            <span class="leader-role">Technical Officer</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/andrew-liang.html">
-            <h3 class="leader-name">Andrew Liang</h3>
-            <span class="leader-role">Sophomore Apprentice</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-        <li>
-          <a class="leader-link" href="team/austin-guydish.html">
-            <h3 class="leader-name">Austin Guydish</h3>
-            <span class="leader-role">Freshman Apprentice</span>
-            <span class="leader-cta">Portfolio →</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <section class="initiatives-section" id="initiatives" data-surface>
-      <p class="section-kicker reveal">Our initiatives</p>
-      <div class="initiatives-intro">
-        <h2 class="section-heading reveal">Work that reaches past campus.</h2>
-        <p class="reveal">Learning the craft, serving the community, and building a home for student photography—led by club members across curriculum, outreach, fundraisers, and the web.</p>
-      </div>
-      <div class="initiative-grid">
-        <article class="initiative reveal">
-          <span class="initiative-index">01</span>
-          <h3>Portraits with a Purpose</h3>
-          <p>Partnering with Bill Wilson Center to create portraits that support people in our community. We are planning 1–2 visits this fall.</p>
-          <span class="initiative-meta">Community partnership</span>
-        </article>
-        <article class="initiative reveal">
-          <span class="initiative-index">02</span>
-          <h3>Curriculum</h3>
-          <p>Hands-on meetings covering camera settings, portrait direction, and how to shoot with intention—from basics to professional habits.</p>
-          <span class="initiative-meta">Allen · Ethan · John · Amanda</span>
-        </article>
-        <article class="initiative reveal">
-          <span class="initiative-index">03</span>
-          <h3>Fundraisers</h3>
-          <p>Events and campaigns that keep the club equipped—film, prints, gear, and the materials that make projects possible.</p>
-          <span class="initiative-meta">Daniel · Jocelyn</span>
-        </article>
-        <article class="initiative reveal">
-          <span class="initiative-index">04</span>
-          <h3>Website</h3>
-          <p>This site is the club’s public archive and schedule—gallery, initiatives, and what’s coming next.</p>
-          <span class="initiative-meta">Andrew · Ethan</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="gallery-section" id="archive" data-surface>
-      <p class="section-kicker reveal">Photo gallery</p>
-      <h2 class="section-heading reveal">A growing student archive.</h2>
-      <div class="masonry">
-        <figure class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=84" alt="Temporary stock landscape for the portfolio layout" loading="lazy" width="1400" height="1750" />
-          <figcaption><strong>Landscape study</strong><span>Temporary stock</span></figcaption>
-        </figure>
-        <figure class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=84" alt="Temporary stock portrait for the portfolio layout" loading="lazy" width="1400" height="1750" />
-          <figcaption><strong>Portrait study</strong><span>Temporary stock</span></figcaption>
-        </figure>
-        <figure class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=84" alt="Temporary stock event photograph for the portfolio layout" loading="lazy" width="1600" height="1067" />
-          <figcaption><strong>Live event study</strong><span>Temporary stock</span></figcaption>
-        </figure>
-        <figure class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=84" alt="Temporary stock community photograph for the portfolio layout" loading="lazy" width="1600" height="1067" />
-          <figcaption><strong>Community study</strong><span>Temporary stock</span></figcaption>
-        </figure>
-        <figure class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=84" alt="Temporary stock editorial portrait for the portfolio layout" loading="lazy" width="1400" height="1750" />
-          <figcaption><strong>Editorial study</strong><span>Temporary stock</span></figcaption>
-        </figure>
-        <figure class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=84" alt="Temporary stock group photograph for the portfolio layout" loading="lazy" width="1600" height="1067" />
-          <figcaption><strong>Motion study</strong><span>Temporary stock</span></figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="schedule-section" id="schedule" data-surface>
-      <div class="schedule-header">
-        <div>
-          <p class="section-kicker reveal">Fall 2026</p>
-          <h2 class="section-heading reveal">Club schedule.</h2>
+  <main id="main">
+    <section id="leadership">
+      <div class="wrap">
+        <div class="inview">
+          <p class="kicker">Leadership</p>
+          <h2>The people behind the lens.</h2>
+          <p class="lede">Click a name to open their portfolio.</p>
         </div>
-        <p class="reveal">Meetings, fair days, and community shoots—scroll through the season as it unfolds.</p>
+        <ul class="roster">
+          <li class="inview"><a href="team/allen-wu.html"><strong>Allen Wu</strong><em>Co-President</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/ethan-chen.html"><strong>Ethan Chen</strong><em>Co-President</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/jocelyn-kwok.html"><strong>Jocelyn Kwok</strong><em>Co-President</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/amanda-garcia.html"><strong>Amanda Garcia</strong><em>Vice President</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/daniel-an.html"><strong>Daniel An</strong><em>Operations Officer</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/john-wu.html"><strong>John Wu</strong><em>Technical Officer</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/andrew-liang.html"><strong>Andrew Liang</strong><em>Sophomore Apprentice</em><b>Portfolio</b></a></li>
+          <li class="inview"><a href="team/austin-guydish.html"><strong>Austin Guydish</strong><em>Freshman Apprentice</em><b>Portfolio</b></a></li>
+        </ul>
       </div>
+    </section>
 
-      <div class="timeline" id="timeline" aria-label="Photography club schedule timeline">
-        <div class="timeline-rail" aria-hidden="true">
-          <div class="timeline-progress" id="timeline-progress"></div>
+    <section id="events">
+      <div class="wrap">
+        <div class="inview">
+          <p class="kicker">Events</p>
+          <h2>The year, by the work.</h2>
+          <p class="lede">Homecoming, spirit week, sports, and class shoots. Open an event to see the photographs, with the photographer on each frame.</p>
         </div>
-
-        <article class="timeline-item" data-timeline-item>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-date-block">
-            <span class="timeline-date">Aug 17</span>
-            <span class="timeline-year">2026</span>
-          </div>
-          <div class="timeline-card">
-            <h3>Club Fair</h3>
-            <p>Photo booth on campus—Instant film, frames, and a first look at the club for new members.</p>
-            <span class="timeline-tag">Kickoff</span>
-          </div>
-        </article>
-
-        <article class="timeline-item" data-timeline-item>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-date-block">
-            <span class="timeline-date">Aug 31</span>
-            <span class="timeline-year">2026</span>
-          </div>
-          <div class="timeline-card">
-            <h3>Camera settings basics</h3>
-            <p>Club meeting focused on exposure, aperture, shutter, and ISO—the foundations of intentional shooting.</p>
-            <span class="timeline-tag">Curriculum</span>
-          </div>
-        </article>
-
-        <article class="timeline-item" data-timeline-item>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-date-block">
-            <span class="timeline-date">Sep 4</span>
-            <span class="timeline-year">2026</span>
-          </div>
-          <div class="timeline-card">
-            <h3>Bill Wilson Center</h3>
-            <p>Planning meeting for Portraits with a Purpose—setting up 1–2 visits over the next four weeks.</p>
-            <span class="timeline-tag">Outreach</span>
-          </div>
-        </article>
-
-        <article class="timeline-item" data-timeline-item>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-date-block">
-            <span class="timeline-date">Sep 14</span>
-            <span class="timeline-year">2026</span>
-          </div>
-          <div class="timeline-card">
-            <h3>Portraits &amp; craft</h3>
-            <p>How to shoot portraits with purpose, give clear direction, and explore types of photography and gear.</p>
-            <span class="timeline-tag">Curriculum</span>
-          </div>
-        </article>
-
-        <article class="timeline-item" data-timeline-item>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-date-block">
-            <span class="timeline-date">Fall</span>
-            <span class="timeline-year">Ongoing</span>
-          </div>
-          <div class="timeline-card">
-            <h3>Community shoots</h3>
-            <p>Visits to Bill Wilson Center and fundraiser support—putting what we learn into work that matters.</p>
-            <span class="timeline-tag">Purpose</span>
-          </div>
-        </article>
+        <ul class="roster">
+          <li class="inview"><a href="events/homecoming-court.html"><strong>Homecoming Court</strong><em>Allen Wu</em><b>Oct 2026</b></a></li>
+          <li class="inview"><a href="events/homecoming.html"><strong>Homecoming</strong><em>Andrew, Ethan, John</em><b>Oct 2026</b></a></li>
+          <li class="inview"><a href="events/spirit-week.html"><strong>Spirit Week</strong><em>Allen Wu</em><b>Oct 6</b></a></li>
+          <li class="inview"><a href="events/indoor-rally.html"><strong>Indoor Rally</strong><em>John Wu</em><b>Oct 5</b></a></li>
+          <li class="inview"><a href="events/outdoor-rally.html"><strong>Outdoor Rally</strong><em>Andrew, Allen, Austin, John, Nathan</em><b>Oct 7</b></a></li>
+          <li class="inview"><a href="events/novaworks.html"><strong>NovaWorks</strong><em>Katherine</em><b>Oct 14</b></a></li>
+          <li class="inview"><a href="events/curriculum-week-4.html"><strong>Curriculum, Week 4</strong><em>Club</em><b>Fall 2026</b></a></li>
+          <li class="inview"><a href="events/curriculum-week-5.html"><strong>Curriculum, Week 5</strong><em>Andrew, Ethan, John</em><b>Fall 2026</b></a></li>
+          <li class="inview"><a href="events/volleyball-jv.html"><strong>Volleyball, JV</strong><em>Club</em><b>2026</b></a></li>
+          <li class="inview"><a href="events/volleyball-varsity.html"><strong>Volleyball, Varsity</strong><em>Club</em><b>2026</b></a></li>
+        </ul>
       </div>
     </section>
 
-    <section class="socials-section" id="socials" data-surface>
-      <div class="socials-layout">
-        <div>
-          <p class="section-kicker reveal">Socials</p>
-          <h2 class="section-heading reveal">Follow the work.</h2>
+    <section id="initiatives">
+      <div class="wrap">
+        <div class="split inview">
+          <div>
+            <p class="kicker">Initiatives</p>
+            <h2>Work that reaches past campus.</h2>
+          </div>
+          <p class="lede">Learning the craft, serving the community, and collaborating with VCS Marketing. Club members lead curriculum, outreach, fundraisers, and the web.</p>
         </div>
-        <p class="reveal">New shoots, club moments, and campus stories land on Instagram first.</p>
-      </div>
-      <div class="social-links reveal">
-        <a class="social-link" href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.2" cy="6.8" r=".7" fill="currentColor" stroke="none" />
-          </svg>
-          <span>@vchs_photography</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="about-section" id="about" data-surface>
-      <h2 class="reveal">A place to practice seeing.</h2>
-      <div class="about-copy reveal">
-        <p>VCHS Photography brings students together to learn technique, share critique, and document school life with care.</p>
-        <p>Phones, borrowed cameras, and personal gear are all welcome. No previous experience is required.</p>
-        <p>This year we are building curriculum, community partnerships, fundraisers, and this website—so student work has somewhere to live.</p>
-      </div>
-    </section>
-
-    <section class="contact-section" id="contact" data-surface>
-      <div class="reveal">
-        <h2>Bring your point of view.</h2>
-        <div class="contact-actions">
-          <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="tel:+14085132400">High School: (408) 513-2400</a>
-          <a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">Official contact page</a>
+        <div class="rules">
+          <article class="rule inview">
+            <span>01</span>
+            <div>
+              <h3>Portraits with a Purpose</h3>
+              <p>Partnering with Bill Wilson Center to create portraits that support people in our community. We are planning 1–2 visits this fall.</p>
+              <small>Community partnership</small>
+            </div>
+          </article>
+          <article class="rule inview">
+            <span>02</span>
+            <div>
+              <h3>Curriculum</h3>
+              <p>Hands-on meetings covering camera settings, portrait direction, and how to shoot with intention, from basics to professional habits.</p>
+              <small>Allen, Ethan, John, Amanda</small>
+            </div>
+          </article>
+          <article class="rule inview">
+            <span>03</span>
+            <div>
+              <h3>Fundraisers</h3>
+              <p>Events and campaigns that keep the club equipped: film, prints, gear, and the materials that make projects possible.</p>
+              <small>Daniel, Jocelyn</small>
+            </div>
+          </article>
+          <article class="rule inview">
+            <span>04</span>
+            <div>
+              <h3>Website</h3>
+              <p>This site is the club’s public archive and schedule: gallery, initiatives, and what’s coming next.</p>
+              <small>Andrew, Ethan</small>
+            </div>
+          </article>
+          <article class="rule inview">
+            <span>05</span>
+            <div>
+              <h3>VCS Marketing</h3>
+              <p>The club collaborates with VCS Marketing on school stories, events, and campus photography.</p>
+              <small>School partnership</small>
+            </div>
+          </article>
         </div>
       </div>
-      <footer class="site-footer">
-        <span>VCHS Photography</span>
-        <span>100 Skyway Drive, San Jose, California</span>
-      </footer>
+    </section>
+
+    <section id="schedule">
+      <div class="wrap">
+        <div class="split inview">
+          <div>
+            <p class="kicker">Fall 2026</p>
+            <h2>Club schedule.</h2>
+          </div>
+          <p class="lede">Meetings, fair days, and community shoots. The season as it unfolds.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item inview">
+            <div class="when">Aug 17<small>2026</small></div>
+            <div>
+              <h3>Club Fair</h3>
+              <p>Photo booth on campus. Instant film, frames, and a first look at the club for new members.</p>
+              <span class="tag">Kickoff</span>
+            </div>
+          </article>
+          <article class="timeline-item inview">
+            <div class="when">Aug 31<small>2026</small></div>
+            <div>
+              <h3>Camera settings basics</h3>
+              <p>Club meeting focused on exposure, aperture, shutter, and ISO, the foundations of intentional shooting.</p>
+              <span class="tag">Curriculum</span>
+            </div>
+          </article>
+          <article class="timeline-item inview">
+            <div class="when">Sep 4<small>2026</small></div>
+            <div>
+              <h3>Bill Wilson Center</h3>
+              <p>Planning meeting for Portraits with a Purpose, setting up 1–2 visits over the next four weeks.</p>
+              <span class="tag">Outreach</span>
+            </div>
+          </article>
+          <article class="timeline-item inview">
+            <div class="when">Sep 14<small>2026</small></div>
+            <div>
+              <h3>Portraits and craft</h3>
+              <p>How to shoot portraits with purpose, give clear direction, and explore types of photography and gear.</p>
+              <span class="tag">Curriculum</span>
+            </div>
+          </article>
+          <article class="timeline-item inview">
+            <div class="when">Fall<small>Ongoing</small></div>
+            <div>
+              <h3>Community shoots</h3>
+              <p>Visits to Bill Wilson Center and fundraiser support, putting what we learn into work that matters.</p>
+              <span class="tag">Purpose</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="socials">
+      <div class="wrap split">
+        <div class="inview">
+          <p class="kicker">Socials</p>
+          <h2>Follow the work.</h2>
+        </div>
+        <div class="inview">
+          <p class="lede">New shoots, club moments, and campus stories land on Instagram first.</p>
+          <div class="actions">
+            <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about">
+        <h2 class="inview">A place to practice seeing.</h2>
+        <div class="about-copy inview">
+          <p>VCHS Photography brings students together to learn technique, share critique, and document school life with care.</p>
+          <p>Phones, borrowed cameras, and personal gear are all welcome. No previous experience is required.</p>
+          <p>This year we are building curriculum, community partnerships, fundraisers, and this website, so student work has somewhere to live. The club also collaborates with VCS Marketing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="inview">
+          <p class="kicker">Contact</p>
+          <h2>Bring your point of view.</h2>
+          <div class="actions">
+            <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="tel:+14085132400">High School: (408) 513-2400</a>
+            <a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">Official contact page</a>
+          </div>
+        </div>
+        <footer class="site-footer">
+          <span>VCHS Photography</span>
+          <span>100 Skyway Drive, San Jose, California</span>
+        </footer>
+      </div>
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script>
-    gsap.registerPlugin(ScrollTrigger);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) document.documentElement.classList.add('motion');
+    const bar = document.querySelector('#bar');
+    const hero = document.querySelector('#home');
+    const slides = [...document.querySelectorAll('#slides img')];
+    const dots = document.querySelector('#dots');
+    const menu = document.querySelector('#menu');
+    const menuToggle = document.querySelector('#menu-toggle');
+    let index = 0;
+    let timer = 0;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const stage = document.querySelector('#background-stage');
-    const photos = [...document.querySelectorAll('.background-photo')];
-    const photoChapters = [...document.querySelectorAll('.photo-chapter')];
-    const surfaceSections = [...document.querySelectorAll('[data-surface]')];
-    const navLinks = [...document.querySelectorAll('[data-nav]')];
-    const timeline = document.querySelector('#timeline');
-    const timelineProgress = document.querySelector('#timeline-progress');
-    const timelineItems = [...document.querySelectorAll('[data-timeline-item]')];
-    let currentPhoto = 0;
-
-    function showPhoto(index) {
-      if (index === currentPhoto && !stage.classList.contains('is-hidden')) return;
-      currentPhoto = index;
-      stage.classList.remove('is-hidden');
-      photos.forEach((photo, photoIndex) => photo.classList.toggle('active', photoIndex === index));
-    }
-
-    function setActiveNav(id) {
-      navLinks.forEach(link => link.classList.toggle('active', link.dataset.nav === id));
-    }
-
-    const chapterObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const index = Number(entry.target.dataset.bg);
-        showPhoto(index);
-        setActiveNav(entry.target.id);
-      });
-    }, { threshold: .56 });
-
-    photoChapters.forEach(chapter => chapterObserver.observe(chapter));
-
-    const surfaceObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        stage.classList.add('is-hidden');
-        setActiveNav(entry.target.id);
-      });
-    }, { threshold: .24 });
-
-    surfaceSections.forEach(section => surfaceObserver.observe(section));
-
-    photos.forEach(photo => {
-      photo.addEventListener('error', () => {
-        photo.style.display = 'none';
-      }, { once: true });
+    slides.forEach((_, slideIndex) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.setAttribute('aria-label', `Show photograph ${slideIndex + 1}`);
+      if (slideIndex === 0) button.setAttribute('aria-current', 'true');
+      button.addEventListener('click', () => show(slideIndex, true));
+      dots.appendChild(button);
     });
 
-    if (!reduceMotion) {
-      gsap.from('.sidebar > *', { opacity: 0, x: -12, duration: .7, stagger: .08, ease: 'power3.out' });
-      gsap.utils.toArray('.reveal').forEach(element => {
-        gsap.to(element, {
-          opacity: 1,
-          y: 0,
-          duration: .85,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: element, start: 'top 88%', once: true }
-        });
+    function show(next, fromUser) {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-on', slideIndex === index));
+      [...dots.children].forEach((dot, dotIndex) => {
+        if (dotIndex === index) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
       });
-
-      ScrollTrigger.create({
-        trigger: timeline,
-        start: 'top 70%',
-        end: 'bottom 55%',
-        scrub: true,
-        onUpdate: self => {
-          timelineProgress.style.height = `${self.progress * 100}%`;
-        }
-      });
-
-      timelineItems.forEach(item => {
-        ScrollTrigger.create({
-          trigger: item,
-          start: 'top 78%',
-          end: 'bottom 45%',
-          onEnter: () => {
-            item.classList.add('is-visible', 'is-active');
-          },
-          onEnterBack: () => item.classList.add('is-active'),
-          onLeave: () => item.classList.remove('is-active'),
-          onLeaveBack: () => item.classList.remove('is-active')
-        });
-      });
-    } else {
-      gsap.set('.reveal', { opacity: 1, y: 0 });
-      timelineItems.forEach(item => item.classList.add('is-visible', 'is-active'));
-      timelineProgress.style.height = '100%';
+      if (fromUser) restart();
     }
 
-    const menuToggle = document.querySelector('#menu-toggle');
-    const mobileMenu = document.querySelector('#mobile-menu');
+    function restart() {
+      window.clearInterval(timer);
+      if (reduce) return;
+      timer = window.setInterval(() => show(index + 1, false), 5200);
+    }
+
+    restart();
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) window.clearInterval(timer);
+      else restart();
+    });
+
+    const barObserver = new IntersectionObserver(([entry]) => {
+      bar.classList.toggle('is-solid', !entry.isIntersecting);
+    }, { threshold: 0.08 });
+    barObserver.observe(hero);
+
+    const sections = [...document.querySelectorAll('main section')];
+    const navLinks = [...document.querySelectorAll('.menu a, .hero-links a, .pill')];
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        sections.forEach((section) => section.classList.toggle('is-current', section === entry.target));
+        navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+      });
+    }, { threshold: 0.62 });
+    sections.forEach((section) => sectionObserver.observe(section));
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const id = link.getAttribute('href');
+        if (!id || id === '#') return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
 
     function closeMenu() {
-      mobileMenu.classList.remove('open');
-      mobileMenu.setAttribute('aria-hidden', 'true');
+      menu.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.textContent = 'Menu';
     }
 
     menuToggle.addEventListener('click', () => {
-      const willOpen = !mobileMenu.classList.contains('open');
-      mobileMenu.classList.toggle('open', willOpen);
-      mobileMenu.setAttribute('aria-hidden', String(!willOpen));
+      const willOpen = !menu.classList.contains('open');
+      menu.classList.toggle('open', willOpen);
       menuToggle.setAttribute('aria-expanded', String(willOpen));
       menuToggle.textContent = willOpen ? 'Close' : 'Menu';
     });
-
-    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
   </script>
 </body>
 </html>

@@ -351,14 +351,23 @@ body.lightbox-open {
 }
 
 .photo-lightbox__caption {
+  display: grid;
+  gap: .2rem;
   flex: 0 0 auto;
   max-width: 36rem;
   min-height: 1.1rem;
-  color: rgba(255, 255, 255, .72);
-  font-family: 'DM Mono', monospace;
-  font-size: .68rem;
-  letter-spacing: .06em;
+  color: #fff;
+  font-family: Manrope, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
   text-align: center;
+}
+
+.photo-lightbox__caption span {
+  color: rgba(255, 255, 255, .72);
+  font-size: .78rem;
+  font-weight: 500;
 }
 
 .photo-lightbox__close,

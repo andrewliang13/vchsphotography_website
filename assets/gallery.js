@@ -20,6 +20,8 @@
     container.classList.add('is-justified');
     const width = container.clientWidth;
     if (width <= 0) return;
+    if (container.dataset.rowWidth === String(width)) return;
+    container.dataset.rowWidth = String(width);
 
     let row = [];
     let rowAspect = 0;
@@ -57,35 +59,32 @@
   }
 
   function run() {
-    document.querySelectorAll('.masonry').forEach(justify);
+    document.querySelectorAll('.masonry').forEach((container) => {
+      justify(container);
+      if (container.dataset.watching === '1' || !('ResizeObserver' in window)) return;
+      container.dataset.watching = '1';
+      const observer = new ResizeObserver(() => justify(container));
+      observer.observe(container);
+    });
   }
 
-  const ready = () => {
-    const imgs = [...document.querySelectorAll('.masonry img')];
-    let left = imgs.length;
-    if (!left) {
-      run();
-      return;
-    }
-    const done = () => {
-      left -= 1;
-      if (left <= 0) run();
-    };
-    imgs.forEach((img) => {
-      if (img.complete) done();
-      else {
-        img.addEventListener('load', done, { once: true });
-        img.addEventListener('error', done, { once: true });
-      }
-    });
-  };
+  function start() {
+    run();
+    requestAnimationFrame(run);
+  }
 
   window.addEventListener('resize', () => {
     clearTimeout(window.__galleryJustifyTimer);
-    window.__galleryJustifyTimer = setTimeout(run, 120);
+    window.__galleryJustifyTimer = setTimeout(() => {
+      document.querySelectorAll('.masonry').forEach((container) => {
+        delete container.dataset.rowWidth;
+      });
+      run();
+    }, 120);
   });
 
-  document.addEventListener('DOMContentLoaded', ready);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
   // Re-run when filters hide/show sections
   document.addEventListener('click', (event) => {
     if (event.target.closest('.portfolio-filter')) {
@@ -168,7 +167,19 @@
       hi.onerror = () => {};
       hi.src = full;
     }
-    cap.textContent = caption ? caption.textContent.replace(/\s+/g, ' ').trim() : '';
+    const who = (item.dataset.photographer || caption?.querySelector('span')?.textContent || '').trim();
+    const when = (caption?.querySelector('strong')?.textContent || '').trim();
+    cap.replaceChildren();
+    if (who) {
+      const name = document.createElement('strong');
+      name.textContent = who;
+      cap.appendChild(name);
+    }
+    if (when) {
+      const date = document.createElement('span');
+      date.textContent = when;
+      cap.appendChild(date);
+    }
 
     const multi = items.length > 1;
     root.querySelector('[data-lightbox-prev]').hidden = !multi;
@@ -265,7 +276,9 @@
     document.querySelectorAll('.gallery-item').forEach((item) => {
       item.setAttribute('tabindex', '0');
       item.setAttribute('role', 'button');
-      item.setAttribute('aria-label', 'View larger photo');
+      const who = (item.dataset.photographer || item.querySelector('figcaption span')?.textContent || 'photographer').trim();
+      const when = (item.querySelector('figcaption strong')?.textContent || '').trim();
+      item.setAttribute('aria-label', when ? `Photograph by ${who}, ${when}` : `Photograph by ${who}`);
     });
   });
 })();
