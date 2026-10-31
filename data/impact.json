@@ -1,0 +1,11 @@
+{
+  "publish": false,
+  "note": "Impact metrics stay hidden until officers verify counts. Set publish to true when ready.",
+  "metrics": [
+    { "label": "Active student photographers", "value": "", "hint": "~30 members" },
+    { "label": "Community projects completed", "value": "", "hint": "Add after documented" },
+    { "label": "Nonprofit partners served", "value": "", "hint": "Add after documented" },
+    { "label": "Headshots delivered", "value": "", "hint": "NovaWorks and future sessions" },
+    { "label": "Shared equipment items acquired", "value": "", "hint": "Track after purchases" }
+  ]
+}

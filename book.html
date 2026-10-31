@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#00467F" />
+  <meta name="description" content="Request a photography shoot with VCHS Photography Club. Pick a photographer to email them directly." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Book Us | VCHS Photography Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-bar" data-site-bar>
+    <a class="mark" href="index.html">VCHS Photography<small>Student collective</small></a>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" data-site-nav aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="portfolios.html">Portfolios</a>
+      <a href="projects.html">Projects</a>
+      <a href="book.html" aria-current="page">Book Us</a>
+      <a href="about.html">About</a>
+      <a href="donate.html">Donate</a>
+    </nav>
+    <a class="btn btn-ghost" href="book.html">Book a Shoot</a>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap reveal">
+        <p class="kicker">Book Us</p>
+        <h1>Request a shoot.</h1>
+        <p class="lede">Pick a photographer to email them directly, or choose “Any available” to email every photographer who listed an address. A message is an inquiry, not a confirmed booking — for Senior Night and other shoots, say the event, date, and what you need in the description.</p>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="wrap split reveal">
+        <div>
+          <p class="kicker">Pricing</p>
+          <h2>Request a quote.</h2>
+          <p class="lede">Fixed rates are not published until pricing and payment procedures are school-approved. Some nonprofit and community projects may be offered free of charge or supported by sponsors, subject to availability and approval.</p>
+        </div>
+        <div>
+          <p class="form-note">Photographers with a listed email get the inquiry in their inbox. Anyone without one still appears — we’ll give you a club Instagram draft naming them.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="inquiry-details">
+      <div class="wrap-narrow reveal">
+        <p class="kicker">Book a photographer</p>
+        <h2>Who should get this inquiry?</h2>
+        <p class="form-note" id="form-setup">Choose someone below, add a few details, then open your email app. The message goes only to that photographer — not the whole club.</p>
+
+        <form class="form" data-book-form novalidate>
+          <div class="honeypot" aria-hidden="true">
+            <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="field">
+            <label for="photographer">Photographer</label>
+            <select id="photographer" name="photographer" required data-book-photographer>
+              <option value="">Loading…</option>
+            </select>
+            <p class="hint" data-book-route aria-live="polite"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="inquiry-type">Inquiry type</label>
+              <select id="inquiry-type" name="inquiry_type" required>
+                <option value="">Select</option>
+                <option>Organization</option>
+                <option>Individual</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="service">Photography service</label>
+              <select id="service" name="service" required>
+                <option value="">Select</option>
+                <option>Professional Headshots</option>
+                <option>Portraits</option>
+                <option>School and Community Events</option>
+                <option>Sports and Athletics</option>
+                <option>Creative Photography</option>
+                <option>Nonprofit and Community Projects</option>
+                <option>Other / Custom Request</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="nonprofit">Community / nonprofit project?</label>
+              <select id="nonprofit" name="nonprofit">
+                <option>No</option>
+                <option>Yes</option>
+                <option>Seeking sponsored / free community service</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">Preferred date</label>
+              <input id="date" name="preferred_date" type="date" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="time">Preferred time</label>
+              <input id="time" name="preferred_time" type="text" placeholder="Afternoon, 3–5pm, flexible…" />
+            </div>
+            <div class="field">
+              <label for="location">Location</label>
+              <input id="location" name="location" type="text" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="budget">Estimated budget</label>
+            <input id="budget" name="budget" type="text" placeholder="Request a quote, or note if seeking sponsored/free support" />
+          </div>
+
+          <div class="field">
+            <label for="description">Project description</label>
+            <textarea id="description" name="description" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="organization">Organization</label>
+            <input id="organization" name="organization" type="text" autocomplete="organization" />
+          </div>
+
+          <div class="actions" style="margin-top:1rem">
+            <button class="btn btn-navy" type="submit" data-book-submit>Open email</button>
+            <a class="btn btn-ghost" href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">DM @vchs_photography</a>
+          </div>
+          <p class="form-success" data-form-success role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <strong>VCHS Photography</strong>
+        <p>Valley Christian High School · San Jose, California</p>
+        <p>100 Skyway Drive, San Jose, California</p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p><a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a></p>
+        <p><a href="tel:+14085132400">(408) 513-2400</a></p>
+        <p><a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">School contact</a></p>
+      </div>
+      <div>
+        <strong>Policies</strong>
+        <p><a href="privacy.html">Privacy notice</a> · <a href="exhibition.html">Exhibitions</a></p>
+        <p>Inquiries are not confirmed bookings.</p>
+        <p>Photo removal: message @vchs_photography.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>

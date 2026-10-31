@@ -3,817 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#02182c" />
-  <meta name="description" content="VCHS Photography is Valley Christian High School's student photography collective in San Jose, California." />
-  <title>VCHS Photography | Student Collective</title>
+  <meta name="theme-color" content="#00467F" />
+  <meta name="description" content="VCHS Photography Club is a student-led photography collective at Valley Christian High School developing young creatives and serving the community through visual storytelling." />
+  <meta property="og:title" content="VCHS Photography Club" />
+  <meta property="og:description" content="Student Photography. Real Stories. Community Impact." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>VCHS Photography Club | Student Collective</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --paper: #f6f5f2;
-      --ink: #121212;
-      --muted: #5c5c5c;
-      --line: rgba(18, 18, 18, .12);
-      --navy: #00467F;
-      --sky: #8CD2F4;
-      --white: #fff;
-      --deep: #02182c;
-      --ease: cubic-bezier(.32, .72, 0, 1);
-      --pad: clamp(1.25rem, 3vw, 2.5rem);
-      --measure: 72rem;
-    }
-
-    * { box-sizing: border-box; }
-    html {
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      background: var(--paper);
-    }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: Manrope, sans-serif;
-      font-weight: 500;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-    ::selection { color: var(--white); background: var(--navy); }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
-
-    .skip-link {
-      position: fixed;
-      z-index: 40;
-      top: .75rem;
-      left: 1rem;
-      transform: translateY(-5rem);
-      padding: .7rem 1rem;
-      background: var(--paper);
-      color: var(--ink);
-    }
-    .skip-link:focus { transform: none; }
-
-    .bar {
-      position: fixed;
-      z-index: 30;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      min-height: 4.5rem;
-      padding: .85rem var(--pad);
-      color: var(--white);
-      transition: background .5s var(--ease), color .5s var(--ease), box-shadow .5s var(--ease);
-    }
-    .bar.is-solid {
-      color: var(--ink);
-      background: rgba(246, 245, 242, .94);
-      box-shadow: inset 0 -1px 0 var(--line);
-    }
-    .mark {
-      font-size: .95rem;
-      font-weight: 700;
-      letter-spacing: -.02em;
-      white-space: nowrap;
-    }
-    .mark small {
-      display: block;
-      margin-top: .12rem;
-      font-size: .62rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      opacity: .72;
-    }
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 1.35rem;
-      margin-left: auto;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .menu a { opacity: .82; }
-    .menu a:hover, .menu a.active { opacity: 1; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.6rem;
-      padding: .55rem 1rem;
-      border: 1px solid rgba(255, 255, 255, .75);
-      border-radius: 999px;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .04em;
-      transition: background .45s var(--ease), color .45s var(--ease), border-color .45s var(--ease), transform .45s var(--ease);
-    }
-    .bar.is-solid .pill { border-color: var(--navy); color: var(--navy); }
-    .pill:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
-    .bar.is-solid .pill:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
-    .pill:active { transform: scale(.98); }
-    .menu-toggle { display: none; letter-spacing: .08em; text-transform: uppercase; font-size: .75rem; font-weight: 700; }
-
-    .hero {
-      position: relative;
-      height: 100dvh;
-      min-height: 100dvh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      color: var(--white);
-      background: var(--deep);
-      overflow: hidden;
-    }
-    .slides { position: absolute; inset: 0; }
-    .slides img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 42%;
-      opacity: 0;
-      transform: scale(1.06);
-      transition: opacity 1.15s var(--ease), transform 6.5s var(--ease);
-    }
-    .slides img.is-on { opacity: 1; transform: scale(1); }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(2, 24, 44, .46) 0%, rgba(2, 24, 44, .5) 42%, rgba(2, 24, 44, .32) 70%, rgba(2, 24, 44, .55));
-    }
-    .hero-copy {
-      position: absolute;
-      z-index: 2;
-      left: 50%;
-      top: 48%;
-      width: min(92vw, 70rem);
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-    .eyebrow {
-      margin: 0 0 .85rem;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(3rem, 7.2vw, 5.8rem);
-      font-weight: 600;
-      line-height: .92;
-      letter-spacing: -.038em;
-      text-shadow: 0 10px 28px rgba(0, 0, 0, .28);
-    }
-    .hero-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.4rem;
-      margin-top: 1.4rem;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-    .hero-links a { opacity: .88; }
-    .hero-links a:hover { opacity: 1; }
-    .hero-foot {
-      position: absolute;
-      z-index: 2;
-      left: var(--pad);
-      right: var(--pad);
-      bottom: 1.35rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .dots { display: flex; gap: .45rem; }
-    .dots button {
-      width: 1.7rem;
-      height: 1.7rem;
-      border-radius: 999px;
-      position: relative;
-    }
-    .dots button::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: .42rem;
-      height: .42rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .45);
-      transform: translate(-50%, -50%);
-      transition: transform .45s var(--ease), background .45s var(--ease);
-    }
-    .dots button[aria-current="true"]::after { background: var(--white); transform: translate(-50%, -50%) scale(1.35); }
-    .scroll-hint {
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      opacity: .82;
-    }
-
-    .wrap { width: min(var(--measure), calc(100% - var(--pad) * 2)); margin: 0 auto; }
-    main > section {
-      display: flex;
-      align-items: center;
-      height: 100dvh;
-      min-height: 100dvh;
-      padding: 4.7rem 0 1.15rem;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      overflow: hidden;
-    }
-    main > section .wrap { width: min(var(--measure), calc(100% - var(--pad) * 2)); }
-    .kicker {
-      margin: 0 0 .7rem;
-      color: var(--navy);
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-    h2 {
-      margin: 0;
-      font-size: clamp(1.7rem, 3.1vw, 2.45rem);
-      font-weight: 700;
-      letter-spacing: -.035em;
-      line-height: 1.02;
-    }
-    .lede { max-width: 34rem; margin: .45rem 0 0; color: var(--muted); font-size: .92rem; line-height: 1.45; }
-    .split {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-      gap: 1.25rem 2.5rem;
-      align-items: end;
-      margin-bottom: 1rem;
-    }
-
-    .work { display: grid; gap: 4.75rem; }
-    .piece { display: grid; gap: .9rem; }
-    .piece figure {
-      margin: 0;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      background: #ddd;
-    }
-    .piece img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 1s var(--ease);
-    }
-    .piece a:hover img { transform: scale(1.03); }
-    .caption {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .caption span { color: var(--muted); font-weight: 500; }
-
-    .roster { margin: .7rem 0 0; padding: 0; list-style: none; }
-    .roster a {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: .4rem 1.5rem;
-      align-items: center;
-      min-height: 2.55rem;
-      padding: .35rem 0;
-      border-top: 1px solid var(--line);
-      transition: color .4s var(--ease), padding-left .4s var(--ease);
-    }
-    .roster li:last-child a { border-bottom: 1px solid var(--line); }
-    .roster a:hover { color: var(--navy); padding-left: .35rem; }
-    .roster strong { font-size: clamp(1.05rem, 1.6vw, 1.28rem); font-weight: 600; letter-spacing: -.02em; }
-    .roster em, .roster b {
-      color: var(--muted);
-      font-style: normal;
-      font-weight: 600;
-      font-size: .75rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .roster a:hover em, .roster a:hover b { color: var(--navy); }
-
-    .rules { border-top: 1px solid var(--line); }
-    .rule {
-      display: grid;
-      grid-template-columns: 3rem minmax(0, 1fr);
-      gap: .35rem 1.25rem;
-      padding: .62rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .rule span { color: var(--navy); font-size: .72rem; font-weight: 700; letter-spacing: .12em; }
-    .rule h3 { margin: 0 0 .15rem; font-size: 1.05rem; letter-spacing: -.02em; }
-    .rule p { margin: 0; max-width: 46rem; color: var(--muted); font-size: .86rem; line-height: 1.35; }
-    .rule small { display: block; margin-top: .2rem; color: var(--muted); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem 1.25rem;
-    }
-    .grid figure { margin: 0; }
-    .grid a {
-      display: block;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      background: #ddd;
-    }
-    .grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 1s var(--ease);
-    }
-    .grid a:hover img { transform: scale(1.03); }
-    .grid figcaption {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: .65rem;
-      color: var(--muted);
-      font-size: .75rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-    .grid figcaption strong { color: var(--ink); font-weight: 600; }
-
-    .timeline { position: relative; max-width: 52rem; margin: 0 auto; }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 7rem minmax(0, 1fr);
-      gap: .75rem 1.25rem;
-      padding: .62rem 0;
-      border-top: 1px solid var(--line);
-    }
-    .timeline-item:last-child { border-bottom: 1px solid var(--line); }
-    .when { color: var(--navy); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .when small { display: block; margin-top: .25rem; color: var(--muted); font-size: .68rem; }
-    .timeline-item h3 { margin: 0 0 .15rem; font-size: 1.05rem; letter-spacing: -.02em; }
-    .timeline-item p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.35; }
-    .tag {
-      display: inline-block;
-      margin-top: .25rem;
-      color: var(--muted);
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .about {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(16rem, .8fr);
-      gap: clamp(2rem, 6vw, 5rem);
-      align-items: start;
-    }
-    .about p { margin: 0 0 1rem; color: var(--muted); line-height: 1.7; }
-
-    .contact { background: #eceae4; }
-    .contact h2 { max-width: 12ch; }
-    .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
-    .actions a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.75rem;
-      padding: .65rem 1rem;
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-      font-size: .85rem;
-      font-weight: 600;
-      transition: background .45s var(--ease), color .45s var(--ease), transform .45s var(--ease);
-    }
-    .actions a:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
-    .actions a:active { transform: scale(.98); }
-    .site-footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 1.6rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .75rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .rise { animation: rise .9s cubic-bezier(.16, 1, .3, 1) both; }
-    .d1 { animation-delay: .08s; }
-    .d2 { animation-delay: .16s; }
-    @keyframes rise {
-      from { opacity: 0; translate: 0 3.2rem; scale: .9; }
-      to { opacity: 1; translate: 0 0; scale: 1; }
-    }
-    html.motion main > section :is(.kicker, h2, .lede, .roster li, .rule, .timeline-item, .about p, .actions, .site-footer) {
-      opacity: 0;
-      translate: 0 2.8rem;
-      scale: .94;
-      transition: opacity 650ms ease, translate 850ms cubic-bezier(.16, 1, .3, 1), scale 850ms cubic-bezier(.16, 1, .3, 1);
-    }
-    html.motion main > section.is-current :is(.kicker, h2, .lede, .roster li, .rule, .timeline-item, .about p, .actions, .site-footer) {
-      opacity: 1;
-      translate: 0 0;
-      scale: 1;
-    }
-    html.motion main > section.is-current h2 { transition-delay: 70ms; }
-    html.motion main > section.is-current .lede { transition-delay: 130ms; }
-    html.motion main > section.is-current .roster li:nth-child(1) { transition-delay: 90ms; }
-    html.motion main > section.is-current .roster li:nth-child(2) { transition-delay: 130ms; }
-    html.motion main > section.is-current .roster li:nth-child(3) { transition-delay: 170ms; }
-    html.motion main > section.is-current .roster li:nth-child(4) { transition-delay: 210ms; }
-    html.motion main > section.is-current .roster li:nth-child(5) { transition-delay: 250ms; }
-    html.motion main > section.is-current .roster li:nth-child(6) { transition-delay: 290ms; }
-    html.motion main > section.is-current .roster li:nth-child(7) { transition-delay: 330ms; }
-    html.motion main > section.is-current .roster li:nth-child(8) { transition-delay: 370ms; }
-    html.motion main > section.is-current .roster li:nth-child(9) { transition-delay: 410ms; }
-    html.motion main > section.is-current .roster li:nth-child(10) { transition-delay: 450ms; }
-    html.motion main > section.is-current .rule:nth-child(1) { transition-delay: 80ms; }
-    html.motion main > section.is-current .rule:nth-child(2) { transition-delay: 140ms; }
-    html.motion main > section.is-current .rule:nth-child(3) { transition-delay: 200ms; }
-    html.motion main > section.is-current .rule:nth-child(4) { transition-delay: 260ms; }
-    html.motion main > section.is-current .rule:nth-child(5) { transition-delay: 320ms; }
-    html.motion main > section.is-current .timeline-item:nth-child(1) { transition-delay: 80ms; }
-    html.motion main > section.is-current .timeline-item:nth-child(2) { transition-delay: 140ms; }
-    html.motion main > section.is-current .timeline-item:nth-child(3) { transition-delay: 200ms; }
-    html.motion main > section.is-current .timeline-item:nth-child(4) { transition-delay: 260ms; }
-    html.motion main > section.is-current .timeline-item:nth-child(5) { transition-delay: 320ms; }
-    html.motion main > section.is-current .actions { transition-delay: 180ms; }
-    html.motion main > section.is-current .about p:nth-child(1) { transition-delay: 80ms; }
-    html.motion main > section.is-current .about p:nth-child(2) { transition-delay: 150ms; }
-    html.motion main > section.is-current .about p:nth-child(3) { transition-delay: 220ms; }
-
-    @media (max-width: 900px) {
-      .menu { display: none; }
-      .menu-toggle { display: inline-flex; margin-left: auto; min-height: 2.75rem; align-items: center; }
-      .menu.open {
-        display: grid;
-        position: absolute;
-        top: 100%;
-        left: .75rem;
-        right: .75rem;
-        margin: 0;
-        padding: .4rem 1rem 1rem;
-        background: var(--paper);
-        color: var(--ink);
-        box-shadow: 0 18px 40px rgba(2, 24, 44, .12);
-      }
-      .menu.open a { padding: .85rem 0; border-bottom: 1px solid var(--line); opacity: 1; }
-      .split, .about, .timeline-item { grid-template-columns: 1fr; }
-      .roster b { justify-self: start; }
-      main > section { padding: 4.4rem 0 .8rem; }
-      .hero-links { gap: .85rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .rise, .slides img { animation: none; }
-      .slides img { transform: none; }
-      main > section :is(.kicker, h2, .lede, .roster li, .rule, .timeline-item, .about p, .actions, .site-footer) {
-        opacity: 1;
-        translate: none;
-        scale: none;
-        transition: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
-<body>
+<body class="home-snap">
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="bar" id="bar">
-    <a class="mark" href="#home">VCHS Photography<small>Student collective</small></a>
-    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-    <nav class="menu" id="menu" aria-label="Site">
-      <a href="#leadership">People</a>
-      <a href="#events">Events</a>
-      <a href="#initiatives">Initiatives</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#about">About</a>
+  <nav class="page-dots" id="page-dots" aria-label="Pages">
+    <a href="#home" aria-current="true" aria-label="Home"></a>
+    <a href="#mission" aria-label="Mission"></a>
+    <a href="#work" aria-label="Featured work"></a>
+    <a href="#community" aria-label="Community"></a>
+    <a href="#portfolios" aria-label="Portfolios"></a>
+    <a href="#projects" aria-label="Projects"></a>
+    <a href="#support" aria-label="Support"></a>
+  </nav>
+  <header class="site-bar is-over-hero" data-site-bar>
+    <a class="mark" href="index.html">VCHS Photography<small>Student collective</small></a>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" data-site-nav aria-label="Site">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="portfolios.html">Portfolios</a>
+      <a href="projects.html">Projects</a>
+      <a href="book.html">Book Us</a>
+      <a href="about.html">About</a>
+      <a href="donate.html">Donate</a>
     </nav>
-    <a class="pill" href="#contact">Contact</a>
+    <a class="btn btn-ghost" href="book.html">Book a Shoot</a>
   </header>
 
-  <section class="hero" id="home">
-    <div class="slides" id="slides" aria-hidden="true">
-      <img class="is-on" src="assets/club/john-indoor/full/196-1m3614-L-DSC09531.JPG" alt="" />
-      <img src="assets/club/vb-var/full/377-1bxVKQ8A-DSC04109.jpg" alt="" />
-      <img src="assets/club/ethan-hoco/full/001-1Hus01uB-1E2111B9-DCF3-4C89-ADC3-EEB53FF8824E.jpeg" alt="" />
-      <img src="assets/club/john-hoco/full/004-1HAZ0xuq-DSC02133.jpg" alt="" />
+  <section class="hero" id="home" data-hero>
+    <div class="hero-media" aria-hidden="true">
+      <img src="assets/club/john-indoor/full/196-1m3614-L-DSC09531.JPG" alt="" />
     </div>
-    <div class="hero-copy">
-      <p class="eyebrow rise">Valley Christian High School</p>
-      <h1 class="rise d1">Photography</h1>
-      <nav class="hero-links rise d2" aria-label="On this page">
-        <a href="#leadership">People</a>
-        <a href="#events">Events</a>
-        <a href="gallery.html">Gallery</a>
-      </nav>
-    </div>
-    <div class="hero-foot">
-      <div class="dots" id="dots" role="group" aria-label="Hero photographs"></div>
-      <a class="scroll-hint" href="#leadership">Scroll down</a>
+    <div class="hero-copy" data-hero-copy>
+      <p class="eyebrow hero-enter" style="--enter-delay:0ms">Valley Christian High School · San Jose</p>
+      <h1 class="hero-enter" style="--enter-delay:90ms">Student Photography. Real Stories. Community Impact.</h1>
+      <p class="lede hero-enter" style="--enter-delay:180ms">A student-led photography collective developing young creatives and using visual storytelling to serve our school and surrounding community.</p>
+      <div class="actions hero-enter" style="--enter-delay:270ms">
+        <a class="btn btn-navy" href="book.html">Book a Shoot</a>
+        <a class="btn btn-ghost" href="donate.html">Support Our Mission</a>
+        <a class="link-quiet" href="portfolios.html" style="color:#fff">Explore Student Portfolios</a>
+      </div>
     </div>
   </section>
 
   <main id="main">
-    <section id="leadership">
-      <div class="wrap">
-        <div class="inview">
-          <p class="kicker">Leadership</p>
-          <h2>The people behind the lens.</h2>
-          <p class="lede">Click a name to open their portfolio.</p>
+    <section class="page-section" id="mission">
+      <div class="wrap split reveal">
+        <div>
+          <p class="kicker">Mission</p>
+          <h2>Photography can tell stories, open doors, and bring communities together.</h2>
         </div>
-        <ul class="roster">
-          <li class="inview"><a href="team/allen-wu.html"><strong>Allen Wu</strong><em>Co-President</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/ethan-chen.html"><strong>Ethan Chen</strong><em>Co-President</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/jocelyn-kwok.html"><strong>Jocelyn Kwok</strong><em>Co-President</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/amanda-garcia.html"><strong>Amanda Garcia</strong><em>Vice President</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/daniel-an.html"><strong>Daniel An</strong><em>Operations Officer</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/john-wu.html"><strong>John Wu</strong><em>Technical Officer</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/andrew-liang.html"><strong>Andrew Liang</strong><em>Sophomore Apprentice</em><b>Portfolio</b></a></li>
-          <li class="inview"><a href="team/austin-guydish.html"><strong>Austin Guydish</strong><em>Freshman Apprentice</em><b>Portfolio</b></a></li>
-        </ul>
+        <div>
+          <p class="lede">We are a student-led photography collective at Valley Christian High School, developing young photographers while using our skills to support our school and surrounding community.</p>
+          <p class="lede">We strive for impact by reaching out to organizations and providing photoshoots. We aim to make photography more accessible by sharing equipment and opportunities with students who may not have access to professional-grade gear.</p>
+        </div>
       </div>
-    </section>
-
-    <section id="events">
       <div class="wrap">
-        <div class="inview">
-          <p class="kicker">Events</p>
-          <h2>The year, by the work.</h2>
-          <p class="lede">Homecoming, spirit week, sports, and class shoots. Open an event to see the photographs, with the photographer on each frame.</p>
-        </div>
-        <ul class="roster">
-          <li class="inview"><a href="events/homecoming-court.html"><strong>Homecoming Court</strong><em>Allen Wu</em><b>Oct 2026</b></a></li>
-          <li class="inview"><a href="events/homecoming.html"><strong>Homecoming</strong><em>Andrew, Ethan, John</em><b>Oct 2026</b></a></li>
-          <li class="inview"><a href="events/spirit-week.html"><strong>Spirit Week</strong><em>Allen Wu</em><b>Oct 6</b></a></li>
-          <li class="inview"><a href="events/indoor-rally.html"><strong>Indoor Rally</strong><em>John Wu</em><b>Oct 5</b></a></li>
-          <li class="inview"><a href="events/outdoor-rally.html"><strong>Outdoor Rally</strong><em>Andrew, Allen, Austin, John, Nathan</em><b>Oct 7</b></a></li>
-          <li class="inview"><a href="events/novaworks.html"><strong>NovaWorks</strong><em>Katherine</em><b>Oct 14</b></a></li>
-          <li class="inview"><a href="events/curriculum-week-4.html"><strong>Curriculum, Week 4</strong><em>Club</em><b>Fall 2026</b></a></li>
-          <li class="inview"><a href="events/curriculum-week-5.html"><strong>Curriculum, Week 5</strong><em>Andrew, Ethan, John</em><b>Fall 2026</b></a></li>
-          <li class="inview"><a href="events/volleyball-jv.html"><strong>Volleyball, JV</strong><em>Club</em><b>2026</b></a></li>
-          <li class="inview"><a href="events/volleyball-varsity.html"><strong>Volleyball, Varsity</strong><em>Club</em><b>2026</b></a></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="initiatives">
-      <div class="wrap">
-        <div class="split inview">
-          <div>
-            <p class="kicker">Initiatives</p>
-            <h2>Work that reaches past campus.</h2>
-          </div>
-          <p class="lede">Learning the craft, serving the community, and collaborating with VCS Marketing. Club members lead curriculum, outreach, fundraisers, and the web.</p>
-        </div>
-        <div class="rules">
-          <article class="rule inview">
-            <span>01</span>
-            <div>
-              <h3>Portraits with a Purpose</h3>
-              <p>Partnering with Bill Wilson Center to create portraits that support people in our community. We are planning 1–2 visits this fall.</p>
-              <small>Community partnership</small>
-            </div>
+        <div class="pillars">
+          <article class="pillar reveal">
+            <h3>Equip Students</h3>
+            <p>Shared access to cameras, lenses, lighting, and accessories so gear is not a barrier to learning.</p>
           </article>
-          <article class="rule inview">
-            <span>02</span>
-            <div>
-              <h3>Curriculum</h3>
-              <p>Hands-on meetings covering camera settings, portrait direction, and how to shoot with intention, from basics to professional habits.</p>
-              <small>Allen, Ethan, John, Amanda</small>
-            </div>
+          <article class="pillar reveal">
+            <h3>Serve the Community</h3>
+            <p>Photography for nonprofits, job seekers, campus events, and organizations that need strong visual materials.</p>
           </article>
-          <article class="rule inview">
-            <span>03</span>
-            <div>
-              <h3>Fundraisers</h3>
-              <p>Events and campaigns that keep the club equipped: film, prints, gear, and the materials that make projects possible.</p>
-              <small>Daniel, Jocelyn</small>
-            </div>
-          </article>
-          <article class="rule inview">
-            <span>04</span>
-            <div>
-              <h3>Website</h3>
-              <p>This site is the club’s public archive and schedule: gallery, initiatives, and what’s coming next.</p>
-              <small>Andrew, Ethan</small>
-            </div>
-          </article>
-          <article class="rule inview">
-            <span>05</span>
-            <div>
-              <h3>VCS Marketing</h3>
-              <p>The club collaborates with VCS Marketing on school stories, events, and campus photography.</p>
-              <small>School partnership</small>
-            </div>
+          <article class="pillar reveal">
+            <h3>Develop Photographers</h3>
+            <p>Portfolios, critique, mentorship, and real assignments that turn practice into professional experience.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="schedule">
-      <div class="wrap">
-        <div class="split inview">
-          <div>
-            <p class="kicker">Fall 2026</p>
-            <h2>Club schedule.</h2>
-          </div>
-          <p class="lede">Meetings, fair days, and community shoots. The season as it unfolds.</p>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item inview">
-            <div class="when">Aug 17<small>2026</small></div>
-            <div>
-              <h3>Club Fair</h3>
-              <p>Photo booth on campus. Instant film, frames, and a first look at the club for new members.</p>
-              <span class="tag">Kickoff</span>
-            </div>
-          </article>
-          <article class="timeline-item inview">
-            <div class="when">Aug 31<small>2026</small></div>
-            <div>
-              <h3>Camera settings basics</h3>
-              <p>Club meeting focused on exposure, aperture, shutter, and ISO, the foundations of intentional shooting.</p>
-              <span class="tag">Curriculum</span>
-            </div>
-          </article>
-          <article class="timeline-item inview">
-            <div class="when">Sep 4<small>2026</small></div>
-            <div>
-              <h3>Bill Wilson Center</h3>
-              <p>Planning meeting for Portraits with a Purpose, setting up 1–2 visits over the next four weeks.</p>
-              <span class="tag">Outreach</span>
-            </div>
-          </article>
-          <article class="timeline-item inview">
-            <div class="when">Sep 14<small>2026</small></div>
-            <div>
-              <h3>Portraits and craft</h3>
-              <p>How to shoot portraits with purpose, give clear direction, and explore types of photography and gear.</p>
-              <span class="tag">Curriculum</span>
-            </div>
-          </article>
-          <article class="timeline-item inview">
-            <div class="when">Fall<small>Ongoing</small></div>
-            <div>
-              <h3>Community shoots</h3>
-              <p>Visits to Bill Wilson Center and fundraiser support, putting what we learn into work that matters.</p>
-              <span class="tag">Purpose</span>
-            </div>
-          </article>
+    <section class="page-section" id="work">
+      <div class="wrap reveal">
+        <p class="kicker">Featured work</p>
+        <h2>Photographs from campus and community.</h2>
+        <p class="lede">Selected frames from club members. Click through to open full portfolios and event sets.</p>
+        <div class="feature-grid">
+          <a class="wide" href="projects.html#novaworks">
+            <img src="assets/club/nova-katherine/web/001-1DOZEyJz-katherine-01.jpg" alt="NovaWorks headshot by Katherine Tsai" loading="lazy" />
+            <span class="photo-credit">Katherine Tsai</span>
+          </a>
+          <a class="tall" href="portfolios/john-wu.html">
+            <img src="assets/club/john-indoor/web/196-1m3614-L-DSC09531.JPG" alt="Indoor rally by John Wu" loading="lazy" />
+            <span class="photo-credit">John Wu</span>
+          </a>
+          <a class="mid" href="portfolios/allen-wu.html">
+            <img src="assets/club/allen-court/web/001-1bgJ8PqH-IMG_5086.jpg" alt="Homecoming court by Allen Wu" loading="lazy" />
+            <span class="photo-credit">Allen Wu</span>
+          </a>
+          <a class="mid" href="portfolios/ethan-chen.html">
+            <img src="assets/club/ethan-hoco/web/001-1Hus01uB-1E2111B9-DCF3-4C89-ADC3-EEB53FF8824E.jpeg" alt="Homecoming by Ethan Chen" loading="lazy" />
+            <span class="photo-credit">Ethan Chen</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <section id="socials">
-      <div class="wrap split">
-        <div class="inview">
-          <p class="kicker">Socials</p>
-          <h2>Follow the work.</h2>
-        </div>
-        <div class="inview">
-          <p class="lede">New shoots, club moments, and campus stories land on Instagram first.</p>
+    <section class="page-section" id="community">
+      <div class="wrap split reveal">
+        <div>
+          <p class="kicker">Community impact</p>
+          <h2>NovaWorks headshot project.</h2>
+          <p class="lede">On October 14, 2026, club members photographed job seekers at NovaWorks Job Center. A follow-up session is scheduled for October 29. The goal is simple: help people access professional headshots for applications and LinkedIn.</p>
           <div class="actions">
-            <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a>
+            <a class="btn btn-navy" href="projects.html#novaworks">View project</a>
+            <a class="btn btn-ghost" href="book.html">Request a community shoot</a>
           </div>
         </div>
+        <a href="portfolios/katherine-tsai.html" aria-label="Open Katherine Tsai portfolio">
+          <img src="assets/club/nova-katherine/full/001-1DOZEyJz-katherine-01.jpg" alt="Portrait from the NovaWorks session" loading="lazy" class="is-loaded" style="width:100%;height:min(58vh,28rem);object-fit:cover" />
+        </a>
       </div>
     </section>
 
-    <section id="about">
-      <div class="wrap about">
-        <h2 class="inview">A place to practice seeing.</h2>
-        <div class="about-copy inview">
-          <p>VCHS Photography brings students together to learn technique, share critique, and document school life with care.</p>
-          <p>Phones, borrowed cameras, and personal gear are all welcome. No previous experience is required.</p>
-          <p>This year we are building curriculum, community partnerships, fundraisers, and this website, so student work has somewhere to live. The club also collaborates with VCS Marketing.</p>
+    <section class="page-section" id="portfolios">
+      <div class="wrap reveal">
+        <p class="kicker">Portfolios</p>
+        <h2>Selected student photographers.</h2>
+        <p class="lede">Browse member work by specialty, then DM the club Instagram to inquire.</p>
+        <div class="person-grid">
+          <a class="person-card" href="portfolios/allen-wu.html">
+            <div class="thumb"><img src="assets/club/allen-portfolio/web/405-1opXWp4P-1__1_.jpg" alt="" loading="lazy" /></div>
+            <div class="meta"><span class="role">President</span><h3>Allen Wu</h3><p class="specs">Sports, Portraits</p></div>
+          </a>
+          <a class="person-card" href="portfolios/katherine-tsai.html">
+            <div class="thumb"><img src="assets/club/nova-katherine/web/001-1DOZEyJz-katherine-01.jpg" alt="" loading="lazy" /></div>
+            <div class="meta"><span class="role">Member</span><h3>Katherine Tsai</h3><p class="specs">Headshots, Community</p></div>
+          </a>
+          <a class="person-card" href="portfolios/john-wu.html">
+            <div class="thumb"><img src="assets/club/john-indoor/web/196-1m3614-L-DSC09531.JPG" alt="" loading="lazy" /></div>
+            <div class="meta"><span class="role">Officer</span><h3>John Wu</h3><p class="specs">Events, Sports</p></div>
+          </a>
+          <a class="person-card" href="portfolios/andrew-liang.html">
+            <div class="thumb"><img src="assets/club/andrew-rally/web/146-19GZ6Qr7-DSC06954.JPG" alt="" loading="lazy" /></div>
+            <div class="meta"><span class="role">Officer</span><h3>Andrew Liang</h3><p class="specs">Landscape, Events</p></div>
+          </a>
+        </div>
+        <div class="actions">
+          <a class="btn btn-ghost" href="portfolios.html">Explore Student Portfolios</a>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact">
-      <div class="wrap">
-        <div class="inview">
-          <p class="kicker">Contact</p>
-          <h2>Bring your point of view.</h2>
+    <section class="page-section" id="projects">
+      <div class="wrap reveal">
+        <p class="kicker">Projects &amp; partnerships</p>
+        <h2>Work beyond the classroom.</h2>
+        <div class="card-list">
+          <a class="card-row" href="projects.html#novaworks"><strong>NovaWorks Job Center</strong><span>Headshots for job seekers</span><em>In progress</em></a>
+          <a class="card-row" href="projects.html#vcs-marketing"><strong>VCS Marketing</strong><span>Campus storytelling</span><em>Started Oct 7</em></a>
+          <a class="card-row" href="projects.html#student-body"><strong>Student Body</strong><span>Event photography</span><em>Started Oct 10</em></a>
+          <a class="card-row" href="projects.html"><strong>All projects</strong><span>Completed, scheduled, and prospective</span><em>View archive</em></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="support">
+      <div class="wrap split reveal">
+        <div>
+          <p class="kicker">Sponsor</p>
+          <h2>Help students access shared gear.</h2>
+          <p class="lede">Support builds a shared equipment library and helps the club offer photography to community organizations. Suggested contribution ranges and an editable wishlist live on the donate page.</p>
           <div class="actions">
-            <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="tel:+14085132400">High School: (408) 513-2400</a>
-            <a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">Official contact page</a>
+            <a class="btn btn-navy" href="donate.html">Support Our Mission</a>
           </div>
         </div>
-        <footer class="site-footer">
-          <span>VCHS Photography</span>
-          <span>100 Skyway Drive, San Jose, California</span>
-        </footer>
+        <div>
+          <p class="kicker">Book</p>
+          <h2>Need photographs?</h2>
+          <p class="lede">Nonprofits, school groups, and local partners can request a shoot. Some community projects may be offered free of charge or supported by sponsors, subject to availability and approval.</p>
+          <div class="actions">
+            <a class="btn btn-ghost" href="book.html">Book a Shoot</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <script>
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduce) document.documentElement.classList.add('motion');
-    const bar = document.querySelector('#bar');
-    const hero = document.querySelector('#home');
-    const slides = [...document.querySelectorAll('#slides img')];
-    const dots = document.querySelector('#dots');
-    const menu = document.querySelector('#menu');
-    const menuToggle = document.querySelector('#menu-toggle');
-    let index = 0;
-    let timer = 0;
-
-    slides.forEach((_, slideIndex) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.setAttribute('aria-label', `Show photograph ${slideIndex + 1}`);
-      if (slideIndex === 0) button.setAttribute('aria-current', 'true');
-      button.addEventListener('click', () => show(slideIndex, true));
-      dots.appendChild(button);
-    });
-
-    function show(next, fromUser) {
-      index = (next + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-on', slideIndex === index));
-      [...dots.children].forEach((dot, dotIndex) => {
-        if (dotIndex === index) dot.setAttribute('aria-current', 'true');
-        else dot.removeAttribute('aria-current');
-      });
-      if (fromUser) restart();
-    }
-
-    function restart() {
-      window.clearInterval(timer);
-      if (reduce) return;
-      timer = window.setInterval(() => show(index + 1, false), 5200);
-    }
-
-    restart();
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) window.clearInterval(timer);
-      else restart();
-    });
-
-    const barObserver = new IntersectionObserver(([entry]) => {
-      bar.classList.toggle('is-solid', !entry.isIntersecting);
-    }, { threshold: 0.08 });
-    barObserver.observe(hero);
-
-    const sections = [...document.querySelectorAll('main section')];
-    const navLinks = [...document.querySelectorAll('.menu a, .hero-links a, .pill')];
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        sections.forEach((section) => section.classList.toggle('is-current', section === entry.target));
-        navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-      });
-    }, { threshold: 0.62 });
-    sections.forEach((section) => sectionObserver.observe(section));
-
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {
-      link.addEventListener('click', (event) => {
-        const id = link.getAttribute('href');
-        if (!id || id === '#') return;
-        const target = document.querySelector(id);
-        if (!target) return;
-        event.preventDefault();
-        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      });
-    });
-
-    function closeMenu() {
-      menu.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.textContent = 'Menu';
-    }
-
-    menuToggle.addEventListener('click', () => {
-      const willOpen = !menu.classList.contains('open');
-      menu.classList.toggle('open', willOpen);
-      menuToggle.setAttribute('aria-expanded', String(willOpen));
-      menuToggle.textContent = willOpen ? 'Close' : 'Menu';
-    });
-    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
-  </script>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <strong>VCHS Photography</strong>
+        <p>Valley Christian High School · San Jose, California</p>
+        <p>100 Skyway Drive, San Jose, California</p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p><a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a></p>
+        <p><a href="tel:+14085132400">(408) 513-2400</a></p>
+        <p><a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">School contact</a></p>
+      </div>
+      <div>
+        <strong>Policies</strong>
+        <p><a href="privacy.html">Privacy notice</a> · <a href="exhibition.html">Exhibitions</a></p>
+        <p>Inquiries are not confirmed bookings.</p>
+        <p>Photo removal: message @vchs_photography.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/site.js"></script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 .DS_Store
 .wrangler/
 node_modules/
+data/.image-dims.json
+versions/
 assets/andrew/raw/
 assets/andrew/thumbs/
 assets/andrew/raw-zip/

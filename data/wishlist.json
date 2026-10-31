@@ -1,0 +1,58 @@
+[
+  {
+    "id": "camera-bodies",
+    "priority": "high",
+    "item": "Shared camera bodies",
+    "use": "Modern cameras students can check out when they do not have suitable personal gear.",
+    "estimate": "To be confirmed by officers"
+  },
+  {
+    "id": "lenses",
+    "priority": "high",
+    "item": "Shared lenses",
+    "use": "Telephoto for sports, portrait lenses, and other assignment-specific glass.",
+    "estimate": "To be confirmed by officers"
+  },
+  {
+    "id": "lighting",
+    "priority": "high",
+    "item": "Lighting and flash",
+    "use": "Better headshots, indoor portraits, and low-light event work.",
+    "estimate": "To be confirmed by officers"
+  },
+  {
+    "id": "power-storage",
+    "priority": "medium",
+    "item": "Memory cards, batteries, and chargers",
+    "use": "Keep shared kits reliable and ready between shoots.",
+    "estimate": "To be confirmed by officers"
+  },
+  {
+    "id": "filters",
+    "priority": "medium",
+    "item": "ND filters and accessories",
+    "use": "Outdoor control and creative options for landscape and documentary work.",
+    "estimate": "To be confirmed by officers"
+  },
+  {
+    "id": "transport",
+    "priority": "medium",
+    "item": "Approved transportation support",
+    "use": "School-approved, supervised travel for off-campus nonprofit and community projects.",
+    "estimate": "Project-based"
+  },
+  {
+    "id": "storage",
+    "priority": "medium",
+    "item": "Online storage and gallery services",
+    "use": "Secure delivery and organization of photographs for club projects and clients.",
+    "estimate": "To be confirmed by officers"
+  },
+  {
+    "id": "printing",
+    "priority": "low",
+    "item": "Printing and exhibitions",
+    "use": "Prints and display materials for student work and community collaborations.",
+    "estimate": "To be confirmed by officers"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "name": "VCHS Photography Club",
+  "shortName": "VCHS Photography",
+  "tagline": "Student Photography. Real Stories. Community Impact.",
+  "support": "A student-led photography collective developing young creatives and using visual storytelling to serve our school and surrounding community.",
+  "school": "Valley Christian High School",
+  "city": "San Jose, California",
+  "address": "100 Skyway Drive, San Jose, California",
+  "phone": "(408) 513-2400",
+  "phoneHref": "tel:+14085132400",
+  "instagram": "https://www.instagram.com/vchs_photography/",
+  "instagramHandle": "@vchs_photography",
+  "schoolContact": "https://www.vcs.net/about/contact-us",
+  "membersApprox": 30,
+  "inquiryEmail": "",
+  "formEndpoint": "",
+  "nav": [
+    { "label": "Home", "href": "index.html" },
+    { "label": "Portfolios", "href": "portfolios.html" },
+    { "label": "Projects", "href": "projects.html" },
+    { "label": "Book Us", "href": "book.html" },
+    { "label": "About", "href": "about.html" },
+    { "label": "Donate", "href": "donate.html" }
+  ]
+}

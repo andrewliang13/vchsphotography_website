@@ -1,0 +1,300 @@
+[
+  {
+    "id": "allen-wu",
+    "name": "Allen Wu",
+    "role": "President",
+    "specialties": [
+      "Sports & Athletics",
+      "Portraits & Headshots"
+    ],
+    "equipment": "Canon R10; 24\u2013100mm, 70\u2013300mm, 18\u201324mm",
+    "instagram": "https://www.instagram.com/allens_photoss/",
+    "instagramHandle": "@allens_photoss",
+    "email": "",
+    "bio": "",
+    "featured": true,
+    "galleries": [
+      {
+        "slug": "allen-portfolio",
+        "label": "Portfolio",
+        "category": "Creative & Fine Art"
+      },
+      {
+        "slug": "allen-court",
+        "label": "Homecoming Court",
+        "category": "School Events"
+      },
+      {
+        "slug": "allen-spirit",
+        "label": "Spirit Week",
+        "category": "School Events"
+      },
+      {
+        "slug": "allen-rally",
+        "label": "Outdoor Rally",
+        "category": "School Events"
+      }
+    ]
+  },
+  {
+    "id": "daniel-an",
+    "name": "Daniel An",
+    "role": "Vice President",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  },
+  {
+    "id": "jocelyn-kwok",
+    "name": "Jocelyn Kwok",
+    "role": "Vice President",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  },
+  {
+    "id": "ethan-chen",
+    "name": "Ethan Chen",
+    "role": "Vice President",
+    "specialties": [
+      "School Events"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": true,
+    "galleries": [
+      {
+        "slug": "ethan-hoco",
+        "label": "Homecoming",
+        "category": "School Events"
+      },
+      {
+        "slug": "week5-ethan",
+        "label": "Curriculum Week 5",
+        "category": "Portraits & Headshots"
+      }
+    ]
+  },
+  {
+    "id": "amanda-garcia",
+    "name": "Amanda Garcia",
+    "role": "Officer",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  },
+  {
+    "id": "andrew-liang",
+    "name": "Andrew Liang",
+    "role": "Officer",
+    "specialties": [
+      "Landscape & Nature",
+      "School Events"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": true,
+    "galleries": [
+      {
+        "slug": "andrew-hoco",
+        "label": "Homecoming",
+        "category": "School Events",
+        "limit": null
+      },
+      {
+        "slug": "andrew-rally",
+        "label": "Outdoor Rally",
+        "category": "School Events",
+        "limit": null
+      },
+      {
+        "slug": "week5-andrew",
+        "label": "Curriculum Week 5",
+        "category": "Portraits & Headshots",
+        "limit": null
+      },
+      {
+        "slug": "andrew-archive",
+        "label": "Archive",
+        "category": "Landscape & Nature",
+        "path": "assets/andrew/web",
+        "fullPath": "assets/andrew/full",
+        "limit": null
+      }
+    ]
+  },
+  {
+    "id": "john-wu",
+    "name": "John Wu",
+    "role": "Officer",
+    "specialties": [
+      "School Events",
+      "Sports & Athletics"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": true,
+    "galleries": [
+      {
+        "slug": "john-indoor",
+        "label": "Indoor Rally",
+        "category": "School Events"
+      },
+      {
+        "slug": "john-hoco",
+        "label": "Homecoming",
+        "category": "School Events"
+      },
+      {
+        "slug": "john-rally",
+        "label": "Outdoor Rally",
+        "category": "School Events"
+      },
+      {
+        "slug": "week5-john",
+        "label": "Curriculum Week 5",
+        "category": "Portraits & Headshots"
+      }
+    ]
+  },
+  {
+    "id": "austin-guydish",
+    "name": "Austin Guydish",
+    "role": "Member",
+    "specialties": [
+      "School Events"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [
+      {
+        "slug": "austin-rally",
+        "label": "Outdoor Rally",
+        "category": "School Events"
+      }
+    ]
+  },
+  {
+    "id": "katherine-tsai",
+    "name": "Katherine Tsai",
+    "role": "Member",
+    "specialties": [
+      "Portraits & Headshots",
+      "Community & Documentary Photography"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": true,
+    "galleries": [
+      {
+        "slug": "nova-katherine",
+        "label": "NovaWorks Headshots",
+        "category": "Community & Documentary Photography"
+      }
+    ]
+  },
+  {
+    "id": "nathan-liu",
+    "name": "Nathan Liu",
+    "role": "Member",
+    "specialties": [
+      "School Events"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [
+      {
+        "slug": "nathan-rally",
+        "label": "Outdoor Rally",
+        "category": "School Events"
+      }
+    ]
+  },
+  {
+    "id": "serena-wu",
+    "name": "Serena Wu",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  },
+  {
+    "id": "thomas-jiang",
+    "name": "Thomas Jiang",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  },
+  {
+    "id": "matthew-lieu",
+    "name": "Matthew Lieu",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  },
+  {
+    "id": "charlotte-li",
+    "name": "Charlotte Li",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": []
+  }
+]

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#00467F" />
+  <meta name="description" content="Support VCHS Photography Club with equipment donations, sponsorship, or in-kind contributions through school-approved channels." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Donate &amp; Sponsor | VCHS Photography Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-bar" data-site-bar>
+    <a class="mark" href="index.html">VCHS Photography<small>Student collective</small></a>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" data-site-nav aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="portfolios.html">Portfolios</a>
+      <a href="projects.html">Projects</a>
+      <a href="book.html">Book Us</a>
+      <a href="about.html">About</a>
+      <a href="donate.html" aria-current="page">Donate</a>
+    </nav>
+    <a class="btn btn-ghost" href="book.html">Book a Shoot</a>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap reveal">
+        <p class="kicker">Donate &amp; Sponsor</p>
+        <h1>Support student gear access and community shoots.</h1>
+        <p class="lede">The club is building a shared equipment library so students can participate without purchasing every piece of gear themselves. Support also helps the club provide photography services to community organizations.</p>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="wrap split reveal">
+        <div>
+          <p class="kicker">Why support us</p>
+          <h2>Equipment access creates opportunity.</h2>
+          <p class="lede">Roughly 30 active members photograph campus life and community projects. Shared cameras, lenses, and lighting make those assignments possible for students who do not own professional gear.</p>
+        </div>
+        <div>
+          <p class="kicker">Current resources</p>
+          <h2>What members already use.</h2>
+          <p class="lede">Personal cameras and lenses contributed or used by members, a tripod, a backdrop, and a reflective umbrella. Lightroom is expected to be provided by the school; confirmation is pending. These are current resources, not claims of club-owned inventory unless ownership is confirmed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap reveal">
+        <p class="kicker">Wishlist</p>
+        <h2>Editable equipment priorities.</h2>
+        <p class="lede">Officers update this list in <code>data/wishlist.json</code>. Estimates stay blank until verified — we do not invent product prices.</p>
+        <div class="wishlist">
+          <article class="wish">
+            <span class="priority priority-high">High</span>
+            <div>
+              <h3>Shared camera bodies</h3>
+              <p>Modern cameras students can check out when they do not have suitable personal gear.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-high">High</span>
+            <div>
+              <h3>Shared lenses</h3>
+              <p>Telephoto for sports, portrait lenses, and other assignment-specific glass.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-high">High</span>
+            <div>
+              <h3>Lighting and flash</h3>
+              <p>Better headshots, indoor portraits, and low-light event work.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-medium">Medium</span>
+            <div>
+              <h3>Memory cards, batteries, and chargers</h3>
+              <p>Keep shared kits reliable and ready between shoots.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-medium">Medium</span>
+            <div>
+              <h3>ND filters and accessories</h3>
+              <p>Outdoor control and creative options for landscape and documentary work.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-medium">Medium</span>
+            <div>
+              <h3>Approved transportation support</h3>
+              <p>School-approved, supervised travel for off-campus nonprofit and community projects.</p>
+            </div>
+            <em>Project-based</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-medium">Medium</span>
+            <div>
+              <h3>Online storage and gallery services</h3>
+              <p>Secure delivery and organization of photographs for club projects and clients.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+          <article class="wish">
+            <span class="priority priority-low">Low</span>
+            <div>
+              <h3>Printing and exhibitions</h3>
+              <p>Prints and display materials for student work and community collaborations.</p>
+            </div>
+            <em>Estimate TBD</em>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section-tight" data-sponsors="data/sponsors.json">
+      <div class="wrap reveal">
+        <p class="kicker">Sponsors</p>
+        <h2>Partners who make shared gear possible.</h2>
+        <p class="lede" data-sponsor-note></p>
+        <div class="sponsor-grid" data-sponsor-list></div>
+      </div>
+    </section>
+    <section class="section-tight">
+      <div class="wrap reveal">
+        <p class="kicker">Suggested levels</p>
+        <h2>Contribution ranges, not minimums.</h2>
+        <p class="lede">Sponsors may offer a different amount or an in-kind contribution.</p>
+        <div class="levels">
+          <article class="level">
+            <h3>Equipment Supporter</h3>
+            <p>$50–200 · Helps fund smaller essentials such as memory cards, batteries, storage, filters, and accessories.</p>
+          </article>
+          <article class="level">
+            <h3>Project Sponsor</h3>
+            <p>$250–500 · Helps support community projects, portrait lighting, printing, and approved transportation expenses.</p>
+          </article>
+          <article class="level">
+            <h3>Camera Sponsor</h3>
+            <p>$500–1,000 · Helps fund shared camera bodies or lenses, giving more students access to quality equipment.</p>
+          </article>
+          <article class="level">
+            <h3>In-kind Contributions</h3>
+            <p>Functional used cameras, lenses, lighting, printing, storage services, mentorship, and other useful resources.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap split reveal">
+        <div>
+          <p class="kicker">Recognition</p>
+          <h2>Subject to school approval.</h2>
+          <p class="lede">Potential benefits: recognition on this sponsor page, a thank-you letter, acknowledgment in an approved project recap or exhibition, and an invitation to a future student photography exhibition if one is organized. We do not guarantee advertising reach or exclusive promotion. See the <a class="link-quiet" href="exhibition.html">exhibitions page</a> for status — none are scheduled yet.</p>
+        </div>
+        <div>
+          <p class="kicker">Important</p>
+          <h2>School-approved donations only.</h2>
+          <p class="lede">The club is not represented as an independent 501(c)(3). Do not assume contributions are tax-deductible through the club. A future independent nonprofit is being explored, but it is not current. There is no online payment flow on this site.</p>
+          <div class="actions">
+            <a class="btn btn-ghost" href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">Official school contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="wrap-narrow reveal">
+        <p class="kicker">Sponsorship inquiry</p>
+        <h2>Tell us how you’d like to help.</h2>
+        <p class="form-note">Set <code>formEndpoint</code> or <code>inquiryEmail</code> in <code>data/site.json</code> for automatic delivery. Until then, submit copies a summary for Instagram / school contact.</p>
+        <form class="form" data-inquiry-form data-form-kind="sponsor" data-endpoint="" novalidate>
+          <div class="honeypot" aria-hidden="true">
+            <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="donor-name">Business or donor name</label>
+              <input id="donor-name" name="donor_name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="donor-email">Contact email</label>
+              <input id="donor-email" name="email" type="email" required autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="gift-type">Type of contribution</label>
+              <select id="gift-type" name="gift_type" required>
+                <option value="">Select</option>
+                <option>Cash / sponsorship</option>
+                <option>Equipment</option>
+                <option>Services</option>
+                <option>Mentorship</option>
+                <option>Other in-kind</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="amount">Estimated amount or item</label>
+              <input id="amount" name="amount" type="text" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <div class="field">
+            <label for="permission">
+              <input id="permission" name="permission" type="checkbox" required />
+              You may contact me about this contribution.
+            </label>
+          </div>
+          <button class="btn btn-navy" type="submit">Send sponsorship inquiry</button>
+          <p class="form-success" data-form-success role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <strong>VCHS Photography</strong>
+        <p>Valley Christian High School · San Jose, California</p>
+        <p>100 Skyway Drive, San Jose, California</p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p><a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a></p>
+        <p><a href="tel:+14085132400">(408) 513-2400</a></p>
+        <p><a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">School contact</a></p>
+      </div>
+      <div>
+        <strong>Policies</strong>
+        <p><a href="privacy.html">Privacy notice</a> · <a href="exhibition.html">Exhibitions</a></p>
+        <p>Inquiries are not confirmed bookings.</p>
+        <p>Photo removal: message @vchs_photography.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>

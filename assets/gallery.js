@@ -6,8 +6,9 @@
   function aspectOf(item) {
     const img = item.querySelector('img');
     if (!img) return 1;
-    const w = Number(img.getAttribute('width')) || img.naturalWidth || 1;
-    const h = Number(img.getAttribute('height')) || img.naturalHeight || 1;
+    // Prefer decoded pixels so portrait/landscape stay correct (attrs can be wrong/stale).
+    const w = img.naturalWidth || Number(img.getAttribute('width')) || 1;
+    const h = img.naturalHeight || Number(img.getAttribute('height')) || 1;
     return w / h;
   }
 
@@ -71,6 +72,19 @@
   function start() {
     run();
     requestAnimationFrame(run);
+    // Re-justify as lazy images decode with real orientation
+    document.querySelectorAll('.masonry img').forEach((img) => {
+      if (img.complete && img.naturalWidth) return;
+      img.addEventListener(
+        'load',
+        () => {
+          const container = img.closest('.masonry');
+          if (container) delete container.dataset.rowWidth;
+          run();
+        },
+        { once: true }
+      );
+    });
   }
 
   window.addEventListener('resize', () => {
@@ -85,12 +99,17 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
-  // Re-run when filters hide/show sections
+  // Re-run when filters hide/show items
+  const relayout = () => {
+    document.querySelectorAll('.masonry').forEach((container) => {
+      delete container.dataset.rowWidth;
+    });
+    setTimeout(run, 30);
+  };
   document.addEventListener('click', (event) => {
-    if (event.target.closest('.portfolio-filter')) {
-      setTimeout(run, 30);
-    }
+    if (event.target.closest('[data-filter], .portfolio-filter, .filter-btn')) relayout();
   });
+  document.addEventListener('vchs:filters', relayout);
 
   /* —— Lightbox —— */
   function visibleItems() {

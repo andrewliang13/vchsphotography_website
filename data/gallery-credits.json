@@ -1,0 +1,60 @@
+{
+  "bySlug": {
+    "allen-portfolio": "Allen Wu",
+    "allen-court": "Allen Wu",
+    "allen-spirit": "Allen Wu",
+    "allen-rally": "Allen Wu",
+    "andrew-hoco": "Andrew Liang",
+    "andrew-rally": "Andrew Liang",
+    "week5-andrew": "Andrew Liang",
+    "andrew-archive": "Andrew Liang",
+    "austin-rally": "Austin Guydish",
+    "ethan-hoco": "Ethan Chen",
+    "week5-ethan": "Ethan Chen",
+    "john-indoor": "John Wu",
+    "john-hoco": "John Wu",
+    "john-rally": "John Wu",
+    "week5-john": "John Wu",
+    "nova-katherine": "Katherine Tsai",
+    "nathan-rally": "Nathan Liu",
+    "week4": null,
+    "vb-jv": "John Wu",
+    "vb-var": "John Wu",
+    "hero": null
+  },
+  "filenameTokens": {
+    "allenwu": "Allen Wu",
+    "allen": "Allen Wu",
+    "danielan": "Daniel An",
+    "danielan2": "Daniel An",
+    "daniel": "Daniel An",
+    "katherine": "Katherine Tsai",
+    "andrew": "Andrew Liang",
+    "john": "John Wu",
+    "ethan": "Ethan Chen",
+    "austin": "Austin Guydish",
+    "nathan": "Nathan Liu",
+    "serena": "Serena Wu",
+    "amanda": "Amanda Garcia",
+    "jocelyn": "Jocelyn Kwok",
+    "thomas": "Thomas Jiang",
+    "matthew": "Matthew Lieu",
+    "charlotte": "Charlotte Li",
+    "li": "Charlotte Li"
+  },
+  "slugPatterns": [
+    {
+      "slug": "week4",
+      "pattern": "IMG_\\d+",
+      "credit": "Allen Wu",
+      "note": "Drive owner Liang heng Wu (= Allen Wu)"
+    },
+    {
+      "slug": "week4",
+      "pattern": "DSC\\d+",
+      "credit": "Andrew Liang",
+      "note": "Drive owner Andrew Liang"
+    }
+  ],
+  "pendingLabel": "Credit pending"
+}
