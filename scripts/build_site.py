@@ -306,9 +306,8 @@ def build_portfolios_index(site, people):
     for person in people:
         cover = cover_for(person)
         specs = ", ".join(person.get("specialties") or []) or "Portfolio coming soon"
-        cats = "|".join(person.get("specialties") or ["Unlisted"])
         cards.append(
-            f'''      <a class="person-card reveal" href="portfolios/{person["id"]}.html" data-categories="{cats}">
+            f'''      <a class="person-card reveal" href="portfolios/{person["id"]}.html">
         <div class="thumb"><img src="{cover}" alt="" loading="lazy" /></div>
         <div class="meta">
           <span class="role">{person.get("role") or "Member"}</span>
@@ -318,28 +317,11 @@ def build_portfolios_index(site, people):
       </a>'''
         )
 
-    categories = [
-        "Portraits & Headshots",
-        "Sports & Athletics",
-        "School Events",
-        "Landscape & Nature",
-        "Creative & Fine Art",
-        "Community & Documentary Photography",
-    ]
-    filters = ['<button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>']
-    for cat in categories:
-        filters.append(
-            f'<button type="button" class="filter-btn" data-filter="{cat}" aria-pressed="false">{cat}</button>'
-        )
-
     body = f'''    <section class="page-hero">
       <div class="wrap">
         <p class="kicker">Portfolios</p>
         <h1>Student photographers.</h1>
-        <p class="lede">Browse member work by specialty. Click a photographer to open their gallery. Booking goes through the club inquiry form — personal emails are not published here.</p>
-        <div class="filters" data-filter-group=".person-card" role="group" aria-label="Filter portfolios">
-          {"".join(filters)}
-        </div>
+        <p class="lede">Click a photographer to open their gallery. Album filters live on each portfolio page. Booking goes through the club inquiry form — personal emails are not published here.</p>
       </div>
     </section>
     <section class="section-tight">
