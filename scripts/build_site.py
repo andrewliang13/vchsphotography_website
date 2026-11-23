@@ -9,6 +9,20 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
+_PHOTO_DATES: dict[str, str] | None = None
+
+
+def taken_at(web_path: str) -> str:
+    """Capture time (ISO) for a published photo, from data/photo-dates.json."""
+    global _PHOTO_DATES
+    if _PHOTO_DATES is None:
+        f = DATA / "photo-dates.json"
+        _PHOTO_DATES = json.loads(f.read_text()) if f.exists() else {}
+    name = web_path.rsplit("/", 1)[-1]
+    if "/assets/andrew/" in web_path:
+        return _PHOTO_DATES.get(f"andrew/{name}", "")
+    parts = name.split("-", 2)
+    return _PHOTO_DATES.get(parts[1], "") if len(parts) == 3 else ""
 OUT_PORTFOLIOS = ROOT / "portfolios"
 DIM_CACHE_PATH = DATA / ".image-dims.json"
 
@@ -266,12 +280,32 @@ def build_portfolio_page(site, person):
     )
     for gallery in ordered:
         chunk = list_images(gallery)
+        # Photos without a usable capture time take the time of the photo
+        # next to them in the album, so they stay with the same moment.
+        times = [taken_at(row["web"]) for row in chunk]
+        times = [t if t >= "2005" else "" for t in times]  # camera clock never set
+        last = ""
+        for k, t in enumerate(times):
+            if t:
+                last = t
+            elif last:
+                times[k] = last
+        nxt = ""
+        for k in range(len(times) - 1, -1, -1):
+            if times[k]:
+                nxt = times[k]
+            elif nxt:
+                times[k] = nxt
+        for row, t in zip(chunk, times):
+            row["taken"] = t or gallery.get("date", "")
         images.extend(chunk)
         key = gallery.get("slug") or gallery.get("label")
         label = gallery.get("label") or key
         if key and key not in seen and chunk:
             seen.add(key)
             albums.append((key, label))
+
+    images.sort(key=lambda row: row.get("taken") or "", reverse=True)
 
     specialty = ", ".join(person.get("specialties") or []) or "Photography"
     filters = ['<button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>']

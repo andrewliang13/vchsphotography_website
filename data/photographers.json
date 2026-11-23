@@ -25,7 +25,7 @@
         "label": "Homecoming Court",
         "category": "School Events",
         "limit": null,
-        "date": "2026-10-09"
+        "date": "2026-10-10"
       },
       {
         "slug": "allen-spirit",
@@ -60,7 +60,7 @@
         "label": "Curriculum Week 5",
         "category": "Portraits & Headshots",
         "limit": null,
-        "date": "2026-09-25"
+        "date": "2026-09-28"
       },
       {
         "slug": "sn-allen",
@@ -116,14 +116,14 @@
         "label": "Homecoming",
         "category": "School Events",
         "limit": null,
-        "date": "2026-10-09"
+        "date": "2026-10-10"
       },
       {
         "slug": "week5-ethan",
         "label": "Curriculum Week 5",
         "category": "Portraits & Headshots",
         "limit": null,
-        "date": "2026-09-25"
+        "date": "2026-09-28"
       }
     ]
   },
@@ -160,7 +160,7 @@
         "label": "Homecoming",
         "category": "School Events",
         "limit": null,
-        "date": "2026-10-09"
+        "date": "2026-10-10"
       },
       {
         "slug": "andrew-rally",
@@ -174,7 +174,7 @@
         "label": "Curriculum Week 5",
         "category": "Portraits & Headshots",
         "limit": null,
-        "date": "2026-09-25"
+        "date": "2026-09-28"
       },
       {
         "slug": "andrew-archive",
@@ -229,7 +229,7 @@
         "label": "Homecoming",
         "category": "School Events",
         "limit": null,
-        "date": "2026-10-09"
+        "date": "2026-10-10"
       },
       {
         "slug": "john-rally",
@@ -243,14 +243,14 @@
         "label": "Curriculum Week 5",
         "category": "Portraits & Headshots",
         "limit": null,
-        "date": "2026-09-25"
+        "date": "2026-09-28"
       },
       {
         "slug": "week2-john",
         "label": "Curriculum Week 2",
         "category": "Portraits & Headshots",
         "limit": null,
-        "date": "2026-08-28"
+        "date": "2026-08-31"
       },
       {
         "slug": "john-d3",
