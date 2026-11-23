@@ -11,20 +11,13 @@
   <title>VCHS Photography Club | Student Collective</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/site.css" />
+  <script src="assets/motion.js"></script>
+  <script src="assets/rail.js" defer></script>
 </head>
 <body class="home-snap">
   <a class="skip-link" href="#main">Skip to content</a>
-  <nav class="page-dots" id="page-dots" aria-label="Pages">
-    <a href="#home" aria-current="true" aria-label="Home"></a>
-    <a href="#mission" aria-label="Mission"></a>
-    <a href="#work" aria-label="Featured work"></a>
-    <a href="#community" aria-label="Community"></a>
-    <a href="#portfolios" aria-label="Portfolios"></a>
-    <a href="#projects" aria-label="Projects"></a>
-    <a href="#support" aria-label="Support"></a>
-  </nav>
   <header class="site-bar is-over-hero" data-site-bar>
     <a class="mark" href="index.html">VCHS Photography<small>Student collective</small></a>
     <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -39,12 +32,17 @@
     <a class="btn btn-ghost" href="book.html">Book a Shoot</a>
   </header>
 
-  <section class="hero" id="home" data-hero>
+  <section data-label="Intro" class="hero" id="home" data-hero>
     <div class="hero-media" aria-hidden="true">
-      <img src="assets/club/john-indoor/full/196-1m3614-L-DSC09531.JPG" alt="" />
+      <img class="is-active" src="assets/club/john-indoor/full/196-1m3614-L-DSC09531.JPG" alt="" fetchpriority="high" />
+      <img data-src="assets/club/andrew-hoco/full/112-1L9Y3Iy--DSC00162.JPG" alt="" decoding="async" />
+      <img data-src="assets/club/sn-andrew/full/234-1y_sni_W-DSC01099.jpg" alt="" decoding="async" />
+      <img data-src="assets/club/allen-court/full/068-1GevKRi--IMG_5860.jpg" alt="" decoding="async" />
+      <img data-src="assets/club/xc-allen/full/310-1KYdZJlI-IMG_1823.jpg" alt="" decoding="async" />
+      <img data-src="assets/club/john-hoco/full/138-1g5Zhb5f-DSC02466.jpg" alt="" decoding="async" />
+      <img data-src="assets/club/nova-allen/full/157-1uz9KR59-IMG_1174.jpg" alt="" decoding="async" />
     </div>
     <div class="hero-copy" data-hero-copy>
-      <p class="eyebrow hero-enter" style="--enter-delay:0ms">Valley Christian High School · San Jose</p>
       <h1 class="hero-enter" style="--enter-delay:90ms">Student Photography. Real Stories. Community Impact.</h1>
       <p class="lede hero-enter" style="--enter-delay:180ms">A student-led photography collective developing young creatives and using visual storytelling to serve our school and surrounding community.</p>
       <div class="actions hero-enter" style="--enter-delay:270ms">
@@ -56,10 +54,10 @@
   </section>
 
   <main id="main">
-    <section class="page-section" id="mission">
+    <section data-label="Mission" class="page-section" id="mission">
+      <div class="wrap section-label-row"><p class="section-label"><span>01</span>Mission</p></div>
       <div class="wrap split reveal">
         <div>
-          <p class="kicker">Mission</p>
           <h2>Photography can tell stories, open doors, and bring communities together.</h2>
         </div>
         <div>
@@ -85,14 +83,15 @@
       </div>
     </section>
 
-    <section class="page-section" id="work">
+    <section data-label="Featured work" class="page-section" id="work">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>02</span>Featured work</p></div>
       <div class="wrap reveal">
-        <p class="kicker">Featured work</p>
         <h2>Photographs from campus and community.</h2>
         <p class="lede">Selected frames from club members. Click through to open full portfolios and event sets.</p>
         <div class="feature-grid">
           <a class="wide" href="projects.html#novaworks">
-            <img src="assets/club/nova-katherine/web/001-1DOZEyJz-katherine-01.jpg" alt="NovaWorks headshot by Katherine Tsai" loading="lazy" />
+            <img src="assets/club/nova-allen/web/060-1KFNYUQO-IMG_0990.jpg" alt="NovaWorks portrait uploaded by Allen Wu" loading="lazy" style="object-position:center 22%" />
             <span class="photo-credit">Katherine Tsai</span>
           </a>
           <a class="tall" href="portfolios/john-wu.html">
@@ -111,10 +110,11 @@
       </div>
     </section>
 
-    <section class="page-section" id="community">
+    <section data-label="Community" class="page-section" id="community">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>03</span>Community</p></div>
       <div class="wrap split reveal">
         <div>
-          <p class="kicker">Community impact</p>
           <h2>NovaWorks headshot project.</h2>
           <p class="lede">On October 14, 2026, club members photographed job seekers at NovaWorks Job Center. A follow-up session is scheduled for October 29. The goal is simple: help people access professional headshots for applications and LinkedIn.</p>
           <div class="actions">
@@ -123,32 +123,33 @@
           </div>
         </div>
         <a href="portfolios/katherine-tsai.html" aria-label="Open Katherine Tsai portfolio">
-          <img src="assets/club/nova-katherine/full/001-1DOZEyJz-katherine-01.jpg" alt="Portrait from the NovaWorks session" loading="lazy" class="is-loaded" style="width:100%;height:min(58vh,28rem);object-fit:cover" />
+          <img src="assets/club/nova-allen/full/044-1MMwRjCs-IMG_0970.jpg" alt="Portrait from the NovaWorks session, uploaded by Allen Wu" loading="lazy" class="is-loaded" style="width:100%;height:min(58vh,28rem);object-fit:cover;object-position:center 72%" />
         </a>
       </div>
     </section>
 
-    <section class="page-section" id="portfolios">
+    <section data-label="Photographers" class="page-section" id="portfolios">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>04</span>Photographers</p></div>
       <div class="wrap reveal">
-        <p class="kicker">Portfolios</p>
         <h2>Selected student photographers.</h2>
         <p class="lede">Browse member work by specialty, then DM the club Instagram to inquire.</p>
         <div class="person-grid">
           <a class="person-card" href="portfolios/allen-wu.html">
             <div class="thumb"><img src="assets/club/allen-portfolio/web/405-1opXWp4P-1__1_.jpg" alt="" loading="lazy" /></div>
-            <div class="meta"><span class="role">President</span><h3>Allen Wu</h3><p class="specs">Sports, Portraits</p></div>
+            <div class="meta"><h3>Allen Wu</h3><span class="role">President</span><p class="specs">Sports, Portraits</p></div>
           </a>
           <a class="person-card" href="portfolios/katherine-tsai.html">
             <div class="thumb"><img src="assets/club/nova-katherine/web/001-1DOZEyJz-katherine-01.jpg" alt="" loading="lazy" /></div>
-            <div class="meta"><span class="role">Member</span><h3>Katherine Tsai</h3><p class="specs">Headshots, Community</p></div>
+            <div class="meta"><h3>Katherine Tsai</h3><span class="role">Member</span><p class="specs">Headshots, Community</p></div>
           </a>
           <a class="person-card" href="portfolios/john-wu.html">
             <div class="thumb"><img src="assets/club/john-indoor/web/196-1m3614-L-DSC09531.JPG" alt="" loading="lazy" /></div>
-            <div class="meta"><span class="role">Officer</span><h3>John Wu</h3><p class="specs">Events, Sports</p></div>
+            <div class="meta"><h3>John Wu</h3><span class="role">Officer</span><p class="specs">Events, Sports</p></div>
           </a>
           <a class="person-card" href="portfolios/andrew-liang.html">
-            <div class="thumb"><img src="assets/club/andrew-rally/web/146-19GZ6Qr7-DSC06954.JPG" alt="" loading="lazy" /></div>
-            <div class="meta"><span class="role">Officer</span><h3>Andrew Liang</h3><p class="specs">Landscape, Events</p></div>
+            <div class="thumb"><img src="assets/club/andrew-hoco/web/056-1UTmqkAj-DSC01190.jpg" alt="" loading="lazy" style="object-position:42% center" /></div>
+            <div class="meta"><h3>Andrew Liang</h3><span class="role">Officer</span><p class="specs">Landscape, Events</p></div>
           </a>
         </div>
         <div class="actions">
@@ -157,9 +158,10 @@
       </div>
     </section>
 
-    <section class="page-section" id="projects">
+    <section data-label="Projects" class="page-section" id="projects">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>05</span>Projects</p></div>
       <div class="wrap reveal">
-        <p class="kicker">Projects &amp; partnerships</p>
         <h2>Work beyond the classroom.</h2>
         <div class="card-list">
           <a class="card-row" href="projects.html#novaworks"><strong>NovaWorks Job Center</strong><span>Headshots for job seekers</span><em>In progress</em></a>
@@ -170,10 +172,11 @@
       </div>
     </section>
 
-    <section class="page-section" id="support">
+    <section data-label="Support" class="page-section" id="support">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>06</span>Support</p></div>
       <div class="wrap split reveal">
         <div>
-          <p class="kicker">Sponsor</p>
           <h2>Help students access shared gear.</h2>
           <p class="lede">Support builds a shared equipment library and helps the club offer photography to community organizations. Suggested contribution ranges and an editable wishlist live on the donate page.</p>
           <div class="actions">
@@ -181,7 +184,6 @@
           </div>
         </div>
         <div>
-          <p class="kicker">Book</p>
           <h2>Need photographs?</h2>
           <p class="lede">Nonprofits, school groups, and local partners can request a shoot. Some community projects may be offered free of charge or supported by sponsors, subject to availability and approval.</p>
           <div class="actions">
@@ -202,6 +204,7 @@
       <div>
         <strong>Contact</strong>
         <p><a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a></p>
+        <p><a href="mailto:vchsphotography@gmail.com">vchsphotography@gmail.com</a></p>
         <p><a href="tel:+14085132400">(408) 513-2400</a></p>
         <p><a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">School contact</a></p>
       </div>

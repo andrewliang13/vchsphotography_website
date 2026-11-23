@@ -12,14 +12,32 @@
   "instagramHandle": "@vchs_photography",
   "schoolContact": "https://www.vcs.net/about/contact-us",
   "membersApprox": 30,
-  "inquiryEmail": "",
-  "formEndpoint": "",
+  "inquiryEmail": "vchsphotography@gmail.com",
+  "formEndpoint": "https://formsubmit.co/ajax/vchsphotography@gmail.com",
   "nav": [
-    { "label": "Home", "href": "index.html" },
-    { "label": "Portfolios", "href": "portfolios.html" },
-    { "label": "Projects", "href": "projects.html" },
-    { "label": "Book Us", "href": "book.html" },
-    { "label": "About", "href": "about.html" },
-    { "label": "Donate", "href": "donate.html" }
+    {
+      "label": "Home",
+      "href": "index.html"
+    },
+    {
+      "label": "Portfolios",
+      "href": "portfolios.html"
+    },
+    {
+      "label": "Projects",
+      "href": "projects.html"
+    },
+    {
+      "label": "Book Us",
+      "href": "book.html"
+    },
+    {
+      "label": "About",
+      "href": "about.html"
+    },
+    {
+      "label": "Donate",
+      "href": "donate.html"
+    }
   ]
 }

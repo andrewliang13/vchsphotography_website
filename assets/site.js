@@ -11,8 +11,8 @@
   }
 
   let siteConfig = {
-    formEndpoint: '',
-    inquiryEmail: '',
+    formEndpoint: 'https://formsubmit.co/ajax/vchsphotography@gmail.com',
+    inquiryEmail: 'vchsphotography@gmail.com',
     instagramHandle: '@vchs_photography',
   };
 
@@ -92,7 +92,24 @@
 
   if (!reduce) {
     const media = hero?.querySelector('.hero-media');
-    if (media) media.classList.add('is-alive');
+    if (media) {
+      media.classList.add('is-alive');
+      const slides = [...media.querySelectorAll('img')];
+      slides.forEach((img) => {
+        if (img.dataset.src) img.src = img.dataset.src;
+      });
+      if (slides.length > 1) {
+        let at = 0;
+        setInterval(() => {
+          if (document.hidden) return;
+          const next = slides[(at + 1) % slides.length];
+          if (!next.complete || !next.naturalWidth) return;
+          slides[at].classList.remove('is-active');
+          at = (at + 1) % slides.length;
+          next.classList.add('is-active');
+        }, 6500);
+      }
+    }
 
     const heroCopy = document.querySelector('[data-hero-copy]');
     if (heroCopy) {
@@ -201,31 +218,27 @@
 
     const selected = () => photographers.find((p) => p.id === select?.value) || null;
 
-    const emailsFor = (list) =>
-      [...new Set(list.map((p) => (p.email || '').trim()).filter(Boolean))];
+    const clubEmail = () => (siteConfig.inquiryEmail || '').trim();
 
     const updateRoute = () => {
       const person = selected();
+      const club = clubEmail();
+      const email = person ? (person.email || '').trim() : '';
       if (!person) {
-        const all = emailsFor(photographers);
         if (route) {
-          route.textContent = all.length
-            ? `No preference — opens one email to all ${all.length} photographers who listed an address.`
-            : `No photographer emails listed yet. We’ll copy a DM draft for ${siteConfig.instagramHandle}.`;
+          route.textContent = club
+            ? `No preference — your request goes to the club inbox (${club}).`
+            : `We’ll copy a DM draft for ${siteConfig.instagramHandle}.`;
         }
-        if (submitBtn) {
-          submitBtn.textContent = all.length ? 'Email all photographers' : 'Copy for club DM';
-        }
-        return;
-      }
-      const email = (person.email || '').trim();
-      if (email) {
-        if (route) route.textContent = `Email opens to ${person.name} only.`;
-        if (submitBtn) submitBtn.textContent = `Email ${person.name}`;
+        if (submitBtn) submitBtn.textContent = club ? 'Send request' : 'Copy for club DM';
+      } else if (email) {
+        if (route) route.textContent = `Your request goes to the club inbox, with ${person.name} copied.`;
+        if (submitBtn) submitBtn.textContent = `Send to ${person.name}`;
+      } else if (club) {
+        if (route) route.textContent = `Your request goes to the club inbox (${club}), asking for ${person.name}.`;
+        if (submitBtn) submitBtn.textContent = `Send request for ${person.name}`;
       } else {
-        if (route) {
-          route.textContent = `${person.name} has no public email yet. We’ll copy a DM draft naming them for ${siteConfig.instagramHandle}.`;
-        }
+        if (route) route.textContent = `We’ll copy a DM draft naming ${person.name} for ${siteConfig.instagramHandle}.`;
         if (submitBtn) submitBtn.textContent = `DM club for ${person.name}`;
       }
     };
@@ -239,9 +252,7 @@
         const options = [
           '<option value="any">Any available photographer</option>',
           ...photographers.map((p) => {
-            const hasEmail = Boolean((p.email || '').trim());
-            const mark = hasEmail ? '' : ' (club DM)';
-            return `<option value="${p.id}">${p.name}${mark}</option>`;
+            return `<option value="${p.id}">${p.name}</option>`;
           }),
         ];
         select.innerHTML = options.join('');
@@ -275,29 +286,64 @@
       const payload = Object.fromEntries(new FormData(bookForm).entries());
       delete payload.company_website;
       const person = selected();
-      const allEmails = emailsFor(photographers);
-      const toEmail = person
-        ? (person.email || '').trim()
-        : allEmails.join(',');
-      const label = person ? person.name : 'Any available photographer';
-      payload.photographer = label;
-      if (!person) payload.route = 'Sent to all listed photographers — reply if you can take this shoot';
-      if (person && !toEmail) payload.route = `Please connect me with ${person.name}`;
+      const club = clubEmail();
+      const personEmail = person ? (person.email || '').trim() : '';
+      const toEmail = personEmail || club;
+      const cc = personEmail && club && club !== personEmail ? club : '';
+      payload.photographer = person ? person.name : 'Any available photographer';
+      if (person && !personEmail) payload.route = `Please connect me with ${person.name}`;
       const summary = payloadLines(payload);
+      const endpoint = (siteConfig.formEndpoint || '').trim();
 
-      if (toEmail) {
+      const openMail = () => {
         const subject = encodeURIComponent(
           person
             ? `VCHS Photography booking inquiry for ${person.name}`
             : 'VCHS Photography booking inquiry — any available photographer'
         );
         const body = encodeURIComponent(summary);
-        window.location.href = `mailto:${toEmail}?subject=${subject}&body=${body}`;
+        const ccPart = cc ? `cc=${encodeURIComponent(cc)}&` : '';
+        window.location.href = `mailto:${toEmail}?${ccPart}subject=${subject}&body=${body}`;
         show(
-          person
-            ? `Your email app should open to ${person.name}. If nothing opens, message ${siteConfig.instagramHandle}. This is not a confirmed booking.`
-            : `Your email app should open to all ${allEmails.length} photographers. If nothing opens, message ${siteConfig.instagramHandle}.`
+          `Your email app should open to ${personEmail ? person.name : toEmail}. If nothing opens, email ${toEmail} or message ${siteConfig.instagramHandle}. This is not a confirmed booking.`
         );
+      };
+
+      if (endpoint) {
+        const subjectLine = person
+          ? `VCHS Photography booking inquiry for ${person.name}`
+          : 'VCHS Photography booking inquiry — any available photographer';
+        const body = { ...payload, _subject: subjectLine, _template: 'table', _captcha: 'false' };
+        if (payload.email) body._replyto = payload.email;
+        if (personEmail && personEmail !== club) body._cc = personEmail;
+        if (submitBtn) submitBtn.disabled = true;
+        show('Sending…');
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body),
+        })
+          .then((r) => (r.ok ? r.json() : Promise.reject(new Error('send failed'))))
+          .then((res) => {
+            if (res && String(res.success) === 'false') throw new Error(res.message || 'send failed');
+            bookForm.reset();
+            updateRoute();
+            show(
+              `Thanks — your request was sent to the club${personEmail ? ` and ${person.name}` : ''}. An officer will reply by email. This is not a confirmed booking yet.`
+            );
+          })
+          .catch(() => {
+            if (toEmail) openMail();
+            else show(`We couldn’t send that. Please message ${siteConfig.instagramHandle}.`);
+          })
+          .finally(() => {
+            if (submitBtn) submitBtn.disabled = false;
+          });
+        return;
+      }
+
+      if (toEmail) {
+        openMail();
         return;
       }
 
@@ -356,10 +402,20 @@
         fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            ...payload,
+            _subject: kind === 'sponsor' ? 'VCHS Photography sponsorship inquiry' : 'VCHS Photography inquiry',
+            _template: 'table',
+            _captcha: 'false',
+            ...(payload.email ? { _replyto: payload.email } : {}),
+          }),
         })
           .then((response) => {
             if (!response.ok) throw new Error('send failed');
+            return response.json().catch(() => ({}));
+          })
+          .then((res) => {
+            if (res && String(res.success) === 'false') throw new Error('send failed');
             form.reset();
             show(
               kind === 'sponsor'
@@ -368,6 +424,14 @@
             );
           })
           .catch(() => {
+            if (email) {
+              const subject = encodeURIComponent(
+                kind === 'sponsor' ? 'VCHS Photography sponsorship inquiry' : 'VCHS Photography inquiry'
+              );
+              window.location.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(summary)}`;
+              show(`We couldn’t send it directly, so your email app should open instead. If nothing opens, email ${email}.`);
+              return;
+            }
             show(
               `The form could not be delivered. Please message ${siteConfig.instagramHandle} or use the school contact page.`
             );

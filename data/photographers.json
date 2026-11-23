@@ -7,7 +7,7 @@
       "Sports & Athletics",
       "Portraits & Headshots"
     ],
-    "equipment": "Canon R10; 24\u2013100mm, 70\u2013300mm, 18\u201324mm",
+    "equipment": "Canon R10; 24–100mm, 70–300mm, 18–24mm",
     "instagram": "https://www.instagram.com/allens_photoss/",
     "instagramHandle": "@allens_photoss",
     "email": "",
@@ -17,22 +17,57 @@
       {
         "slug": "allen-portfolio",
         "label": "Portfolio",
-        "category": "Creative & Fine Art"
+        "category": "Creative & Fine Art",
+        "limit": null
       },
       {
         "slug": "allen-court",
         "label": "Homecoming Court",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-09"
       },
       {
         "slug": "allen-spirit",
         "label": "Spirit Week",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-06"
       },
       {
         "slug": "allen-rally",
         "label": "Outdoor Rally",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-07"
+      },
+      {
+        "slug": "nova-allen",
+        "label": "NovaWorks",
+        "category": "Community & Documentary Photography",
+        "limit": null,
+        "date": "2026-10-14"
+      },
+      {
+        "slug": "xc-allen",
+        "label": "XC Invitational",
+        "category": "Sports & Athletics",
+        "limit": null,
+        "date": "2026-09-12"
+      },
+      {
+        "slug": "week5-allen",
+        "label": "Curriculum Week 5",
+        "category": "Portraits & Headshots",
+        "limit": null,
+        "date": "2026-09-25"
+      },
+      {
+        "slug": "sn-allen",
+        "label": "Senior Night",
+        "category": "Sports & Athletics",
+        "limit": null,
+        "date": "2026-11-06"
       }
     ]
   },
@@ -79,12 +114,16 @@
       {
         "slug": "ethan-hoco",
         "label": "Homecoming",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-09"
       },
       {
         "slug": "week5-ethan",
         "label": "Curriculum Week 5",
-        "category": "Portraits & Headshots"
+        "category": "Portraits & Headshots",
+        "limit": null,
+        "date": "2026-09-25"
       }
     ]
   },
@@ -112,7 +151,7 @@
     "equipment": "",
     "instagram": "",
     "instagramHandle": "",
-    "email": "",
+    "email": "andrew.liang@warriorlife.net",
     "bio": "",
     "featured": true,
     "galleries": [
@@ -120,19 +159,22 @@
         "slug": "andrew-hoco",
         "label": "Homecoming",
         "category": "School Events",
-        "limit": null
+        "limit": null,
+        "date": "2026-10-09"
       },
       {
         "slug": "andrew-rally",
         "label": "Outdoor Rally",
         "category": "School Events",
-        "limit": null
+        "limit": null,
+        "date": "2026-10-07"
       },
       {
         "slug": "week5-andrew",
         "label": "Curriculum Week 5",
         "category": "Portraits & Headshots",
-        "limit": null
+        "limit": null,
+        "date": "2026-09-25"
       },
       {
         "slug": "andrew-archive",
@@ -140,9 +182,19 @@
         "category": "Landscape & Nature",
         "path": "assets/andrew/web",
         "fullPath": "assets/andrew/full",
-        "limit": null
+        "limit": null,
+        "date": "2026-08-04"
+      },
+      {
+        "slug": "sn-andrew",
+        "label": "Senior Night",
+        "category": "Sports & Athletics",
+        "limit": null,
+        "date": "2026-11-06"
       }
-    ]
+    ],
+    "cover": "assets/club/andrew-hoco/web/056-1UTmqkAj-DSC01190.jpg",
+    "coverPosition": "42% center"
   },
   {
     "id": "john-wu",
@@ -160,24 +212,52 @@
     "featured": true,
     "galleries": [
       {
+        "slug": "john-portfolio",
+        "label": "Portfolio",
+        "category": "Creative & Fine Art",
+        "limit": null
+      },
+      {
         "slug": "john-indoor",
         "label": "Indoor Rally",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-05"
       },
       {
         "slug": "john-hoco",
         "label": "Homecoming",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-09"
       },
       {
         "slug": "john-rally",
         "label": "Outdoor Rally",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-07"
       },
       {
         "slug": "week5-john",
         "label": "Curriculum Week 5",
-        "category": "Portraits & Headshots"
+        "category": "Portraits & Headshots",
+        "limit": null,
+        "date": "2026-09-25"
+      },
+      {
+        "slug": "week2-john",
+        "label": "Curriculum Week 2",
+        "category": "Portraits & Headshots",
+        "limit": null,
+        "date": "2026-08-28"
+      },
+      {
+        "slug": "john-d3",
+        "label": "Spirit Week",
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-08"
       }
     ]
   },
@@ -196,9 +276,31 @@
     "featured": false,
     "galleries": [
       {
+        "slug": "austin-portfolio",
+        "label": "Portfolio",
+        "category": "Creative & Fine Art",
+        "limit": null
+      },
+      {
         "slug": "austin-rally",
         "label": "Outdoor Rally",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-07"
+      },
+      {
+        "slug": "sn-austin",
+        "label": "Senior Night",
+        "category": "Sports & Athletics",
+        "limit": null,
+        "date": "2026-11-06"
+      },
+      {
+        "slug": "nova29-austin",
+        "label": "NovaWorks",
+        "category": "Community & Documentary Photography",
+        "limit": null,
+        "date": "2026-10-29"
       }
     ]
   },
@@ -220,7 +322,16 @@
       {
         "slug": "nova-katherine",
         "label": "NovaWorks Headshots",
-        "category": "Community & Documentary Photography"
+        "category": "Community & Documentary Photography",
+        "limit": null,
+        "date": "2026-10-14"
+      },
+      {
+        "slug": "katherine-spirit",
+        "label": "Spirit Week",
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-06"
       }
     ]
   },
@@ -241,7 +352,9 @@
       {
         "slug": "nathan-rally",
         "label": "Outdoor Rally",
-        "category": "School Events"
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-07"
       }
     ]
   },
@@ -249,14 +362,24 @@
     "id": "serena-wu",
     "name": "Serena Wu",
     "role": "Member",
-    "specialties": [],
+    "specialties": [
+      "Community & Documentary Photography"
+    ],
     "equipment": "",
     "instagram": "",
     "instagramHandle": "",
     "email": "",
     "bio": "",
     "featured": false,
-    "galleries": []
+    "galleries": [
+      {
+        "slug": "nova-serena",
+        "label": "NovaWorks",
+        "category": "Community & Documentary Photography",
+        "limit": null,
+        "date": "2026-10-29"
+      }
+    ]
   },
   {
     "id": "thomas-jiang",

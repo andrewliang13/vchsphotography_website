@@ -9,8 +9,10 @@
   <title>Donate &amp; Sponsor | VCHS Photography Club</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/site.css" />
+  <script src="assets/motion.js"></script>
+  <script src="assets/rail.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,32 +31,32 @@
   </header>
 
   <main id="main">
-    <section class="page-hero">
+    <section data-label="Overview" class="page-hero">
       <div class="wrap reveal">
-        <p class="kicker">Donate &amp; Sponsor</p>
         <h1>Support student gear access and community shoots.</h1>
         <p class="lede">The club is building a shared equipment library so students can participate without purchasing every piece of gear themselves. Support also helps the club provide photography services to community organizations.</p>
       </div>
     </section>
 
-    <section class="section-tight">
+    <section data-label="Why it matters" class="section-tight">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>01</span>Why it matters</p></div>
       <div class="wrap split reveal">
         <div>
-          <p class="kicker">Why support us</p>
           <h2>Equipment access creates opportunity.</h2>
           <p class="lede">Roughly 30 active members photograph campus life and community projects. Shared cameras, lenses, and lighting make those assignments possible for students who do not own professional gear.</p>
         </div>
         <div>
-          <p class="kicker">Current resources</p>
           <h2>What members already use.</h2>
           <p class="lede">Personal cameras and lenses contributed or used by members, a tripod, a backdrop, and a reflective umbrella. Lightroom is expected to be provided by the school; confirmation is pending. These are current resources, not claims of club-owned inventory unless ownership is confirmed.</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section data-label="Equipment priorities" class="section">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>02</span>Equipment priorities</p></div>
       <div class="wrap reveal">
-        <p class="kicker">Wishlist</p>
         <h2>Editable equipment priorities.</h2>
         <p class="lede">Officers update this list in <code>data/wishlist.json</code>. Estimates stay blank until verified — we do not invent product prices.</p>
         <div class="wishlist">
@@ -127,17 +129,19 @@
     </section>
 
 
-    <section class="section-tight" data-sponsors="data/sponsors.json">
+    <section data-label="Partners" class="section-tight" data-sponsors="data/sponsors.json">
+
+
+      <div class="wrap section-label-row"><p class="section-label"><span>03</span>Partners</p></div>
       <div class="wrap reveal">
-        <p class="kicker">Sponsors</p>
         <h2>Partners who make shared gear possible.</h2>
         <p class="lede" data-sponsor-note></p>
         <div class="sponsor-grid" data-sponsor-list></div>
       </div>
     </section>
-    <section class="section-tight">
+    <section data-label="Contributions" class="section-tight">
+      <div class="wrap section-label-row"><p class="section-label"><span>04</span>Contributions</p></div>
       <div class="wrap reveal">
-        <p class="kicker">Suggested levels</p>
         <h2>Contribution ranges, not minimums.</h2>
         <p class="lede">Sponsors may offer a different amount or an in-kind contribution.</p>
         <div class="levels">
@@ -161,15 +165,15 @@
       </div>
     </section>
 
-    <section class="section">
+    <section data-label="School approval" class="section">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>05</span>School approval</p></div>
       <div class="wrap split reveal">
         <div>
-          <p class="kicker">Recognition</p>
           <h2>Subject to school approval.</h2>
           <p class="lede">Potential benefits: recognition on this sponsor page, a thank-you letter, acknowledgment in an approved project recap or exhibition, and an invitation to a future student photography exhibition if one is organized. We do not guarantee advertising reach or exclusive promotion. See the <a class="link-quiet" href="exhibition.html">exhibitions page</a> for status — none are scheduled yet.</p>
         </div>
         <div>
-          <p class="kicker">Important</p>
           <h2>School-approved donations only.</h2>
           <p class="lede">The club is not represented as an independent 501(c)(3). Do not assume contributions are tax-deductible through the club. A future independent nonprofit is being explored, but it is not current. There is no online payment flow on this site.</p>
           <div class="actions">
@@ -179,11 +183,12 @@
       </div>
     </section>
 
-    <section class="section-tight">
+    <section data-label="Get in touch" class="section-tight">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>06</span>Get in touch</p></div>
       <div class="wrap-narrow reveal">
-        <p class="kicker">Sponsorship inquiry</p>
         <h2>Tell us how you’d like to help.</h2>
-        <p class="form-note">Set <code>formEndpoint</code> or <code>inquiryEmail</code> in <code>data/site.json</code> for automatic delivery. Until then, submit copies a summary for Instagram / school contact.</p>
+        <p class="form-note">Submitting sends your message to <a href="mailto:vchsphotography@gmail.com">vchsphotography@gmail.com</a>. You can also write to us there directly.</p>
         <form class="form" data-inquiry-form data-form-kind="sponsor" data-endpoint="" novalidate>
           <div class="honeypot" aria-hidden="true">
             <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
@@ -242,6 +247,7 @@
       <div>
         <strong>Contact</strong>
         <p><a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a></p>
+        <p><a href="mailto:vchsphotography@gmail.com">vchsphotography@gmail.com</a></p>
         <p><a href="tel:+14085132400">(408) 513-2400</a></p>
         <p><a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">School contact</a></p>
       </div>

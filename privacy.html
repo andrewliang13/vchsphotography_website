@@ -9,8 +9,10 @@
   <title>Privacy | VCHS Photography Club</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/site.css" />
+  <script src="assets/motion.js"></script>
+  <script src="assets/rail.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,22 +31,23 @@
   </header>
 
   <main id="main">
-    <section class="page-hero">
+    <section data-label="Overview" class="page-hero">
       <div class="wrap reveal">
-        <p class="kicker">Privacy</p>
         <h1>How we handle inquiries and photos.</h1>
         <p class="lede">This notice covers the club website only. School policies also apply to campus activities, student records, and donations.</p>
       </div>
     </section>
 
-    <section class="section-tight">
+    <section data-label="Policy" class="section-tight">
+
+      <div class="wrap section-label-row"><p class="section-label"><span>01</span>Policy</p></div>
       <div class="wrap-narrow reveal">
         <h2>Booking and sponsorship forms</h2>
         <p class="lede">Forms may collect name, email, organization, project details, preferred date/time/location, budget notes, photographer preference, and contribution interest. We use that information only to respond to the inquiry and coordinate approved shoots or donations. We do not sell contact lists or run marketing campaigns from these forms.</p>
         <h2>Delivery</h2>
         <p class="lede">Until a form endpoint or club inquiry email is configured in <code>data/site.json</code>, submissions are not emailed automatically. The site may copy a summary for you to send via Instagram or email.</p>
         <h2>Photographs</h2>
-        <p class="lede">Published images should have appropriate permission. Subjects, parents/guardians, or school staff can request removal by messaging <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a>. We will review and remove or replace images when required.</p>
+        <p class="lede">Published images should have appropriate permission. Subjects, parents/guardians, or school staff can request removal by messaging <a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a> or emailing <a href="mailto:vchsphotography@gmail.com">vchsphotography@gmail.com</a>. We will review and remove or replace images when required.</p>
         <h2>Student contact details</h2>
         <p class="lede">Personal student emails and phone numbers are not published on this site. Booking goes through the club inquiry flow.</p>
         <h2>Corrections</h2>
@@ -63,6 +66,7 @@
       <div>
         <strong>Contact</strong>
         <p><a href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">@vchs_photography</a></p>
+        <p><a href="mailto:vchsphotography@gmail.com">vchsphotography@gmail.com</a></p>
         <p><a href="tel:+14085132400">(408) 513-2400</a></p>
         <p><a href="https://www.vcs.net/about/contact-us" target="_blank" rel="noreferrer">School contact</a></p>
       </div>

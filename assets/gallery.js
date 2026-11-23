@@ -186,12 +186,12 @@
       hi.onerror = () => {};
       hi.src = full;
     }
-    const who = (item.dataset.photographer || caption?.querySelector('span')?.textContent || '').trim();
+    const who = (item.dataset.photographer || (caption?.querySelector('span')?.textContent || '').replace(/^Uploaded by /, '')).trim();
     const when = (caption?.querySelector('strong')?.textContent || '').trim();
     cap.replaceChildren();
     if (who) {
       const name = document.createElement('strong');
-      name.textContent = who;
+      name.textContent = `Uploaded by ${who}`;
       cap.appendChild(name);
     }
     if (when) {
@@ -295,9 +295,9 @@
     document.querySelectorAll('.gallery-item').forEach((item) => {
       item.setAttribute('tabindex', '0');
       item.setAttribute('role', 'button');
-      const who = (item.dataset.photographer || item.querySelector('figcaption span')?.textContent || 'photographer').trim();
+      const who = (item.dataset.photographer || (item.querySelector('figcaption span')?.textContent || '').replace(/^Uploaded by /, '') || 'a club member').trim();
       const when = (item.querySelector('figcaption strong')?.textContent || '').trim();
-      item.setAttribute('aria-label', when ? `Photograph by ${who}, ${when}` : `Photograph by ${who}`);
+      item.setAttribute('aria-label', when ? `Photograph uploaded by ${who}, ${when}` : `Photograph uploaded by ${who}`);
     });
   });
 })();

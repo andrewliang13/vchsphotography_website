@@ -1,8 +1,8 @@
 :root {
   color-scheme: light;
-  --paper: #f4f4f2;
-  --ink: #0a0a0a;
-  --muted: #6b6b6b;
+  --paper: #f7f7f5;
+  --ink: #111111;
+  --muted: #5c5c58;
   --gray: #8a8a8a;
   --line: rgba(10, 10, 10, 0.16);
   --accent: #00467F;
@@ -21,7 +21,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: 'Manrope', sans-serif;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -65,20 +65,19 @@ a:focus-visible {
 
 .wordmark {
   display: inline-block;
-  font-size: .78rem;
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: .09em;
-  text-transform: uppercase;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1;
 }
 
-.wordmark span { display: block; }
+.wordmark span { display: inline; }
+.wordmark span + span { margin-left: .28em; }
 
 .back-link {
   color: var(--muted);
-  font-family: 'DM Mono', monospace;
-  font-size: .68rem;
-  letter-spacing: .06em;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: .875rem;
   transition: color .25s ease, transform .25s ease;
 }
 
@@ -94,19 +93,24 @@ a:focus-visible {
 .section-kicker {
   margin: 0 0 1rem;
   color: var(--accent);
-  font-family: 'DM Mono', monospace;
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: .875rem;
+}
+
+.portfolio-hero .page-role {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: .9375rem;
 }
 
 .portfolio-hero h1 {
   max-width: 12ch;
   margin: 0;
-  font-size: clamp(3rem, 7vw, 6.4rem);
-  font-weight: 500;
-  line-height: .92;
-  letter-spacing: -.06em;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3rem, 7vw, 5.75rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.012em;
 }
 
 .portfolio-blurb {
@@ -119,29 +123,29 @@ a:focus-visible {
 
 .portfolio-note {
   margin: 1rem 0 0;
-  color: var(--gray);
-  font-family: 'DM Mono', monospace;
-  font-size: .62rem;
-  letter-spacing: .04em;
+  color: var(--muted);
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: .8125rem;
 }
 
 .portfolio-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
-  margin-top: 2rem;
+  gap: .25rem 1.5rem;
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .portfolio-filter {
-  min-height: 2.4rem;
-  padding: .45rem .85rem;
-  border: 1px solid var(--line);
+  min-height: 2.75rem;
+  margin-bottom: -1px;
+  padding: .5rem 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
   background: transparent;
   color: var(--muted);
-  font-family: 'DM Mono', monospace;
-  font-size: .64rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: .9375rem;
   cursor: pointer;
   transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .2s ease;
 }
@@ -152,9 +156,8 @@ a:focus-visible {
 }
 
 .portfolio-filter.is-active {
-  color: var(--white);
-  background: var(--accent);
-  border-color: var(--accent);
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
 .portfolio-filter:active { transform: scale(.97); }
@@ -169,12 +172,11 @@ a:focus-visible {
 
 .category-heading {
   margin: 0 0 1.75rem;
-  color: var(--accent);
-  font-family: 'DM Mono', monospace;
-  font-size: .72rem;
+  color: var(--ink);
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
   font-weight: 400;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  line-height: 1.1;
 }
 
 .portfolio-gallery {
@@ -232,8 +234,8 @@ a:focus-visible {
   gap: .75rem;
   padding: .7rem .75rem;
   color: rgba(255, 255, 255, .86);
-  font-family: 'DM Mono', monospace;
-  font-size: .58rem;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: .8125rem;
   line-height: 1.35;
   text-align: left;
   background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .55));
@@ -357,7 +359,7 @@ body.lightbox-open {
   max-width: 36rem;
   min-height: 1.1rem;
   color: #fff;
-  font-family: Manrope, sans-serif;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: -.01em;
@@ -433,8 +435,8 @@ body.lightbox-open {
   padding-top: 1.4rem;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-family: 'DM Mono', monospace;
-  font-size: .64rem;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: .8125rem;
 }
 
 .portfolio-footer a {

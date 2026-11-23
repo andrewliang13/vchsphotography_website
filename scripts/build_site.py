@@ -59,7 +59,7 @@ def image_dims(path: Path) -> tuple[int, int]:
     key = str(path.relative_to(ROOT))
     mtime = str(int(path.stat().st_mtime))
     hit = cache.get(key)
-    if hit and len(hit) == 3 and str(hit[2]) == mtime:
+    if hit and len(hit) == 4 and str(hit[2]) == mtime:
         return int(hit[0]), int(hit[1])
 
     w, h = DEFAULT_W, DEFAULT_H
@@ -76,8 +76,15 @@ def image_dims(path: Path) -> tuple[int, int]:
                 h = int(line.split()[-1])
     except (subprocess.CalledProcessError, ValueError, OSError):
         pass
+    try:
+        from PIL import Image  # browsers apply EXIF rotation, so match it
 
-    cache[key] = [w, h, int(mtime)]
+        if Image.open(path).getexif().get(274) in (5, 6, 7, 8):
+            w, h = h, w
+    except Exception:
+        pass
+
+    cache[key] = [w, h, int(mtime), 1]
     return w, h
 
 
@@ -95,6 +102,17 @@ def list_images(gallery: dict):
         files = sorted(
             p for p in web.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}
         )
+        manifest = web.parent / "manifest.json"
+        if manifest.exists():
+            try:
+                taken = {
+                    row["out"]: row.get("date") or ""
+                    for row in json.loads(manifest.read_text()).get("photos", [])
+                    if row.get("ok")
+                }
+                files.sort(key=lambda p: (taken.get(p.name, ""), p.name), reverse=True)
+            except (ValueError, KeyError):
+                pass
         if limit is not None:
             files = files[:limit]
         rows = []
@@ -138,6 +156,8 @@ def list_images(gallery: dict):
 
 
 def cover_for(person: dict):
+    if person.get("cover") and (ROOT / person["cover"]).exists():
+        return person["cover"]
     for gallery in person.get("galleries", []):
         images = list_images({**gallery, "limit": 1})
         if images:
@@ -156,7 +176,7 @@ def nav(site, active: str, prefix: str = ""):
 
 
 def shell(site, title: str, description: str, active: str, body: str, prefix: str = "", over_hero: bool = False):
-    fonts = "https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap"
+    fonts = "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
     bar_attr = ' data-site-bar' + (' class="site-bar is-over-hero"' if over_hero else ' class="site-bar"')
     if not over_hero:
         bar_attr = ' class="site-bar" data-site-bar'
@@ -176,6 +196,8 @@ def shell(site, title: str, description: str, active: str, body: str, prefix: st
   <link href="{fonts}" rel="stylesheet" />
   <link rel="stylesheet" href="{prefix}assets/site.css" />
   <link rel="stylesheet" href="{prefix}assets/portfolio.css" />
+  <script src="{prefix}assets/motion.js"></script>
+  <script src="{prefix}assets/rail.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -200,6 +222,7 @@ def shell(site, title: str, description: str, active: str, body: str, prefix: st
       <div>
         <strong>Contact</strong>
         <p><a href="{site["instagram"]}" target="_blank" rel="noreferrer">{site["instagramHandle"]}</a></p>
+        <p><a href="mailto:{site["inquiryEmail"]}">{site["inquiryEmail"]}</a></p>
         <p><a href="{site["phoneHref"]}">{site["phone"]}</a></p>
         <p><a href="{site["schoolContact"]}" target="_blank" rel="noreferrer">School contact</a></p>
       </div>
@@ -225,8 +248,8 @@ def figures_html(person: dict, images: list[dict]):
         label = image.get("label") or album
         bits.append(
             f'''        <figure class="gallery-item" data-category="{album}" data-album="{album}" data-photographer="{person["name"]}" data-categories="{album}">
-          <img src="{image["web"]}" alt="Photograph by {person["name"]}" loading="lazy" width="{image["w"]}" height="{image["h"]}" />
-          <figcaption><strong>{label}</strong><span>{person["name"]}</span></figcaption>
+          <img src="{image["web"]}" alt="Photograph uploaded by {person["name"]}" loading="lazy" width="{image["w"]}" height="{image["h"]}" />
+          <figcaption><strong>{label}</strong><span>Uploaded by {person["name"]}</span></figcaption>
         </figure>'''
         )
     return "\n".join(bits)
@@ -236,7 +259,12 @@ def build_portfolio_page(site, person):
     images = []
     albums: list[tuple[str, str]] = []  # (filter value, button label)
     seen = set()
-    for gallery in person.get("galleries", []):
+    ordered = sorted(
+        person.get("galleries", []),
+        key=lambda g: g.get("date") or "0000-00-00",
+        reverse=True,
+    )
+    for gallery in ordered:
         chunk = list_images(gallery)
         images.extend(chunk)
         key = gallery.get("slug") or gallery.get("label")
@@ -264,8 +292,8 @@ def build_portfolio_page(site, person):
 
     body = f'''    <section class="page-hero">
       <div class="wrap">
-        <p class="kicker">{person.get("role") or "Photographer"}</p>
         <h1>{person["name"]}</h1>
+        <p class="page-role">{person.get("role") or "Photographer"}</p>
         <p class="lede">{specialty}</p>
         {equipment}
         {bio}
@@ -306,12 +334,15 @@ def build_portfolios_index(site, people):
     for person in people:
         cover = cover_for(person)
         specs = ", ".join(person.get("specialties") or []) or "Portfolio coming soon"
+        soon = not any(list_images({**g, "limit": 1}) for g in person.get("galleries", []))
+        pos = f' style="object-position:{person["coverPosition"]}"' if person.get("coverPosition") else ""
+        thumb = '<div class="thumb thumb-empty"><span>Coming soon</span></div>' if soon else f'<div class="thumb"><img src="{cover}" alt="" loading="lazy"{pos} /></div>'
         cards.append(
-            f'''      <a class="person-card reveal" href="portfolios/{person["id"]}.html">
-        <div class="thumb"><img src="{cover}" alt="" loading="lazy" /></div>
+            f'''      <a class="person-card reveal{' is-soon' if soon else ''}" href="portfolios/{person["id"]}.html">
+        {thumb}
         <div class="meta">
-          <span class="role">{person.get("role") or "Member"}</span>
           <h3>{person["name"]}</h3>
+          <span class="role">{person.get("role") or "Member"}</span>
           <p class="specs">{specs}</p>
         </div>
       </a>'''
@@ -319,7 +350,6 @@ def build_portfolios_index(site, people):
 
     body = f'''    <section class="page-hero">
       <div class="wrap">
-        <p class="kicker">Portfolios</p>
         <h1>Student photographers.</h1>
         <p class="lede">Click a photographer to open their gallery. Album filters live on each portfolio page. Booking goes through the club inquiry form — personal emails are not published here.</p>
       </div>
