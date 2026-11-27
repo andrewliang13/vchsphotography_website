@@ -904,3 +904,27 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 900px) {
   .feature-grid > a:last-child:nth-child(4) { grid-column: 1 / -1; aspect-ratio: 3 / 2; }
 }
+
+/* Booking form states */
+.field-error {
+  margin: .4rem 0 0;
+  color: #a1281e;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+.field [aria-invalid="true"] { border-color: #a1281e; }
+.form-success.is-error { border-color: rgba(161, 40, 30, .35); color: #a1281e; }
+[data-book-form][aria-busy="true"] { opacity: .6; pointer-events: none; }
+.form-state {
+  margin-top: 1.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line-strong);
+  background: var(--paper-2);
+}
+.form-state h3 { font-family: var(--serif); font-weight: 400; font-size: 1.75rem; margin: 0 0 .75rem; }
+.form-state p { margin: 0 0 1rem; color: var(--muted); }
+.form-state .form-note { margin-top: .5rem; }
+.form-state-ok { border-color: rgba(31, 107, 58, .4); }
+.form-state-ok h3 { color: #1f6b3a; }
+.form-state-error { border-color: rgba(161, 40, 30, .4); }
+.form-state-error h3 { color: #a1281e; }

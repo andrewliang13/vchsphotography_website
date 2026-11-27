@@ -56,8 +56,8 @@
 
       <div class="wrap section-label-row"><p class="section-label"><span>02</span>Inquiry details</p></div>
       <div class="wrap-narrow reveal">
-        <h2>Who should get this inquiry?</h2>
-        <p class="form-note" id="form-setup">Choose someone below, add a few details, then open your email app. The message goes only to that photographer — not the whole club.</p>
+        <h2>Send a request.</h2>
+        <p class="form-note" id="form-setup">Fill in the details below and press Send request. It goes straight to the club inbox (vchsphotography@gmail.com), with your chosen photographer copied when they have a listed email. An officer replies within 2–3 school days.</p>
 
         <form class="form" data-book-form novalidate>
           <div class="honeypot" aria-hidden="true">
@@ -66,10 +66,10 @@
 
           <div class="field">
             <label for="photographer">Photographer</label>
-            <select id="photographer" name="photographer" required data-book-photographer>
+            <select id="photographer" name="photographer" required data-book-photographer aria-describedby="photographer-route">
               <option value="">Loading…</option>
             </select>
-            <p class="hint" data-book-route aria-live="polite"></p>
+            <p class="hint" id="photographer-route" data-book-route aria-live="polite"></p>
           </div>
 
           <div class="form-row">
@@ -149,7 +149,7 @@
           </div>
 
           <div class="actions" style="margin-top:1rem">
-            <button class="btn btn-navy" type="submit" data-book-submit>Send request</button>
+            <button class="btn btn-navy" type="submit" data-book-submit disabled>Send request</button>
             <a class="btn btn-ghost" href="https://www.instagram.com/vchs_photography/" target="_blank" rel="noreferrer">DM @vchs_photography</a>
           </div>
           <p class="form-success" data-form-success role="status"></p>

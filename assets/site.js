@@ -212,12 +212,6 @@
     const photographersUrl = 'data/photographers.json';
     let photographers = [];
 
-    const show = (message) => {
-      if (!success) return;
-      success.textContent = message;
-      success.classList.add('is-on');
-    };
-
     const selected = () => photographers.find((p) => p.id === select?.value) || null;
 
     const clubEmail = () => (siteConfig.inquiryEmail || '').trim();
@@ -232,16 +226,12 @@
             ? `No preference — your request goes to the club inbox (${club}).`
             : `We’ll copy a DM draft for ${siteConfig.instagramHandle}.`;
         }
-        if (submitBtn) submitBtn.textContent = club ? 'Send request' : 'Copy for club DM';
       } else if (email) {
         if (route) route.textContent = `Your request goes to the club inbox, with ${person.name} copied.`;
-        if (submitBtn) submitBtn.textContent = `Send to ${person.name}`;
       } else if (club) {
         if (route) route.textContent = `Your request goes to the club inbox (${club}), asking for ${person.name}.`;
-        if (submitBtn) submitBtn.textContent = `Send request for ${person.name}`;
       } else {
         if (route) route.textContent = `We’ll copy a DM draft naming ${person.name} for ${siteConfig.instagramHandle}.`;
-        if (submitBtn) submitBtn.textContent = `DM club for ${person.name}`;
       }
     };
 
@@ -251,114 +241,230 @@
         photographers = Array.isArray(list) ? list : [];
         if (!select) return;
         const pref = new URLSearchParams(location.search).get('photographer') || '';
-        const options = [
-          '<option value="any">Any available photographer</option>',
-          ...photographers.map((p) => {
-            return `<option value="${p.id}">${p.name}</option>`;
-          }),
-        ];
-        select.innerHTML = options.join('');
+        select.replaceChildren(
+          new Option('Any available photographer', 'any'),
+          ...photographers.map((p) => new Option(p.name, p.id))
+        );
         if (pref && photographers.some((p) => p.id === pref)) select.value = pref;
         else select.value = 'any';
         updateRoute();
       })
       .catch(() => {
-        if (select) {
-          select.innerHTML = '<option value="any">Any available photographer</option>';
-        }
+        if (select) select.replaceChildren(new Option('Any available photographer', 'any'));
         updateRoute();
+      })
+      .finally(() => {
+        if (submitBtn) submitBtn.disabled = false;
       });
 
+    const dateInput = bookForm.querySelector('input[type="date"]');
+    if (dateInput) {
+      const now = new Date();
+      dateInput.min = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    }
+
     select?.addEventListener('change', updateRoute);
+
+    const fieldLabel = (field) =>
+      (bookForm.querySelector(`label[for="${field.id}"]`)?.textContent || field.name || 'This field').trim();
+
+    const setError = (field, message) => {
+      const wrap = field.closest('.field') || field.parentElement;
+      let note = wrap.querySelector('.field-error');
+      if (message) {
+        if (!note) {
+          note = document.createElement('p');
+          note.className = 'field-error';
+          note.id = `${field.id || field.name}-error`;
+          wrap.appendChild(note);
+        }
+        note.textContent = message;
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', note.id);
+      } else {
+        note?.remove();
+        field.removeAttribute('aria-invalid');
+        field.removeAttribute('aria-describedby');
+      }
+    };
+
+    const validate = (field) => {
+      const value = String(field.value || '').trim();
+      if (field.required && !value) return `${fieldLabel(field)} is required.`;
+      if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+        return 'Enter a valid email address, like name@example.com.';
+      }
+      if (field.type === 'date' && value) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (new Date(`${value}T00:00:00`) < today) return 'Choose a date that is today or later.';
+      }
+      return '';
+    };
+
+    const fields = [...bookForm.querySelectorAll('input:not([name="company_website"]), select, textarea')];
+    fields.forEach((field) => {
+      field.addEventListener('blur', () => {
+        if (field.getAttribute('aria-invalid') === 'true' || field.value) setError(field, validate(field));
+      });
+      field.addEventListener('input', () => {
+        if (field.getAttribute('aria-invalid') === 'true') setError(field, validate(field));
+      });
+    });
+
+    const panel = document.createElement('div');
+    panel.className = 'form-state';
+    panel.setAttribute('role', 'status');
+    panel.setAttribute('aria-live', 'polite');
+    panel.hidden = true;
+    bookForm.after(panel);
+
+    const showPanel = (kind, title, html) => {
+      panel.className = `form-state form-state-${kind}`;
+      panel.innerHTML = `<h3 tabindex="-1">${title}</h3>${html}`;
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      panel.querySelector('h3').focus({ preventScroll: true });
+    };
+
+    const escapeHtml = (text) =>
+      String(text).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+    const setBusy = (busy) => {
+      if (!submitBtn) return;
+      submitBtn.disabled = busy;
+      bookForm.setAttribute('aria-busy', String(busy));
+      if (busy) {
+        submitBtn.dataset.label = submitBtn.textContent;
+        submitBtn.textContent = 'Sending…';
+      } else if (submitBtn.dataset.label) {
+        submitBtn.textContent = submitBtn.dataset.label;
+      }
+    };
 
     bookForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const trap = bookForm.querySelector('[name="company_website"]');
       if (trap && trap.value.trim()) return;
 
-      const required = [...bookForm.querySelectorAll('[required]')];
-      let ok = true;
-      required.forEach((field) => {
-        const valid = Boolean(String(field.value || '').trim());
-        field.setAttribute('aria-invalid', String(!valid));
-        if (!valid) ok = false;
+      let firstBad = null;
+      fields.forEach((field) => {
+        const message = validate(field);
+        setError(field, message);
+        if (message && !firstBad) firstBad = field;
       });
-      if (!ok) return;
+      if (firstBad) {
+        if (success) {
+          success.textContent = 'Please fix the highlighted fields.';
+          success.classList.add('is-on', 'is-error');
+        }
+        firstBad.focus();
+        return;
+      }
+      success?.classList.remove('is-on', 'is-error');
+      panel.hidden = true;
 
-      const payload = Object.fromEntries(new FormData(bookForm).entries());
-      delete payload.company_website;
+      const data = Object.fromEntries(new FormData(bookForm).entries());
       const person = selected();
       const club = clubEmail();
       const personEmail = person ? (person.email || '').trim() : '';
-      const toEmail = personEmail || club;
-      const cc = personEmail && club && club !== personEmail ? club : '';
-      payload.photographer = person ? person.name : 'Any available photographer';
-      if (person && !personEmail) payload.route = `Please connect me with ${person.name}`;
-      const summary = payloadLines(payload);
+      const who = person ? person.name : 'Any available photographer';
+      const service = data.service || 'Photography';
+      const subjectLine = `Booking request: ${service} — ${data.name}`;
+
+      // Human-readable labels become the rows of the email table.
+      const rows = {
+        Name: data.name,
+        Email: data.email,
+        Organization: data.organization || '—',
+        'Inquiry type': data.inquiry_type,
+        Service: service,
+        Photographer: who,
+        'Community / nonprofit': data.nonprofit || 'No',
+        'Preferred date': data.preferred_date || 'Flexible',
+        'Preferred time': data.preferred_time || 'Flexible',
+        Location: data.location,
+        Budget: data.budget || 'Requesting a quote',
+        'Project description': data.description,
+      };
+      const summary = Object.entries(rows).map(([k, v]) => `${k}: ${v}`).join('\n');
+      const mailHref = `mailto:${club}?${personEmail && personEmail !== club ? `cc=${encodeURIComponent(personEmail)}&` : ''}subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(summary)}`;
       const endpoint = (siteConfig.formEndpoint || '').trim();
 
-      const openMail = () => {
-        const subject = encodeURIComponent(
-          person
-            ? `VCHS Photography booking inquiry for ${person.name}`
-            : 'VCHS Photography booking inquiry — any available photographer'
+      const fallback = (reason) => {
+        setBusy(false);
+        showPanel(
+          'error',
+          'We couldn’t send your request',
+          `<p>${escapeHtml(reason)} Your details are still in the form.</p>
+           <div class="actions">
+             <a class="btn btn-navy" href="${mailHref}">Email it to ${escapeHtml(club)}</a>
+             <button type="button" class="btn btn-ghost" data-retry>Try again</button>
+           </div>`
         );
-        const body = encodeURIComponent(summary);
-        const ccPart = cc ? `cc=${encodeURIComponent(cc)}&` : '';
-        window.location.href = `mailto:${toEmail}?${ccPart}subject=${subject}&body=${body}`;
-        show(
-          `Your email app should open to ${personEmail ? person.name : toEmail}. If nothing opens, email ${toEmail} or message ${siteConfig.instagramHandle}. This is not a confirmed booking.`
-        );
+        panel.querySelector('[data-retry]')?.addEventListener('click', () => {
+          panel.hidden = true;
+          bookForm.requestSubmit();
+        });
       };
 
-      if (endpoint) {
-        const subjectLine = person
-          ? `VCHS Photography booking inquiry for ${person.name}`
-          : 'VCHS Photography booking inquiry — any available photographer';
-        const body = { ...payload, _subject: subjectLine, _template: 'table', _captcha: 'false' };
-        if (payload.email) body._replyto = payload.email;
-        if (personEmail && personEmail !== club) body._cc = personEmail;
-        if (submitBtn) submitBtn.disabled = true;
-        show('Sending…');
-        fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(body),
-        })
-          .then((r) => (r.ok ? r.json() : Promise.reject(new Error('send failed'))))
-          .then((res) => {
-            if (res && String(res.success) === 'false') throw new Error(res.message || 'send failed');
-            bookForm.reset();
-            updateRoute();
-            show(
-              `Thanks — your request was sent to the club${personEmail ? ` and ${person.name}` : ''}. An officer will reply by email. This is not a confirmed booking yet.`
+      if (!endpoint) {
+        fallback('Online booking is offline right now.');
+        return;
+      }
+
+      const body = {
+        ...rows,
+        _subject: subjectLine,
+        _replyto: data.email,
+        _template: 'table',
+        _captcha: 'false',
+      };
+      if (personEmail && personEmail !== club) body._cc = personEmail;
+
+      setBusy(true);
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(body),
+        signal: controller.signal,
+      })
+        .then((r) => r.json().catch(() => ({})).then((res) => ({ ok: r.ok, res })))
+        .then(({ ok, res }) => {
+          clearTimeout(timer);
+          if (!ok || String(res.success) !== 'true') {
+            fallback(
+              /activat/i.test(res.message || '')
+                ? 'Online requests are still being set up.'
+                : 'The booking service didn’t accept the request.'
             );
-          })
-          .catch(() => {
-            if (toEmail) openMail();
-            else show(`We couldn’t send that. Please message ${siteConfig.instagramHandle}.`);
-          })
-          .finally(() => {
-            if (submitBtn) submitBtn.disabled = false;
-          });
-        return;
-      }
-
-      if (toEmail) {
-        openMail();
-        return;
-      }
-
-      copyText(summary)
-        .then(() => {
-          show(
-            person
-              ? `Summary copied. Paste it into a DM to ${siteConfig.instagramHandle} and ask for ${person.name}.`
-              : `Summary copied. Paste it into a DM to ${siteConfig.instagramHandle} and ask for any available photographer.`
+            return;
+          }
+          setBusy(false);
+          bookForm.reset();
+          fields.forEach((field) => setError(field, ''));
+          updateRoute();
+          bookForm.hidden = true;
+          showPanel(
+            'ok',
+            'Request sent',
+            `<p>Thanks, ${escapeHtml(data.name)}. Your ${escapeHtml(service.toLowerCase())} request went to the club inbox${
+              personEmail ? ` and ${escapeHtml(person.name)}` : ''
+            }. An officer will reply to <strong>${escapeHtml(data.email)}</strong> within 2–3 school days.</p>
+             <p class="form-note">This is not a confirmed booking until an officer replies.</p>
+             <div class="actions"><button type="button" class="btn btn-ghost" data-again>Send another request</button></div>`
           );
+          panel.querySelector('[data-again]')?.addEventListener('click', () => {
+            panel.hidden = true;
+            bookForm.hidden = false;
+            bookForm.querySelector('input, select, textarea')?.focus();
+          });
         })
         .catch(() => {
-          show(`Please message ${siteConfig.instagramHandle} with your project details.`);
+          clearTimeout(timer);
+          fallback('The connection timed out or dropped.');
         });
     });
   }
