@@ -315,11 +315,13 @@ h3 {
 .split > div > .lede:first-child { margin-top: .4rem; }
 .feature-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  /* Wide tile is 2.4 of 4.4 columns and spans both rows; with the grid at
+     2.75:1 that tile comes out 3:2, so wide group photos fit uncropped. */
+  grid-template-columns: 2.4fr 1fr 1fr;
   grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   gap: 4px;
   margin-top: clamp(2rem, 4vw, 3rem);
-  height: min(72vh, 40rem);
+  aspect-ratio: 2.75 / 1;
 }
 .feature-grid a,
 .feature-grid figure {
@@ -834,11 +836,12 @@ body.lightbox-open { overflow: hidden; }
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     height: auto;
+    aspect-ratio: auto;
   }
   .feature-grid .wide {
     grid-column: 1 / -1;
     grid-row: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
   }
   .feature-grid .tall,
   .feature-grid .mid,
@@ -898,3 +901,6 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 900px) { .project { grid-template-columns: 1fr; } }
 .project-strip img:only-child { aspect-ratio: 3 / 2; }
 @media (min-width: 901px) { .person-grid-five { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media (max-width: 900px) {
+  .feature-grid > a:last-child:nth-child(4) { grid-column: 1 / -1; aspect-ratio: 3 / 2; }
+}
