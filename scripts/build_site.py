@@ -301,6 +301,10 @@ def build_portfolio_page(site, person):
                 times[k] = nxt
         for row, t in zip(chunk, times):
             row["taken"] = t or gallery.get("date", "")
+        if gallery.get("personal"):
+            # Curated picks keep their hand-picked order, ahead of event photos.
+            for k, row in enumerate(chunk):
+                row["taken"] = f"9999-{999 - k:03d}"
         images.extend(chunk)
         key = gallery.get("slug") or gallery.get("label")
         label = gallery.get("label") or key
