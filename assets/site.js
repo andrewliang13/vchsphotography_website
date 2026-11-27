@@ -168,6 +168,8 @@
         document.dispatchEvent(new CustomEvent('vchs:filters'));
       });
     });
+    const preset = buttons.find((button) => button.hasAttribute('data-default'));
+    if (preset) preset.click();
   });
 
   const params = new URLSearchParams(window.location.search);

@@ -98,9 +98,9 @@ def patch_file(path: Path) -> int:
     new_text = FIG_RE.sub(repl, text)
     # Also fix short first-name-only credits in loose text
     replacements = {
-        "Photograph by Katherine\"": 'Photograph by Katherine Tsai"',
-        ">Katherine</span>": ">Katherine Tsai</span>",
-        'data-photographer="Katherine"': 'data-photographer="Katherine Tsai"',
+        "Photograph by Katherine\"": 'Photograph by Katherine Zhao"',
+        ">Katherine</span>": ">Katherine Zhao</span>",
+        'data-photographer="Katherine"': 'data-photographer="Katherine Zhao"',
     }
     for a, b in replacements.items():
         if a in new_text:

@@ -73,7 +73,10 @@ def image_dims(path: Path) -> tuple[int, int]:
     key = str(path.relative_to(ROOT))
     mtime = str(int(path.stat().st_mtime))
     hit = cache.get(key)
-    if hit and len(hit) == 4 and str(hit[2]) == mtime:
+    # Published file names include a unique Drive id and never change size,
+    # so a cached entry stays valid even when iCloud rewrites the mtime.
+    # (Re-reading would force iCloud to download evicted photos.)
+    if hit and len(hit) >= 3:
         return int(hit[0]), int(hit[1])
 
     w, h = DEFAULT_W, DEFAULT_H
@@ -275,7 +278,7 @@ def build_portfolio_page(site, person):
     seen = set()
     ordered = sorted(
         person.get("galleries", []),
-        key=lambda g: g.get("date") or "0000-00-00",
+        key=lambda g: ("1" if g.get("personal") else "0") + (g.get("date") or "0000-00-00"),
         reverse=True,
     )
     for gallery in ordered:
@@ -308,8 +311,18 @@ def build_portfolio_page(site, person):
     images.sort(key=lambda row: row.get("taken") or "", reverse=True)
 
     specialty = ", ".join(person.get("specialties") or []) or "Photography"
-    filters = ['<button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>']
+    personal_key = next((g["slug"] for g in ordered if g.get("personal") and list_images({**g, "limit": 1})), None)
+    filters = []
+    if personal_key:
+        filters.append(
+            f'<button type="button" class="filter-btn is-active" data-filter="{personal_key}" data-default aria-pressed="true">Personal Portfolio</button>'
+        )
+    filters.append(
+        f'<button type="button" class="filter-btn{"" if personal_key else " is-active"}" data-filter="all" aria-pressed="{"false" if personal_key else "true"}">All</button>'
+    )
     for value, label in albums:
+        if value == personal_key:
+            continue
         filters.append(
             f'<button type="button" class="filter-btn" data-filter="{value}" aria-pressed="false">{label}</button>'
         )
@@ -363,35 +376,46 @@ def build_portfolio_page(site, person):
     return len(images)
 
 
-def build_portfolios_index(site, people):
-    cards = []
-    for person in people:
-        cover = cover_for(person)
-        specs = ", ".join(person.get("specialties") or []) or "Portfolio coming soon"
-        soon = not any(list_images({**g, "limit": 1}) for g in person.get("galleries", []))
-        pos = f' style="object-position:{person["coverPosition"]}"' if person.get("coverPosition") else ""
-        thumb = '<div class="thumb thumb-empty"><span>Coming soon</span></div>' if soon else f'<div class="thumb"><img src="{cover}" alt="" loading="lazy"{pos} /></div>'
-        cards.append(
-            f'''      <a class="person-card reveal{' is-soon' if soon else ''}" href="portfolios/{person["id"]}.html">
+def person_card(person, prefix=""):
+    specs = ", ".join(person.get("specialties") or [])
+    if person.get("portrait"):
+        thumb = f'<div class="thumb"><img src="{prefix}{person["portrait"]}" alt="Portrait of {person["name"]}" loading="lazy" /></div>'
+    else:
+        initials = "".join(part[0] for part in person["name"].split()[:2])
+        thumb = f'<div class="thumb thumb-empty"><span>{initials}</span></div>'
+    specs_html = f'<p class="specs">{specs}</p>' if specs else ""
+    return f'''      <a class="person-card reveal" href="{prefix}portfolios/{person["id"]}.html">
         {thumb}
         <div class="meta">
           <h3>{person["name"]}</h3>
           <span class="role">{person.get("role") or "Member"}</span>
-          <p class="specs">{specs}</p>
+          {specs_html}
         </div>
       </a>'''
-        )
 
-    body = f'''    <section class="page-hero">
+
+def build_portfolios_index(site, people):
+    selected = [p for p in people if p.get("selected")]
+    others = [p for p in people if not p.get("selected")]
+    body = f'''    <section class="page-hero" data-label="Overview">
       <div class="wrap">
         <h1>Student photographers.</h1>
-        <p class="lede">Click a photographer to open their gallery. Album filters live on each portfolio page. Booking goes through the club inquiry form — personal emails are not published here.</p>
+        <p class="lede">Open a photographer to see their Personal Portfolio first, then the school events they shot. Booking goes through the club inquiry form.</p>
       </div>
     </section>
-    <section class="section-tight">
+    <section class="section-tight" data-label="Selected photographers">
+      <div class="wrap section-label-row"><p class="section-label"><span>01</span>Selected photographers</p></div>
+      <div class="wrap">
+        <div class="person-grid person-grid-five">
+{chr(10).join(person_card(p) for p in selected)}
+        </div>
+      </div>
+    </section>
+    <section class="section-tight" data-label="All members">
+      <div class="wrap section-label-row"><p class="section-label"><span>02</span>All members</p></div>
       <div class="wrap">
         <div class="person-grid">
-{chr(10).join(cards)}
+{chr(10).join(person_card(p) for p in others)}
         </div>
       </div>
     </section>

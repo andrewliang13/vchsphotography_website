@@ -482,3 +482,5 @@ body.lightbox-open {
     transition-duration: .01ms !important;
   }
 }
+
+.portfolio-logo { display: block; max-width: 12rem; height: auto; margin-bottom: 1.5rem; }

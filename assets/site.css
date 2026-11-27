@@ -868,3 +868,33 @@ body.lightbox-open { overflow: hidden; }
   }
   img { opacity: 1; }
 }
+
+/* Projects */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.project-text h2 { margin-top: 1rem; }
+.project-logo {
+  display: block;
+  max-width: 11rem;
+  max-height: 3.25rem;
+  width: auto;
+  height: auto;
+  margin-bottom: 1.5rem;
+  object-fit: contain;
+  opacity: 1;
+}
+.project-photo { width: 100%; height: auto; max-height: 34rem; object-fit: cover; }
+.project-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 4px;
+}
+.project-strip img { width: 100%; aspect-ratio: 1; object-fit: cover; height: auto; }
+@media (max-width: 900px) { .project { grid-template-columns: 1fr; } }
+.project-strip img:only-child { aspect-ratio: 3 / 2; }
+@media (min-width: 901px) { .person-grid-five { grid-template-columns: repeat(5, minmax(0, 1fr)); } }

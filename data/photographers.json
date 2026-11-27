@@ -4,8 +4,8 @@
     "name": "Allen Wu",
     "role": "President",
     "specialties": [
-      "Sports & Athletics",
-      "Portraits & Headshots"
+      "Portraits",
+      "Sports"
     ],
     "equipment": "Canon R10; 24–100mm, 70–300mm, 18–24mm",
     "instagram": "https://www.instagram.com/allens_photoss/",
@@ -15,10 +15,11 @@
     "featured": true,
     "galleries": [
       {
-        "slug": "allen-portfolio",
-        "label": "Portfolio",
-        "category": "Creative & Fine Art",
-        "limit": null
+        "slug": "allen-personal",
+        "label": "Personal Portfolio",
+        "category": "Personal",
+        "limit": null,
+        "personal": true
       },
       {
         "slug": "allen-court",
@@ -69,84 +70,17 @@
         "limit": null,
         "date": "2026-11-06"
       }
-    ]
-  },
-  {
-    "id": "daniel-an",
-    "name": "Daniel An",
-    "role": "Vice President",
-    "specialties": [],
-    "equipment": "",
-    "instagram": "",
-    "instagramHandle": "",
-    "email": "",
-    "bio": "",
-    "featured": false,
-    "galleries": []
-  },
-  {
-    "id": "jocelyn-kwok",
-    "name": "Jocelyn Kwok",
-    "role": "Vice President",
-    "specialties": [],
-    "equipment": "",
-    "instagram": "",
-    "instagramHandle": "",
-    "email": "",
-    "bio": "",
-    "featured": false,
-    "galleries": []
-  },
-  {
-    "id": "ethan-chen",
-    "name": "Ethan Chen",
-    "role": "Vice President",
-    "specialties": [
-      "School Events"
     ],
-    "equipment": "",
-    "instagram": "",
-    "instagramHandle": "",
-    "email": "",
-    "bio": "",
-    "featured": true,
-    "galleries": [
-      {
-        "slug": "ethan-hoco",
-        "label": "Homecoming",
-        "category": "School Events",
-        "limit": null,
-        "date": "2026-10-10"
-      },
-      {
-        "slug": "week5-ethan",
-        "label": "Curriculum Week 5",
-        "category": "Portraits & Headshots",
-        "limit": null,
-        "date": "2026-09-28"
-      }
-    ]
-  },
-  {
-    "id": "amanda-garcia",
-    "name": "Amanda Garcia",
-    "role": "Officer",
-    "specialties": [],
-    "equipment": "",
-    "instagram": "",
-    "instagramHandle": "",
-    "email": "",
-    "bio": "",
-    "featured": false,
-    "galleries": []
+    "selected": true,
+    "portrait": "assets/club/portraits/web/allen-wu.jpg"
   },
   {
     "id": "andrew-liang",
     "name": "Andrew Liang",
     "role": "Officer",
     "specialties": [
-      "Landscape & Nature",
-      "School Events"
+      "Sports",
+      "Events"
     ],
     "equipment": "",
     "instagram": "",
@@ -155,6 +89,13 @@
     "bio": "",
     "featured": true,
     "galleries": [
+      {
+        "slug": "andrew-personal",
+        "label": "Personal Portfolio",
+        "category": "Personal",
+        "limit": null,
+        "personal": true
+      },
       {
         "slug": "andrew-hoco",
         "label": "Homecoming",
@@ -177,15 +118,6 @@
         "date": "2026-09-28"
       },
       {
-        "slug": "andrew-archive",
-        "label": "Archive",
-        "category": "Landscape & Nature",
-        "path": "assets/andrew/web",
-        "fullPath": "assets/andrew/full",
-        "limit": null,
-        "date": "2026-08-04"
-      },
-      {
         "slug": "sn-andrew",
         "label": "Senior Night",
         "category": "Sports & Athletics",
@@ -193,16 +125,16 @@
         "date": "2026-11-06"
       }
     ],
-    "cover": "assets/club/andrew-hoco/web/056-1UTmqkAj-DSC01190.jpg",
-    "coverPosition": "42% center"
+    "selected": true
   },
   {
     "id": "john-wu",
     "name": "John Wu",
     "role": "Officer",
     "specialties": [
-      "School Events",
-      "Sports & Athletics"
+      "Events",
+      "Vehicles",
+      "Sports"
     ],
     "equipment": "",
     "instagram": "",
@@ -212,10 +144,11 @@
     "featured": true,
     "galleries": [
       {
-        "slug": "john-portfolio",
-        "label": "Portfolio",
-        "category": "Creative & Fine Art",
-        "limit": null
+        "slug": "john-personal",
+        "label": "Personal Portfolio",
+        "category": "Personal",
+        "limit": null,
+        "personal": true
       },
       {
         "slug": "john-indoor",
@@ -259,7 +192,101 @@
         "limit": null,
         "date": "2026-10-08"
       }
-    ]
+    ],
+    "selected": true
+  },
+  {
+    "id": "ethan-chen",
+    "name": "Ethan Chen",
+    "role": "Vice President",
+    "specialties": [
+      "Portraits"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": true,
+    "galleries": [
+      {
+        "slug": "ethan-hoco",
+        "label": "Homecoming",
+        "category": "School Events",
+        "limit": null,
+        "date": "2026-10-10"
+      },
+      {
+        "slug": "week5-ethan",
+        "label": "Curriculum Week 5",
+        "category": "Portraits & Headshots",
+        "limit": null,
+        "date": "2026-09-28"
+      }
+    ],
+    "selected": true,
+    "portrait": "assets/club/portraits/web/ethan-chen.jpg"
+  },
+  {
+    "id": "caleb-martinez",
+    "name": "Caleb Martinez",
+    "role": "Member",
+    "specialties": [
+      "Sports"
+    ],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [],
+    "selected": true
+  },
+  {
+    "id": "daniel-an",
+    "name": "Daniel An",
+    "role": "Vice President",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/daniel-an.jpg"
+  },
+  {
+    "id": "jocelyn-kwok",
+    "name": "Jocelyn Kwok",
+    "role": "Vice President",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/jocelyn-kwok.jpg"
+  },
+  {
+    "id": "amanda-garcia",
+    "name": "Amanda Garcia",
+    "role": "Officer",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/amanda-garcia.jpg"
   },
   {
     "id": "austin-guydish",
@@ -276,10 +303,11 @@
     "featured": false,
     "galleries": [
       {
-        "slug": "austin-portfolio",
-        "label": "Portfolio",
-        "category": "Creative & Fine Art",
-        "limit": null
+        "slug": "austin-personal",
+        "label": "Personal Portfolio",
+        "category": "Personal",
+        "limit": null,
+        "personal": true
       },
       {
         "slug": "austin-rally",
@@ -302,11 +330,13 @@
         "limit": null,
         "date": "2026-10-29"
       }
-    ]
+    ],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/austin-guydish.jpg"
   },
   {
-    "id": "katherine-tsai",
-    "name": "Katherine Tsai",
+    "id": "katherine-zhao",
+    "name": "Katherine Zhao",
     "role": "Member",
     "specialties": [
       "Portraits & Headshots",
@@ -333,7 +363,8 @@
         "limit": null,
         "date": "2026-10-06"
       }
-    ]
+    ],
+    "selected": false
   },
   {
     "id": "nathan-liu",
@@ -356,7 +387,8 @@
         "limit": null,
         "date": "2026-10-07"
       }
-    ]
+    ],
+    "selected": false
   },
   {
     "id": "serena-wu",
@@ -379,7 +411,9 @@
         "limit": null,
         "date": "2026-10-29"
       }
-    ]
+    ],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/serena-wu.jpg"
   },
   {
     "id": "thomas-jiang",
@@ -392,7 +426,9 @@
     "email": "",
     "bio": "",
     "featured": false,
-    "galleries": []
+    "galleries": [],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/thomas-jiang.jpg"
   },
   {
     "id": "matthew-lieu",
@@ -405,7 +441,8 @@
     "email": "",
     "bio": "",
     "featured": false,
-    "galleries": []
+    "galleries": [],
+    "selected": false
   },
   {
     "id": "charlotte-li",
@@ -418,6 +455,22 @@
     "email": "",
     "bio": "",
     "featured": false,
-    "galleries": []
+    "galleries": [],
+    "selected": false
+  },
+  {
+    "id": "kissa-hsieh",
+    "name": "Kissa Hsieh",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "galleries": [],
+    "selected": false,
+    "portrait": "assets/club/portraits/web/kissa-hsieh.jpg"
   }
 ]
