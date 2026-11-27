@@ -94,7 +94,8 @@
         "limit": null
       }
     ],
-    "selected": true
+    "selected": true,
+    "portrait": "assets/club/portraits/web/andrew-liang.jpg"
   },
   {
     "id": "john-wu",
@@ -127,7 +128,8 @@
         "date": "2026-10-10"
       }
     ],
-    "selected": true
+    "selected": true,
+    "portrait": "assets/club/portraits/web/john-wu.jpg"
   },
   {
     "id": "ethan-chen",
@@ -339,5 +341,65 @@
     "galleries": [],
     "selected": false,
     "portrait": "assets/club/portraits/web/kissa-hsieh.jpg"
+  },
+  {
+    "id": "bryan-hu",
+    "name": "Bryan Hu",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "selected": false,
+    "galleries": [],
+    "portrait": "assets/club/portraits/web/bryan-hu.jpg"
+  },
+  {
+    "id": "jarrett-robinson",
+    "name": "Jarrett Robinson",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "selected": false,
+    "galleries": [],
+    "portrait": "assets/club/portraits/web/jarrett-robinson.jpg"
+  },
+  {
+    "id": "noel-thomas",
+    "name": "Noel Thomas",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "selected": false,
+    "galleries": [],
+    "portrait": "assets/club/portraits/web/noel-thomas.jpg"
+  },
+  {
+    "id": "sofia-solis-cummings",
+    "name": "Sofia Solis Cummings",
+    "role": "Member",
+    "specialties": [],
+    "equipment": "",
+    "instagram": "",
+    "instagramHandle": "",
+    "email": "",
+    "bio": "",
+    "featured": false,
+    "selected": false,
+    "galleries": [],
+    "portrait": "assets/club/portraits/web/sofia-solis-cummings.jpg"
   }
 ]
